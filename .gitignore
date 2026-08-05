@@ -1,0 +1,92 @@
+# ─────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.installed.cfg
+*.pth
+
+# ─────────────────────────────────────────────
+# Virtual Environments
+# ─────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ─────────────────────────────────────────────
+# Jupyter Notebooks
+# ─────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ─────────────────────────────────────────────
+# Data – keep directory structure, ignore files
+# ─────────────────────────────────────────────
+data/raw/*
+data/processed/*
+data/images/*
+data/labels/*
+# Allow .gitkeep placeholders
+!data/**/.gitkeep
+
+# ─────────────────────────────────────────────
+# Model Artefacts
+# ─────────────────────────────────────────────
+models/*.pkl
+models/*.json
+models/*.ubj
+models/*.pt
+models/*.bin
+!models/.gitkeep
+
+# ─────────────────────────────────────────────
+# ML / Experiment Tracking
+# ─────────────────────────────────────────────
+mlruns/
+wandb/
+.neptune/
+lightning_logs/
+
+# ─────────────────────────────────────────────
+# HuggingFace / Torch Cache
+# ─────────────────────────────────────────────
+.cache/
+*.hdf5
+
+# ─────────────────────────────────────────────
+# IDE / Editor
+# ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─────────────────────────────────────────────
+# OS
+# ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ─────────────────────────────────────────────
+# Environment Variables
+# ─────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─────────────────────────────────────────────
+# Coverage & Test Reports
+# ─────────────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+*.log
