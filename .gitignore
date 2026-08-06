@@ -50,7 +50,7 @@ models/*.bin
 # ─────────────────────────────────────────────
 # Image classifier docs (local explanation only)
 # ─────────────────────────────────────────────
-IMAGE_CLASSIFIER_EXPLANATION.md
+
 
 # ─────────────────────────────────────────────
 # Local pip / temp caches
