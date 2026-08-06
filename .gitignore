@@ -48,6 +48,17 @@ models/*.bin
 !models/.gitkeep
 
 # ─────────────────────────────────────────────
+# Image classifier docs (local explanation only)
+# ─────────────────────────────────────────────
+IMAGE_CLASSIFIER_EXPLANATION.md
+
+# ─────────────────────────────────────────────
+# Local pip / temp caches
+# ─────────────────────────────────────────────
+.pip-cache/
+.tmp/
+
+# ─────────────────────────────────────────────
 # ML / Experiment Tracking
 # ─────────────────────────────────────────────
 mlruns/
