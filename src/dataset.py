@@ -1,7 +1,7 @@
 """
 Custom PyTorch Dataset for disaster image classification.
 
-Recursively scans ``dataset/``, maps folder paths to the six training labels
+Recursively scans ``dataset/``, maps folder paths to the five training labels
 (including Infrastructure → Earthquake), and does **not** rely on ImageFolder.
 """
 

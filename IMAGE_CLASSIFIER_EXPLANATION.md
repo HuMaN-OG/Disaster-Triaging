@@ -14,8 +14,7 @@ disaster-triaging/
 │   │   ├── Urban_Fire/               → label: Urban Fire
 │   │   └── Wild_Fire/                → label: Wild Fire
 │   ├── Land_Disaster/
-│   │   ├── Drought/                  → label: Drought
-│   │   └── Land_Slide/               → label: Landslide
+│   │   └── Drought/                  → label: Drought
 │   └── Water_Disaster/               → label: Flood
 ├── src/
 │   ├── dataset.py                    # Custom Dataset + path→label mapping
@@ -38,8 +37,8 @@ disaster-triaging/
 | File | Role |
 |------|------|
 | `src/utils/image_classifier.py` | Shared constants (class names, paths, hyper-parameters), seed helpers, metric computation, and plotting (`confusion_matrix.png`, `training_history.png`). |
-| `src/dataset.py` | Recursively scans `dataset/`, maps folder paths to the 6 labels (Infrastructure → Earthquake), stratified 80/20 split, train/val transforms. |
-| `src/model.py` | EfficientNet-B0 (ImageNet pretrained) with a 6-class head; `freeze_backbone()` / `unfreeze_backbone()` for staged fine-tuning; checkpoint save/load. |
+| `src/dataset.py` | Recursively scans `dataset/`, maps folder paths to the 5 labels (Infrastructure → Earthquake), stratified 80/20 split, train/val transforms. |
+| `src/model.py` | EfficientNet-B0 (ImageNet pretrained) with a 5-class head; `freeze_backbone()` / `unfreeze_backbone()` for staged fine-tuning; checkpoint save/load. |
 | `src/train_image_classifier.py` | End-to-end training: CrossEntropyLoss, AdamW (1e-4), ReduceLROnPlateau, early stopping, saves best weights to `models/disaster_classifier.pth`. |
 | `src/evaluate.py` | Loads a checkpoint, reports loss/accuracy/precision/recall/F1 and writes the confusion matrix. |
 
@@ -52,7 +51,6 @@ disaster-triaging/
 | `Damaged_Infrastructure/Infrastructure/` | Earthquake |
 | `Fire_Disaster/Urban_Fire/` | Urban Fire |
 | `Fire_Disaster/Wild_Fire/` | Wild Fire |
-| `Land_Disaster/Land_Slide/` | Landslide |
 | `Land_Disaster/Drought/` | Drought |
 
 ## How to train

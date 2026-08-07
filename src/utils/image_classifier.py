@@ -38,7 +38,6 @@ CLASS_NAMES: list[str] = [
     "Earthquake",
     "Urban Fire",
     "Wild Fire",
-    "Landslide",
     "Drought",
 ]
 NUM_CLASSES: int = len(CLASS_NAMES)
@@ -54,7 +53,6 @@ FOLDER_TO_CLASS: dict[str, str] = {
     "Infrastructure": "Earthquake",
     "Urban_Fire": "Urban Fire",
     "Wild_Fire": "Wild Fire",
-    "Land_Slide": "Landslide",
     "Drought": "Drought",
 }
 

@@ -21,12 +21,12 @@ FinetuneMode = Literal["frozen", "partial", "full"]
 
 class DisasterClassifier(nn.Module):
     """
-    EfficientNet-B0 with a replaced 6-class classifier head.
+    EfficientNet-B0 with a replaced 5-class classifier head.
 
     Parameters
     ----------
     num_classes:
-        Number of output classes (default: 6).
+        Number of output classes (default: 5).
     pretrained:
         Load ImageNet-pretrained EfficientNet-B0 weights.
     finetune_mode:

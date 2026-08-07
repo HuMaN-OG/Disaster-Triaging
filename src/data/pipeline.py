@@ -33,7 +33,6 @@ POSITIVE_PROMPTS = [
     ("Wildfire spreading through a forest", "wildfire", "Clearly depicts a wildfire spreading through dense forest terrain."),
     ("Earthquake damage", "earthquake", "Clearly depicts severe earthquake structural damage."),
     ("Collapsed building", "building_collapse", "Clearly depicts a collapsed building and structural debris."),
-    ("Landslide blocking a road", "landslide", "Clearly depicts a landslide scar or debris blocking a roadway."),
     ("Disaster infrastructure damage", "infrastructure_damage", "Clearly depicts major infrastructure damage caused by a disaster."),
     ("Disaster response scene", "disaster_response", "Clearly depicts active emergency disaster response personnel and equipment."),
     ("Rescue workers during a disaster", "rescue_operation", "Clearly depicts rescue workers operating at a disaster site.")
@@ -111,12 +110,6 @@ ENV_DESCRIPTIONS = {
         "A multi-level property wing has caved in, leaving unsupported columns and exposed interiors.",
         "Massive structural debris blocks pathways after the roof and upper floors collapsed."
     ],
-    "landslide": [
-        "A massive soil and mud slope failure has swept down the hillside, burying parts of the roadway.",
-        "Rock avalanche and saturated mudflow cover vehicular lanes and encroaching residential plots.",
-        "A hillside scar indicates heavy mud movement that has deposited mud and trees onto access roads.",
-        "Mudslide debris blocks transit corridors and lower ground levels of hillside structures."
-    ],
     "infrastructure_damage": [
         "A bridge deck or overpass structure shows critical structural cracking and partial roadway collapse.",
         "Damaged utility poles, fractured pavement, and breached retaining walls render the route impassable.",
@@ -167,12 +160,6 @@ CITIZEN_REPORTS = {
         "Roof structure caved into the main hall. 4 occupants escaped with minor injuries, but 2 people remain unaccounted for inside. Send search and rescue teams!",
         "Wall collapse crushed our side entryway. 5 residents are stranded on the upper landing. The structure feels unstable — please dispatch emergency ladders.",
         "Building facade collapsed onto parked vehicles. 2 bystanders sustained injuries from flying debris. Bystanders are assisting until paramedics arrive."
-    ],
-    "landslide": [
-        "A mudslide engulfed our access road and blocked our doorway. 4 family members including an infant are trapped inside the house. Soil is still moving above us!",
-        "Landslide debris hit a passing vehicle on the highway. 2 passengers are trapped inside the vehicle under mud and branches. Send heavy rescue machinery now!",
-        "Mud and rocks flooded our driveway after the hillside gave way. 3 occupants evacuated safely to higher ground. Reporting road blockage for emergency clearing.",
-        "Saturated earth collapsed onto three homes. About 7 residents evacuated but 2 are missing. Immediate search and rescue teams required on site."
     ],
     "infrastructure_damage": [
         "The bridge section collapsed, completely cutting off access to 30 households. No casualties observed, but emergency vehicles cannot cross. Urgent bridge assessment needed.",
