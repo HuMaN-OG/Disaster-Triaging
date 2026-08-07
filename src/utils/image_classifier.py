@@ -26,8 +26,8 @@ from sklearn.metrics import (
 # src/utils/image_classifier.py → project root is three levels up
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent.parent
 DATASET_ROOT: Path = PROJECT_ROOT / "dataset"
-MODELS_DIR: Path = PROJECT_ROOT / "models"
-RESULTS_DIR: Path = PROJECT_ROOT / "results"
+MODELS_DIR: Path = PROJECT_ROOT / "models" / "image"
+RESULTS_DIR: Path = PROJECT_ROOT / "results" / "image"
 CHECKPOINT_PATH: Path = MODELS_DIR / "disaster_classifier.pth"
 
 # ---------------------------------------------------------------------------

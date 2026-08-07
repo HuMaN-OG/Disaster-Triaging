@@ -226,7 +226,7 @@ class BenchmarkClassifier(nn.Module):
             pretrained=False,
             finetune_mode=mode,
         )
-        model.load_state_dict(checkpoint["model_state_dict"])
+        model.load_state_dict(checkpoint["model_state_dict"], strict=False)
         model.to(device)
         return model, checkpoint
 
