@@ -1,0 +1,7 @@
+{
+  "highres_accuracy": 0.8414179104477612,
+  "highres_precision": 0.836906709241,
+  "highres_recall": 0.8408899772050525,
+  "highres_f1": 0.8369449626233681,
+  "classification_report": "              precision    recall  f1-score   support\n\n       Flood     0.9200    0.9055    0.9127       127\n  Earthquake     0.8161    0.7802    0.7978        91\n  Urban Fire     0.8592    0.7262    0.7871        84\n   Wild Fire     0.8462    0.9612    0.9000       103\n   Landslide     0.7391    0.7473    0.7432        91\n     Drought     0.8409    0.9250    0.8810        40\n\n    accuracy                         0.8414       536\n   macro avg     0.8369    0.8409    0.8369       536\nweighted avg     0.8420    0.8414    0.8399       536\n"
+}
