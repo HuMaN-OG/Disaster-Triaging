@@ -1,0 +1,6 @@
+Text Priority Regressor — Validation Report
+Sentence model: all-MiniLM-L6-v2
+MAE                    : 6.8484
+RMSE                   : 8.4680
+R²                     : 0.8980
+Avg abs priority error : 6.8484 points

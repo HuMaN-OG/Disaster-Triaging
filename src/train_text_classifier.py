@@ -176,10 +176,10 @@ def train(args: argparse.Namespace) -> dict[str, Any]:
         encoding="utf-8",
     )
 
-    print(f"Saved XGBRegressor   → {XGBOOST_PATH}")
-    print(f"Saved model meta     → {MODEL_META_PATH}")
-    print(f"Saved pred-vs-true   → {PRED_VS_TRUE_PATH}")
-    print(f"Saved report         → {REGRESSION_REPORT_PATH}")
+    print(f"Saved XGBRegressor   -> {XGBOOST_PATH}")
+    print(f"Saved model meta     -> {MODEL_META_PATH}")
+    print(f"Saved pred-vs-true   -> {PRED_VS_TRUE_PATH}")
+    print(f"Saved report         -> {REGRESSION_REPORT_PATH}")
 
     return metrics
 

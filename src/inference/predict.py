@@ -1,16 +1,15 @@
 """
-Inference module for disaster image classification and rescue triage.
+Inference module for disaster image classification, text priority scoring, and multimodal rescue triage.
 
-Provides `ImagePredictor` class to load trained image model checkpoints
-(Swin-T, ConvNeXt-Tiny, ViT-B/16, EfficientNetV2-S, EfficientNet-B0)
-or the Multi-Architecture Ensemble for single-image and batch inference.
+Provides `ImagePredictor` for disaster type prediction from photos,
+and `MultimodalPredictor` for combining citizen reports (text) + uploaded photos (image).
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Any, Sequence
 
 import numpy as np
 import torch
@@ -35,6 +34,29 @@ class ImagePredictionResult:
     predicted_class_idx: int
     confidence: float
     class_probabilities: dict[str, float]
+
+
+@dataclass
+class MultimodalPredictionResult:
+    """Dataclass holding combined image + text rescue triage prediction."""
+
+    disaster_type: str
+    image_confidence: float
+    priority_score: float
+    priority_class: str
+    image_class_probabilities: dict[str, float]
+
+    def to_dict(self) -> dict[str, Any]:
+        """Format prediction as a JSON-serializable dictionary."""
+        return {
+            "disaster_type": self.disaster_type,
+            "priority": self.priority_class,
+            "severity_score": round(self.priority_score, 1),
+            "confidence": round(self.image_confidence, 4),
+            "class_probabilities": {
+                k: round(v, 4) for k, v in self.image_class_probabilities.items()
+            },
+        }
 
 
 class ImagePredictor:
@@ -136,6 +158,50 @@ class ImagePredictor:
     ) -> list[ImagePredictionResult]:
         """Predict disaster classes for a batch of images."""
         return [self.predict(img) for img in image_inputs]
+
+
+class MultimodalPredictor:
+    """
+    End-to-end Multimodal Rescue Triage Predictor.
+
+    Fuses predictions from the Image Classifier (Disaster Type) and
+    Text Classifier (Priority Score / Severity Class).
+    """
+
+    def __init__(
+        self,
+        image_model_type: str = "ensemble",
+        device: torch.device | str | None = None,
+    ) -> None:
+        from src.predict_text import load_pipeline
+        from src.text_dataset import MODEL_META_PATH, XGBOOST_PATH
+
+        self.image_predictor = ImagePredictor(model_type=image_model_type, device=device)
+        self.text_model, self.text_encoder = load_pipeline(XGBOOST_PATH, MODEL_META_PATH)
+
+    def predict(
+        self,
+        text_report: str,
+        image_input: str | Path | Image.Image,
+    ) -> MultimodalPredictionResult:
+        """
+        Given citizen report text and an image, produce a combined MultimodalPredictionResult.
+        """
+        from src.predict_text import predict_priority_score
+
+        # 1. Image prediction
+        img_res = self.image_predictor.predict(image_input)
+
+        # 2. Text prediction
+        text_res = predict_priority_score(text_report, self.text_model, self.text_encoder)
+
+        return MultimodalPredictionResult(
+            disaster_type=img_res.predicted_class,
+            image_confidence=img_res.confidence,
+            priority_score=text_res["priority_score"],
+            priority_class=text_res["ui_category"],
+            image_class_probabilities=img_res.class_probabilities,
+        )
 
 
 def predict_image(image_path: str | Path, model_type: str = "swin_t") -> ImagePredictionResult:
