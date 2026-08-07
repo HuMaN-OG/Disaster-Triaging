@@ -1,0 +1,106 @@
+{
+  "english_baseline_r2": 0.9217,
+  "english_baseline_mae": 6.038,
+  "winning_model": {
+    "model_name": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+    "display_name": "multilingual-mpnet-v2 (768-d)",
+    "embedding_dim": 768,
+    "r2": 0.9232607617383956,
+    "mae": 6.092134014862703,
+    "rmse": 7.343772823606515,
+    "embedding_time_sec": 338.0607260999968,
+    "fit_time_sec": 44.733904699998675,
+    "latency_ms": 266.79368750137655,
+    "memory_mb": 742.5,
+    "mini_cross_lingual_preds": {
+      "english": 85.44709943392546,
+      "hindi": 86.16959612938126,
+      "hinglish": 30.877062296227695
+    },
+    "delta_hindi": 0.72,
+    "delta_hinglish": 54.57,
+    "checkpoint_path": "C:\\Users\\HP\\disaster-triaging\\models\\catboost_sentence-transformers_paraphrase-multilingual-mpnet-base-v2.cbm"
+  },
+  "leaderboard": [
+    {
+      "model_name": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+      "display_name": "multilingual-mpnet-v2 (768-d)",
+      "embedding_dim": 768,
+      "r2": 0.9232607617383956,
+      "mae": 6.092134014862703,
+      "rmse": 7.343772823606515,
+      "embedding_time_sec": 338.0607260999968,
+      "fit_time_sec": 44.733904699998675,
+      "latency_ms": 266.79368750137655,
+      "memory_mb": 742.5,
+      "mini_cross_lingual_preds": {
+        "english": 85.44709943392546,
+        "hindi": 86.16959612938126,
+        "hinglish": 30.877062296227695
+      },
+      "delta_hindi": 0.72,
+      "delta_hinglish": 54.57,
+      "checkpoint_path": "C:\\Users\\HP\\disaster-triaging\\models\\catboost_sentence-transformers_paraphrase-multilingual-mpnet-base-v2.cbm"
+    },
+    {
+      "model_name": "BAAI/bge-base-en-v1.5",
+      "display_name": "bge-base-v1.5 (English Ref)",
+      "embedding_dim": 768,
+      "r2": 0.9205867761736823,
+      "mae": 6.098697601854399,
+      "rmse": 7.470624454421607,
+      "embedding_time_sec": 0.0,
+      "fit_time_sec": 33.955006699994556,
+      "latency_ms": 125.07637499948032,
+      "memory_mb": 391.7,
+      "mini_cross_lingual_preds": {
+        "english": 86.36831889536222,
+        "hindi": 50.04667397748999,
+        "hinglish": 53.650982555866996
+      },
+      "delta_hindi": 36.32,
+      "delta_hinglish": 32.72,
+      "checkpoint_path": "C:\\Users\\HP\\disaster-triaging\\models\\catboost_BAAI_bge-base-en-v1.5.cbm"
+    },
+    {
+      "model_name": "BAAI/bge-m3",
+      "display_name": "bge-m3 (1024-d)",
+      "embedding_dim": 1024,
+      "r2": 0.9184431879489441,
+      "mae": 6.171274451021746,
+      "rmse": 7.570779760776004,
+      "embedding_time_sec": 887.4868875999964,
+      "fit_time_sec": 54.61155950000102,
+      "latency_ms": 514.0361374997156,
+      "memory_mb": 1118.5,
+      "mini_cross_lingual_preds": {
+        "english": 80.63536564179628,
+        "hindi": 75.92126478353859,
+        "hinglish": 40.52622374890751
+      },
+      "delta_hindi": 4.71,
+      "delta_hinglish": 40.11,
+      "checkpoint_path": "C:\\Users\\HP\\disaster-triaging\\models\\catboost_BAAI_bge-m3.cbm"
+    },
+    {
+      "model_name": "intfloat/multilingual-e5-base",
+      "display_name": "multilingual-e5-base (768-d)",
+      "embedding_dim": 768,
+      "r2": 0.9077325731576652,
+      "mae": 6.445810523445896,
+      "rmse": 8.05257347705082,
+      "embedding_time_sec": 195.52332970000134,
+      "fit_time_sec": 47.81495400000131,
+      "latency_ms": 237.59596250147297,
+      "memory_mb": -34.7,
+      "mini_cross_lingual_preds": {
+        "english": 78.07215446132177,
+        "hindi": 75.43690662838287,
+        "hinglish": 28.9513700234756
+      },
+      "delta_hindi": 2.64,
+      "delta_hinglish": 49.12,
+      "checkpoint_path": "C:\\Users\\HP\\disaster-triaging\\models\\catboost_intfloat_multilingual-e5-base.cbm"
+    }
+  ]
+}

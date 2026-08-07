@@ -1,0 +1,16 @@
+{
+  "embedding_model": "BAAI/bge-base-en-v1.5",
+  "best_r2": 0.9242530465126038,
+  "best_mae": 6.011810302734375,
+  "best_rmse": 7.296137835823549,
+  "best_params": {
+    "n_estimators": 850,
+    "max_depth": 6,
+    "learning_rate": 0.010716583039889564,
+    "subsample": 0.6134137518817666,
+    "colsample_bytree": 0.6159620759414395,
+    "min_child_weight": 6,
+    "reg_alpha": 9.15569136482099,
+    "reg_lambda": 2.5727118815254477
+  }
+}

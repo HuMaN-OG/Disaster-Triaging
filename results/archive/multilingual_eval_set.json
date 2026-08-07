@@ -1,0 +1,1602 @@
+[
+  {
+    "id": 1,
+    "priority_score": 5.1,
+    "ui_category": "Very Low",
+    "english": "Update from the senior complex on Pine. Floodwater is creeping higher along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. No dispatch needed unless you want us on the awareness list.",
+    "hindi": "Update from the senior complex on Pine. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list.",
+    "hinglish": "Update from the senior complex on Pine. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. Kisi team ki zaroorat nahi hai unless you want us on the awareness list."
+  },
+  {
+    "id": 2,
+    "priority_score": 5.9,
+    "ui_category": "Very Low",
+    "english": "Situation at the industrial spur where the building tilted slightly but still stands. Community volunteers already handed out water bottles nearby. We will call again if anything changes Case ref L398.",
+    "hindi": "Situation at the industrial spur where the building tilted slightly but still stands. Community volunteers already handed out पानी bottles nearby. We will call again if anything changes केस संदर्भ L398.",
+    "hinglish": "Situation at the industrial spur where the building tilted slightly but still stands. Community volunteers already handed out paani bottles nearby. We will call again if anything changes Case ref L398."
+  },
+  {
+    "id": 3,
+    "priority_score": 6.3,
+    "ui_category": "Very Low",
+    "english": "We are at the temporary shelter street. Related to the local urban fire: neighboring apartments filled with smoke. Pets are inside, fed, and secure; no medical issues. No dispatch needed unless you want us on the awareness list Case ref L226.",
+    "hindi": "We are at the temporary shelter street. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Pets are inside, fed, and secure; no medical issues. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L226.",
+    "hinglish": "We are at the temporary shelter street. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Pets are inside, fed, and secure; no medical issues. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L226."
+  },
+  {
+    "id": 4,
+    "priority_score": 6.7,
+    "ui_category": "Very Low",
+    "english": "During this landslide at North Bridge approach, mud and rock buried part of the access road. Neighbors checked door-to-door and found no injuries on our floor. Sharing so teams can focus elsewhere Case ref L89.",
+    "hindi": "भूस्खलन के दौरान at North Bridge approach, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Neighbors checked door-to-door and found no injuries on our floor. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L89.",
+    "hinglish": "Is landslide ke dauran at North Bridge approach, keechad aur pathar se rasta block ho gaya hai. Neighbors checked door-to-door and found no injuries on our floor. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L89."
+  },
+  {
+    "id": 5,
+    "priority_score": 7.3,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for Warehouse Row where the building tilted slightly but still stands. Our household plan to shelter in place overnight and monitor official alerts. Logging this for coordination only Case ref L200.",
+    "hindi": "Need to log an update for Wareघर Row where the building tilted slightly but still stands. Our घरhold plan to shelter in place overnight and monitor official alerts. Logging this for coordination only केस संदर्भ L200.",
+    "hinglish": "Need to log an update for Wareghar Row where the building tilted slightly but still stands. Our gharhold plan to shelter in place overnight and monitor official alerts. Logging this for coordination only Case ref L200."
+  },
+  {
+    "id": 6,
+    "priority_score": 7.9,
+    "ui_category": "Very Low",
+    "english": "Situation at the industrial spur. Related to the local urban fire: neighboring apartments filled with smoke. Community volunteers already handed out water bottles nearby. Sharing so teams can focus elsewhere Case ref L478.",
+    "hindi": "Situation at the industrial spur. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Community volunteers already handed out पानी bottles nearby. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L478.",
+    "hinglish": "Situation at the industrial spur. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Community volunteers already handed out paani bottles nearby. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L478."
+  },
+  {
+    "id": 7,
+    "priority_score": 8.6,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for Oakridge apartments where the building tilted slightly but still stands. We have charged batteries and can call again if conditions change. Kindly mark our household as currently safe.",
+    "hindi": "Need to log an update for Oakridge apartments where the building tilted slightly but still stands. We have charged batteries and can call again if conditions change. Kindly mark our घरhold as currently safe.",
+    "hinglish": "Need to log an update for Oakridge apartments where the building tilted slightly but still stands. We have charged batteries and can call again if conditions change. Kindly mark our gharhold as currently safe."
+  },
+  {
+    "id": 8,
+    "priority_score": 9.4,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for Warehouse Row. Our household plan to shelter in place overnight and monitor official alerts. Context: water rationing started in our ward. Sharing so teams can focus elsewhere Case ref L480.",
+    "hindi": "Need to log an update for Wareघर Row. Our घरhold plan to shelter in place overnight and monitor official alerts. Context: पानी rationing started in our ward. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L480.",
+    "hinglish": "Need to log an update for Wareghar Row. Our gharhold plan to shelter in place overnight and monitor official alerts. Context: paani rationing started in our ward. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L480."
+  },
+  {
+    "id": 9,
+    "priority_score": 9.9,
+    "ui_category": "Very Low",
+    "english": "During this landslide at the east levee area, mud and rock buried part of the access road. Basement dampness is annoying but not dangerous to anyone. We will call again if anything changes Case ref L173.",
+    "hindi": "भूस्खलन के दौरान at the east levee area, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Basement dampness is annoying but not dangerous to anyone. We will call again if anything changes केस संदर्भ L173.",
+    "hinglish": "Is landslide ke dauran at the east levee area, keechad aur pathar se rasta block ho gaya hai. Basement dampness is annoying but not dangerous to anyone. We will call again if anything changes Case ref L173."
+  },
+  {
+    "id": 10,
+    "priority_score": 10.8,
+    "ui_category": "Very Low",
+    "english": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: water rationing started in our ward. Sharing so teams can focus elsewhere Case ref L450.",
+    "hindi": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: पानी rationing started in our ward. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L450.",
+    "hinglish": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: paani rationing started in our ward. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L450."
+  },
+  {
+    "id": 11,
+    "priority_score": 11.7,
+    "ui_category": "Very Low",
+    "english": "Citizen report near Warehouse Row where the building tilted slightly but still stands. Our household plan to shelter in place overnight and monitor official alerts. Logging this for coordination only Case ref L260.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Wareघर Row where the building tilted slightly but still stands. Our घरhold plan to shelter in place overnight and monitor official alerts. Logging this for coordination only केस संदर्भ L260.",
+    "hinglish": "Citizen report area Wareghar Row where the building tilted slightly but still stands. Our gharhold plan to shelter in place overnight and monitor official alerts. Logging this for coordination only Case ref L260."
+  },
+  {
+    "id": 12,
+    "priority_score": 12.4,
+    "ui_category": "Very Low",
+    "english": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: water rationing started in our ward. Sharing so teams can focus elsewhere Case ref L210.",
+    "hindi": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: पानी rationing started in our ward. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L210.",
+    "hinglish": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: paani rationing started in our ward. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L210."
+  },
+  {
+    "id": 13,
+    "priority_score": 12.7,
+    "ui_category": "Very Low",
+    "english": "Wildfire smoke is dense and orange around Lakeside Terrace. Livestock were shifted earlier; herders report no stranded animals. Sharing so teams can focus elsewhere Case ref L195.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Lakeside Terrace. Livestock were shifted earlier; herders report no stranded animals. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L195.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Lakeside Terrace. Livestock were shifted earlier; herders report no stranded animals. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L195."
+  },
+  {
+    "id": 14,
+    "priority_score": 13.3,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for the riverside flats where the building tilted slightly but still stands. Children and adults are calm indoors with working phones. Sharing so teams can focus elsewhere Case ref L344.",
+    "hindi": "Need to log an update for the riverside flats where the building tilted slightly but still stands. Children and adults are calm indoors with working phones. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L344.",
+    "hinglish": "Need to log an update for the riverside flats where the building tilted slightly but still stands. Children and adults are calm indoors with working phones. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L344."
+  },
+  {
+    "id": 15,
+    "priority_score": 14.3,
+    "ui_category": "Very Low",
+    "english": "Calling about North Bridge approach. Floodwater is creeping higher along the curb. Meanwhile, neighbors checked door-to-door and found no injuries on our floor. Logging this for coordination only Case ref L229.",
+    "hindi": "Calling about North Bridge approach. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, neighbors checked door-to-door and found no injuries on our floor. Logging this for coordination only केस संदर्भ L229.",
+    "hinglish": "Calling about North Bridge approach. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, neighbors checked door-to-door and found no injuries on our floor. Logging this for coordination only Case ref L229."
+  },
+  {
+    "id": 16,
+    "priority_score": 14.6,
+    "ui_category": "Very Low",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Smoke smell outside is mild; windows are sealed and breathing is fine. Please mark our household as currently safe Case ref L491.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Smoke smell outside is mild; windows are sealed and breathing is fine. Please mark our घरhold as currently safe केस संदर्भ L491.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Smoke smell outside is mild; windows are sealed and breathing is fine. Please mark our gharhold as currently safe Case ref L491."
+  },
+  {
+    "id": 17,
+    "priority_score": 15.2,
+    "ui_category": "Very Low",
+    "english": "Wildfire smoke is dense and orange around the school zone by Route 14. Outdoor plants were lost, yet the living spaces stay dry and usable. Please mark our household as currently safe Case ref L297.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the school zone by Route 14. Outdoor plants were lost, yet the living spaces stay dry and usable. Please mark our घरhold as currently safe केस संदर्भ L297.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the school zone by Route 14. Outdoor plants were lost, yet the living spaces stay dry and usable. Please mark our gharhold as currently safe Case ref L297."
+  },
+  {
+    "id": 18,
+    "priority_score": 15.9,
+    "ui_category": "Very Low",
+    "english": "Wildfire smoke is dense and orange around Maple Street. Everyone here is safe, uninjured, and accounted for. Logging this for coordination only Case ref L81.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Maple Street. Everyone here is safe, unघायल, and accounted for. Logging this for coordination only केस संदर्भ L81.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Maple Street. Everyone here is safe, unghayal, and accounted for. Logging this for coordination only Case ref L81."
+  },
+  {
+    "id": 19,
+    "priority_score": 16.9,
+    "ui_category": "Very Low",
+    "english": "From Lakeside Terrace. Floodwater is creeping higher along the curb. Meanwhile, livestock were shifted earlier; herders report no stranded animals. Please mark our household as currently safe Case ref L415.",
+    "hindi": "From Lakeside Terrace. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, livestock were shifted earlier; herders report no stranded animals. Please mark our घरhold as currently safe केस संदर्भ L415.",
+    "hinglish": "From Lakeside Terrace. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, livestock were shifted earlier; herders report no stranded animals. Please mark our gharhold as currently safe Case ref L415."
+  },
+  {
+    "id": 20,
+    "priority_score": 17.5,
+    "ui_category": "Very Low",
+    "english": "Situation at South Canal ward where the building tilted slightly but still stands. No one needs rescue; we are only sharing a status update. No dispatch needed unless you want us on the awareness list Case ref L302.",
+    "hindi": "Situation at South Canal ward where the building tilted slightly but still stands. No one needs बचाव; we are only sharing a status update. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L302.",
+    "hinglish": "Situation at South Canal ward where the building tilted slightly but still stands. No one needs rescue; we are only sharing a status update. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L302."
+  },
+  {
+    "id": 21,
+    "priority_score": 17.9,
+    "ui_category": "Very Low",
+    "english": "During this landslide at Lakeside Terrace, mud and rock buried part of the access road. Livestock were shifted earlier; herders report no stranded animals. Logging this for coordination only.",
+    "hindi": "भूस्खलन के दौरान at Lakeside Terrace, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Livestock were shifted earlier; herders report no stranded animals. Logging this for coordination only.",
+    "hinglish": "Is landslide ke dauran at Lakeside Terrace, keechad aur pathar se rasta block ho gaya hai. Livestock were shifted earlier; herders report no stranded animals. Logging this for coordination only."
+  },
+  {
+    "id": 22,
+    "priority_score": 18.6,
+    "ui_category": "Very Low",
+    "english": "Wildfire smoke is dense and orange around Block C near the market. We still have drinking water and packaged food for today. Please mark our household as currently safe Case ref L87.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Block C near the market. We still have drinking पानी and packaged food for today. Please mark our घरhold as currently safe केस संदर्भ L87.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Block C near the market. We still have drinking paani and packaged food for today. Please mark our gharhold as currently safe Case ref L87."
+  },
+  {
+    "id": 23,
+    "priority_score": 19.2,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for Warehouse Row. Related to the local urban fire: neighboring apartments filled with smoke. Our household plan to shelter in place overnight and monitor official alerts. Kindly mark our household as currently safe Case ref L160.",
+    "hindi": "Need to log an update for Wareघर Row. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Our घरhold plan to shelter in place overnight and monitor official alerts. Kindly mark our घरhold as currently safe केस संदर्भ L160.",
+    "hinglish": "Need to log an update for Wareghar Row. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Our gharhold plan to shelter in place overnight and monitor official alerts. Kindly mark our gharhold as currently safe Case ref L160."
+  },
+  {
+    "id": 24,
+    "priority_score": 19.6,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for Harbor Court. Related to the local urban fire: neighboring apartments filled with smoke. An elderly parent is comfortable with a caregiver already present. Sharing so teams can focus elsewhere Case ref L208.",
+    "hindi": "Need to log an update for Harbor Court. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. An elderly parent is comfortable with a caregiver already present. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L208.",
+    "hinglish": "Need to log an update for Harbor Court. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. An elderly parent is comfortable with a caregiver already present. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L208."
+  },
+  {
+    "id": 25,
+    "priority_score": 20.2,
+    "ui_category": "Very Low",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Smoke smell outside is mild; windows are sealed and breathing is fine. Please mark our household as currently safe Case ref L251.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Smoke smell outside is mild; windows are sealed and breathing is fine. Please mark our घरhold as currently safe केस संदर्भ L251.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Smoke smell outside is mild; windows are sealed and breathing is fine. Please mark our gharhold as currently safe Case ref L251."
+  },
+  {
+    "id": 26,
+    "priority_score": 20.7,
+    "ui_category": "Very Low",
+    "english": "Need to log an update for the canyon mouth neighborhood. Power blinked once, then returned; lights and radio work. Context: water rationing started in our ward. Kindly mark our household as currently safe Case ref L312.",
+    "hindi": "Need to log an update for the canyon mouth neighborhood. Power blinked once, then returned; lights and radio work. Context: पानी rationing started in our ward. Kindly mark our घरhold as currently safe केस संदर्भ L312.",
+    "hinglish": "Need to log an update for the canyon mouth neighborhood. Power blinked once, then returned; lights and radio work. Context: paani rationing started in our ward. Kindly mark our gharhold as currently safe Case ref L312."
+  },
+  {
+    "id": 27,
+    "priority_score": 21.2,
+    "ui_category": "Low",
+    "english": "Citizen report near the canyon mouth neighborhood. Power blinked once, then returned; lights and radio work. Context: water rationing started in our ward. Kindly mark our household as currently safe.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood. Power blinked once, then returned; lights and radio work. Context: पानी rationing started in our ward. Kindly mark our घरhold as currently safe.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood. Power blinked once, then returned; lights and radio work. Context: paani rationing started in our ward. Kindly mark our gharhold as currently safe."
+  },
+  {
+    "id": 28,
+    "priority_score": 21.8,
+    "ui_category": "Low",
+    "english": "From the senior complex on Pine. Floodwater is creeping higher along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. No dispatch needed unless you want us on the awareness list Case ref L151.",
+    "hindi": "From the senior complex on Pine. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L151.",
+    "hinglish": "From the senior complex on Pine. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L151."
+  },
+  {
+    "id": 29,
+    "priority_score": 22.3,
+    "ui_category": "Low",
+    "english": "Wildfire smoke is dense and orange around the east levee area. Basement dampness is annoying but not dangerous to anyone. No dispatch needed unless you want us on the awareness list Case ref L453.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the east levee area. Basement dampness is annoying but not dangerous to anyone. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L453.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the east levee area. Basement dampness is annoying but not dangerous to anyone. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L453."
+  },
+  {
+    "id": 30,
+    "priority_score": 22.9,
+    "ui_category": "Low",
+    "english": "Need to log an update for Oakridge apartments where the building tilted slightly but still stands. We have charged batteries and can call again if conditions change. Kindly mark our household as currently safe Case ref L176.",
+    "hindi": "Need to log an update for Oakridge apartments where the building tilted slightly but still stands. We have charged batteries and can call again if conditions change. Kindly mark our घरhold as currently safe केस संदर्भ L176.",
+    "hinglish": "Need to log an update for Oakridge apartments where the building tilted slightly but still stands. We have charged batteries and can call again if conditions change. Kindly mark our gharhold as currently safe Case ref L176."
+  },
+  {
+    "id": 31,
+    "priority_score": 23.6,
+    "ui_category": "Low",
+    "english": "We are at the industrial spur. Community volunteers already handed out water bottles nearby. Context: water rationing started in our ward. No dispatch needed unless you want us on the awareness list Case ref L378.",
+    "hindi": "We are at the industrial spur. Community volunteers already handed out पानी bottles nearby. Context: पानी rationing started in our ward. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L378.",
+    "hinglish": "We are at the industrial spur. Community volunteers already handed out paani bottles nearby. Context: paani rationing started in our ward. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L378."
+  },
+  {
+    "id": 32,
+    "priority_score": 24.2,
+    "ui_category": "Low",
+    "english": "Update from Block C near the market. Floodwater is creeping higher along the curb. Meanwhile, we still have drinking water and packaged food for today. We will call again if anything changes.",
+    "hindi": "Update from Block C near the market. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, we still have drinking पानी and packaged food for today. We will call again if anything changes.",
+    "hinglish": "Update from Block C near the market. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, we still have drinking paani and packaged food for today. We will call again if anything changes."
+  },
+  {
+    "id": 33,
+    "priority_score": 24.9,
+    "ui_category": "Low",
+    "english": "Reporting from Maple Street. Floodwater is creeping higher along the curb. Meanwhile, everyone here is safe, uninjured, and accounted for. No dispatch needed unless you want us on the awareness list Case ref L361.",
+    "hindi": "Reporting from Maple Street. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, everyone here is safe, unघायल, and accounted for. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L361.",
+    "hinglish": "Reporting from Maple Street. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, everyone here is safe, unghayal, and accounted for. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L361."
+  },
+  {
+    "id": 34,
+    "priority_score": 25.4,
+    "ui_category": "Low",
+    "english": "Situation at the industrial spur. Related to the local urban fire: neighboring apartments filled with smoke. Community volunteers already handed out water bottles nearby. Sharing so teams can focus elsewhere Case ref L238.",
+    "hindi": "Situation at the industrial spur. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Community volunteers already handed out पानी bottles nearby. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L238.",
+    "hinglish": "Situation at the industrial spur. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Community volunteers already handed out paani bottles nearby. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L238."
+  },
+  {
+    "id": 35,
+    "priority_score": 26.5,
+    "ui_category": "Low",
+    "english": "During this landslide at Maple Street, mud and rock buried part of the access road. Everyone here is safe, uninjured, and accounted for. Please mark our household as currently safe.",
+    "hindi": "भूस्खलन के दौरान at Maple Street, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Everyone here is safe, unघायल, and accounted for. Please mark our घरhold as currently safe.",
+    "hinglish": "Is landslide ke dauran at Maple Street, keechad aur pathar se rasta block ho gaya hai. Everyone here is safe, unghayal, and accounted for. Please mark our gharhold as currently safe."
+  },
+  {
+    "id": 36,
+    "priority_score": 26.9,
+    "ui_category": "Low",
+    "english": "Update from Block C near the market. Floodwater is creeping higher along the curb. Meanwhile, we still have drinking water and packaged food for today. We will call again if anything changes Case ref L187.",
+    "hindi": "Update from Block C near the market. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, we still have drinking पानी and packaged food for today. We will call again if anything changes केस संदर्भ L187.",
+    "hinglish": "Update from Block C near the market. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, we still have drinking paani and packaged food for today. We will call again if anything changes Case ref L187."
+  },
+  {
+    "id": 37,
+    "priority_score": 27.5,
+    "ui_category": "Low",
+    "english": "Wildfire smoke is dense and orange around the old quarry road. No trapped persons, no missing persons, and no urgent medical needs. We will call again if anything changes Case ref L459.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the old quarry road. No फँसे हुए persons, no missing persons, and no urgent medical needs. We will call again if anything changes केस संदर्भ L459.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the old quarry road. No phase hue persons, no missing persons, and no urgent medical needs. We will call again if anything changes Case ref L459."
+  },
+  {
+    "id": 38,
+    "priority_score": 28.1,
+    "ui_category": "Low",
+    "english": "Citizen report near the riverside flats. Related to the local urban fire: neighboring apartments filled with smoke. Children and adults are calm indoors with working phones. Logging this for coordination only Case ref L484.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the riverside flats. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Children and adults are calm indoors with working phones. Logging this for coordination only केस संदर्भ L484.",
+    "hinglish": "Citizen report area the riverside flats. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Children and adults are calm indoors with working phones. Logging this for coordination only Case ref L484."
+  },
+  {
+    "id": 39,
+    "priority_score": 28.6,
+    "ui_category": "Low",
+    "english": "Wildfire smoke is dense and orange around North Bridge approach. Neighbors checked door-to-door and found no injuries on our floor. We will call again if anything changes Case ref L249.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around North Bridge approach. Neighbors checked door-to-door and found no injuries on our floor. We will call again if anything changes केस संदर्भ L249.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around North Bridge approach. Neighbors checked door-to-door and found no injuries on our floor. We will call again if anything changes Case ref L249."
+  },
+  {
+    "id": 40,
+    "priority_score": 28.9,
+    "ui_category": "Low",
+    "english": "From the senior complex on Pine. Floodwater is creeping higher along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. No dispatch needed unless you want us on the awareness list.",
+    "hindi": "From the senior complex on Pine. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list.",
+    "hinglish": "From the senior complex on Pine. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, smoke smell outside is mild; windows are sealed and breathing is fine. Kisi team ki zaroorat nahi hai unless you want us on the awareness list."
+  },
+  {
+    "id": 41,
+    "priority_score": 29.3,
+    "ui_category": "Low",
+    "english": "During this landslide at Block C near the market, mud and rock buried part of the access road. We still have drinking water and packaged food for today. No dispatch needed unless you want us on the awareness list Case ref L347.",
+    "hindi": "भूस्खलन के दौरान at Block C near the market, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. We still have drinking पानी and packaged food for today. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L347.",
+    "hinglish": "Is landslide ke dauran at Block C near the market, keechad aur pathar se rasta block ho gaya hai. We still have drinking paani and packaged food for today. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L347."
+  },
+  {
+    "id": 42,
+    "priority_score": 30.0,
+    "ui_category": "Low",
+    "english": "Citizen report near Oakridge apartments. We have charged batteries and can call again if conditions change. Context: water rationing started in our ward. Logging this for coordination only Case ref L156.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Oakridge apartments. We have charged batteries and can call again if conditions change. Context: पानी rationing started in our ward. Logging this for coordination only केस संदर्भ L156.",
+    "hinglish": "Citizen report area Oakridge apartments. We have charged batteries and can call again if conditions change. Context: paani rationing started in our ward. Logging this for coordination only Case ref L156."
+  },
+  {
+    "id": 43,
+    "priority_score": 30.5,
+    "ui_category": "Low",
+    "english": "During this landslide at Cedar Creek trailheads, mud and rock buried part of the access road. Our family evacuated early and reached a relative's home without problems. We will call again if anything changes Case ref L383.",
+    "hindi": "भूस्खलन के दौरान at Cedar Creek trailheads, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Our family evacuated early and reached a relative's home without problems. We will call again if anything changes केस संदर्भ L383.",
+    "hinglish": "Is landslide ke dauran at Cedar Creek trailheads, keechad aur pathar se rasta block ho gaya hai. Our family evacuated early and reached a relative's home without problems. We will call again if anything changes Case ref L383."
+  },
+  {
+    "id": 44,
+    "priority_score": 31.1,
+    "ui_category": "Low",
+    "english": "Situation at Valley Edge settlement where the building tilted slightly but still stands. School dismissed early and all students from our street arrived home. Sharing so teams can focus elsewhere Case ref L494.",
+    "hindi": "Situation at Valley Edge settlement where the building tilted slightly but still stands. School dismissed early and all students from our street arrived home. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L494.",
+    "hinglish": "Situation at Valley Edge settlement where the building tilted slightly but still stands. School dismissed early and all students from our street arrived home. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L494."
+  },
+  {
+    "id": 45,
+    "priority_score": 31.7,
+    "ui_category": "Low",
+    "english": "Situation at South Canal ward where the building tilted slightly but still stands. No one needs rescue; we are only sharing a status update. No dispatch needed unless you want us on the awareness list Case ref L422.",
+    "hindi": "Situation at South Canal ward where the building tilted slightly but still stands. No one needs बचाव; we are only sharing a status update. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L422.",
+    "hinglish": "Situation at South Canal ward where the building tilted slightly but still stands. No one needs rescue; we are only sharing a status update. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L422."
+  },
+  {
+    "id": 46,
+    "priority_score": 32.3,
+    "ui_category": "Low",
+    "english": "Citizen report near the canyon mouth neighborhood. Related to the local urban fire: neighboring apartments filled with smoke. Power blinked once, then returned; lights and radio work. We will call again if anything changes Case ref L412.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Power blinked once, then returned; lights and radio work. We will call again if anything changes केस संदर्भ L412.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Power blinked once, then returned; lights and radio work. We will call again if anything changes Case ref L412."
+  },
+  {
+    "id": 47,
+    "priority_score": 33.1,
+    "ui_category": "Low",
+    "english": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: water rationing started in our ward. Sharing so teams can focus elsewhere.",
+    "hindi": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: पानी rationing started in our ward. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके.",
+    "hinglish": "We are at Hillview Lane. Roads look messy but walkable, and traffic is moving slowly. Context: paani rationing started in our ward. Ye info share kar rahe hain taaki team kahin aur focus kare."
+  },
+  {
+    "id": 48,
+    "priority_score": 33.7,
+    "ui_category": "Low",
+    "english": "Calling about the east levee area. Floodwater is creeping higher along the curb. Meanwhile, basement dampness is annoying but not dangerous to anyone. Sharing so teams can focus elsewhere Case ref L253.",
+    "hindi": "Calling about the east levee area. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, तहखाने में नमी की समस्या है but not dangerous to anyone. यह जानकारी साझा की जा रही है ताकि टीम अन्यत्र ध्यान केंद्रित कर सके केस संदर्भ L253.",
+    "hinglish": "Calling about the east levee area. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, basement me paani ki samasya hai but not dangerous to anyone. Ye info share kar rahe hain taaki team kahin aur focus kare Case ref L253."
+  },
+  {
+    "id": 49,
+    "priority_score": 34.2,
+    "ui_category": "Low",
+    "english": "We are at Valley Edge settlement. School dismissed early and all students from our street arrived home. Context: water rationing started in our ward. We will call again if anything changes Case ref L234.",
+    "hindi": "We are at Valley Edge settlement. School dismissed early and all students from our street arrived home. Context: पानी rationing started in our ward. We will call again if anything changes केस संदर्भ L234.",
+    "hinglish": "We are at Valley Edge settlement. School dismissed early and all students from our street arrived home. Context: paani rationing started in our ward. We will call again if anything changes Case ref L234."
+  },
+  {
+    "id": 50,
+    "priority_score": 34.5,
+    "ui_category": "Low",
+    "english": "We are at the temporary shelter street. Related to the local urban fire: neighboring apartments filled with smoke. Pets are inside, fed, and secure; no medical issues. No dispatch needed unless you want us on the awareness list Case ref L466.",
+    "hindi": "We are at the temporary shelter street. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Pets are inside, fed, and secure; no medical issues. किसी बचाव दल की आवश्यकता नहीं है unless you want us on the awareness list केस संदर्भ L466.",
+    "hinglish": "We are at the temporary shelter street. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Pets are inside, fed, and secure; no medical issues. Kisi team ki zaroorat nahi hai unless you want us on the awareness list Case ref L466."
+  },
+  {
+    "id": 51,
+    "priority_score": 41.0,
+    "ui_category": "Medium",
+    "english": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Infant formula is running low and nearby shops look closed. A supply drop or cleared exit path is requested.",
+    "hindi": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Infant formula is running low and nearby shops look closed. A supply drop or cleared exit path is requested.",
+    "hinglish": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Infant formula is running low and nearby shops look closed. A supply drop or cleared exit path is requested."
+  },
+  {
+    "id": 52,
+    "priority_score": 41.5,
+    "ui_category": "Medium",
+    "english": "Situation at the industrial spur. Related to the local urban fire: neighboring apartments filled with smoke. One calf looks weak from lack of water but is still standing. We can wait a short while but need a plan today Case ref M478.",
+    "hindi": "Situation at the industrial spur. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. One calf looks weak from lack of पानी but is still standing. We can wait a short while but need a plan today केस संदर्भ M478.",
+    "hinglish": "Situation at the industrial spur. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. One calf looks weak from lack of paani but is still standing. We can wait a short while but need a plan today Case ref M478."
+  },
+  {
+    "id": 53,
+    "priority_score": 42.0,
+    "ui_category": "Medium",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Heat left an older aunt dehydrated though she remains conscious. Please call back when signal allows.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Heat left an older aunt dehydrated though she remains conscious. Please call back when signal allows.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Heat left an older aunt dehydrated though she remains conscious. Please call back when signal allows."
+  },
+  {
+    "id": 54,
+    "priority_score": 42.3,
+    "ui_category": "Medium",
+    "english": "Reporting from the farm cluster past mile marker 9. Floodwater is creeping higher along the curb. Meanwhile, a wheelchair ramp is blocked by debris, delaying a safe exit. Please call back when signal allows Case ref M385.",
+    "hindi": "Reporting from the farm cluster past mile marker 9. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a wheelchair ramp is blocked by debris, delaying a safe exit. Please call back when signal allows केस संदर्भ M385.",
+    "hinglish": "Reporting from the farm cluster past mile marker 9. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a wheelchair ramp is blocked by debris, delaying a safe exit. Please call back when signal allows Case ref M385."
+  },
+  {
+    "id": 55,
+    "priority_score": 42.7,
+    "ui_category": "Medium",
+    "english": "We are at the temporary shelter street. Bottled water will last through tomorrow at most. Context: water rationing started in our ward. Non-urgent transport later today would reduce risk Case ref M426.",
+    "hindi": "We are at the temporary shelter street. Bottled पानी will last through tomorrow at most. Context: पानी rationing started in our ward. Non-urgent transport later today would reduce risk केस संदर्भ M426.",
+    "hinglish": "We are at the temporary shelter street. Bottled paani will last through tomorrow at most. Context: paani rationing started in our ward. Non-urgent transport later today would reduce risk Case ref M426."
+  },
+  {
+    "id": 56,
+    "priority_score": 43.1,
+    "ui_category": "Medium",
+    "english": "We are at Hillview Lane. We are stuck upstairs overnight with no elevator power. Context: water rationing started in our ward. Our household can wait a short while but need a plan today Case ref M330.",
+    "hindi": "We are at Hillview Lane. We are stuck upstairs overnight with no elevator power. Context: पानी rationing started in our ward. Our घरhold can wait a short while but need a plan today केस संदर्भ M330.",
+    "hinglish": "We are at Hillview Lane. We are stuck upstairs overnight with no elevator power. Context: paani rationing started in our ward. Our gharhold can wait a short while but need a plan today Case ref M330."
+  },
+  {
+    "id": 57,
+    "priority_score": 43.3,
+    "ui_category": "Medium",
+    "english": "From the old quarry road. Floodwater is creeping higher along the curb. Meanwhile, communication with relatives failed after towers went intermittent. Non-urgent transport later today would reduce risk Case ref M319.",
+    "hindi": "From the old quarry road. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, communication with relatives failed after towers went intermittent. Non-urgent transport later today would reduce risk केस संदर्भ M319.",
+    "hinglish": "From the old quarry road. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, communication with relatives failed after towers went intermittent. Non-urgent transport later today would reduce risk Case ref M319."
+  },
+  {
+    "id": 58,
+    "priority_score": 43.6,
+    "ui_category": "Medium",
+    "english": "Citizen report near Warehouse Row. Our household need a non-emergency transport window within the next few hours. Context: water rationing started in our ward. Our household can wait a short while but need a plan today Case ref M420.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Wareघर Row. Our घरhold need a non-emergency transport window within the next few hours. Context: पानी rationing started in our ward. Our घरhold can wait a short while but need a plan today केस संदर्भ M420.",
+    "hinglish": "Citizen report area Wareghar Row. Our gharhold need a non-emergency transport window within the next few hours. Context: paani rationing started in our ward. Our gharhold can wait a short while but need a plan today Case ref M420."
+  },
+  {
+    "id": 59,
+    "priority_score": 44.2,
+    "ui_category": "Medium",
+    "english": "Calling about the farm cluster past mile marker 9. Floodwater is creeping higher along the curb. Meanwhile, a wheelchair ramp is blocked by debris, delaying a safe exit. Please call back when signal allows Case ref M325.",
+    "hindi": "Calling about the farm cluster past mile marker 9. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a wheelchair ramp is blocked by debris, delaying a safe exit. Please call back when signal allows केस संदर्भ M325.",
+    "hinglish": "Calling about the farm cluster past mile marker 9. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a wheelchair ramp is blocked by debris, delaying a safe exit. Please call back when signal allows Case ref M325."
+  },
+  {
+    "id": 60,
+    "priority_score": 44.8,
+    "ui_category": "Medium",
+    "english": "During this landslide at Cedar Creek trailheads, mud and rock buried part of the access road. Children missed meals and we have only a few snacks remaining. A supply drop or cleared exit path is requested Case ref M263.",
+    "hindi": "भूस्खलन के दौरान at Cedar Creek trailheads, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Children missed meals and we have only a few snacks remaining. A supply drop or cleared exit path is requested केस संदर्भ M263.",
+    "hinglish": "Is landslide ke dauran at Cedar Creek trailheads, keechad aur pathar se rasta block ho gaya hai. Children missed meals and we have only a few snacks remaining. A supply drop or cleared exit path is requested Case ref M263."
+  },
+  {
+    "id": 61,
+    "priority_score": 45.1,
+    "ui_category": "Medium",
+    "english": "Situation at Valley Edge settlement. Related to the local urban fire: neighboring apartments filled with smoke. A pregnant neighbor cannot walk a long detour around barriers. Non-urgent transport later today would reduce risk Case ref M454.",
+    "hindi": "Situation at Valley Edge settlement. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A pregnant neighbor cannot walk a long detour around barriers. Non-urgent transport later today would reduce risk केस संदर्भ M454.",
+    "hinglish": "Situation at Valley Edge settlement. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A pregnant neighbor cannot walk a long detour around barriers. Non-urgent transport later today would reduce risk Case ref M454."
+  },
+  {
+    "id": 62,
+    "priority_score": 45.5,
+    "ui_category": "Medium",
+    "english": "Reporting from the east levee area. Floodwater is creeping higher along the curb. Meanwhile, food for five people is nearly gone after two days indoors. We can wait a short while but need a plan today.",
+    "hindi": "Reporting from the east levee area. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, food for five लोग is nearly gone after two days indoors. We can wait a short while but need a plan today.",
+    "hinglish": "Reporting from the east levee area. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, food for five log is nearly gone after two days indoors. We can wait a short while but need a plan today."
+  },
+  {
+    "id": 63,
+    "priority_score": 45.8,
+    "ui_category": "Medium",
+    "english": "Situation at the industrial spur where the building tilted slightly but still stands. One calf looks weak from lack of water but is still standing. A supply drop or cleared exit path is requested Case ref M158.",
+    "hindi": "Situation at the industrial spur where the building tilted slightly but still stands. One calf looks weak from lack of पानी but is still standing. A supply drop or cleared exit path is requested केस संदर्भ M158.",
+    "hinglish": "Situation at the industrial spur where the building tilted slightly but still stands. One calf looks weak from lack of paani but is still standing. A supply drop or cleared exit path is requested Case ref M158."
+  },
+  {
+    "id": 64,
+    "priority_score": 46.2,
+    "ui_category": "Medium",
+    "english": "Citizen report near the riverside flats. Related to the local urban fire: neighboring apartments filled with smoke. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the riverside flats. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk.",
+    "hinglish": "Citizen report area the riverside flats. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk."
+  },
+  {
+    "id": 65,
+    "priority_score": 46.4,
+    "ui_category": "Medium",
+    "english": "Wildfire smoke is dense and orange around Cedar Creek trailheads. Children missed meals and we have only a few snacks remaining. Advice on the nearest accessible shelter would help Case ref M183.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Cedar Creek trailheads. Children missed meals and we have only a few snacks remaining. Advice on the nearest accessible shelter would help केस संदर्भ M183.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Cedar Creek trailheads. Children missed meals and we have only a few snacks remaining. Advice on the nearest accessible shelter would help Case ref M183."
+  },
+  {
+    "id": 66,
+    "priority_score": 46.7,
+    "ui_category": "Medium",
+    "english": "Wildfire smoke is dense and orange around North Bridge approach. A child's asthma is irritated by smoke and inhaler doses are short. A supply drop or cleared exit path is requested Case ref M249.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around North Bridge approach. A child's asthma is irritated by smoke and inhaler doses are short. A supply drop or cleared exit path is requested केस संदर्भ M249.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around North Bridge approach. A child's asthma is irritated by smoke and inhaler doses are short. A supply drop or cleared exit path is requested Case ref M249."
+  },
+  {
+    "id": 67,
+    "priority_score": 47.1,
+    "ui_category": "Medium",
+    "english": "Situation at South Canal ward. An elderly resident can walk but is exhausted and needs guided evacuation soon. Context: water rationing started in our ward. Please call back when signal allows Case ref M222.",
+    "hindi": "Situation at South Canal ward. An elderly resident can walk but is exhausted and needs guided evacuation soon. Context: पानी rationing started in our ward. Please call back when signal allows केस संदर्भ M222.",
+    "hinglish": "Situation at South Canal ward. An elderly resident can walk but is exhausted and needs guided evacuation soon. Context: paani rationing started in our ward. Please call back when signal allows Case ref M222."
+  },
+  {
+    "id": 68,
+    "priority_score": 47.3,
+    "ui_category": "Medium",
+    "english": "Situation at South Canal ward where the building tilted slightly but still stands. An elderly resident can walk but is exhausted and needs guided evacuation soon. Advice on the nearest accessible shelter would help.",
+    "hindi": "Situation at South Canal ward where the building tilted slightly but still stands. An elderly resident can walk but is exhausted and needs guided evacuation soon. Advice on the nearest accessible shelter would help.",
+    "hinglish": "Situation at South Canal ward where the building tilted slightly but still stands. An elderly resident can walk but is exhausted and needs guided evacuation soon. Advice on the nearest accessible shelter would help."
+  },
+  {
+    "id": 69,
+    "priority_score": 47.6,
+    "ui_category": "Medium",
+    "english": "Wildfire smoke is dense and orange around the school zone by Route 14. We cannot reach the clinic by phone about a feverish child. Please call back when signal allows Case ref M177.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the school zone by Route 14. We cannot reach the clinic by phone about a feverish child. Please call back when signal allows केस संदर्भ M177.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the school zone by Route 14. We cannot reach the clinic by phone about a feverish child. Please call back when signal allows Case ref M177."
+  },
+  {
+    "id": 70,
+    "priority_score": 48.3,
+    "ui_category": "Medium",
+    "english": "During this landslide at Maple Street, mud and rock buried part of the access road. We cannot drive out because the road is impassable for regular cars. Please call back when signal allows Case ref M401.",
+    "hindi": "भूस्खलन के दौरान at Maple Street, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. We cannot drive out because the road is impassable for regular cars. Please call back when signal allows केस संदर्भ M401.",
+    "hinglish": "Is landslide ke dauran at Maple Street, keechad aur pathar se rasta block ho gaya hai. We cannot drive out because the road is impassable for regular cars. Please call back when signal allows Case ref M401."
+  },
+  {
+    "id": 71,
+    "priority_score": 48.7,
+    "ui_category": "Medium",
+    "english": "During this landslide at the east levee area, mud and rock buried part of the access road. Food for five people is nearly gone after two days indoors. A supply drop or cleared exit path is requested.",
+    "hindi": "भूस्खलन के दौरान at the east levee area, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Food for five लोग is nearly gone after two days indoors. A supply drop or cleared exit path is requested.",
+    "hinglish": "Is landslide ke dauran at the east levee area, keechad aur pathar se rasta block ho gaya hai. Food for five log is nearly gone after two days indoors. A supply drop or cleared exit path is requested."
+  },
+  {
+    "id": 72,
+    "priority_score": 49.1,
+    "ui_category": "Medium",
+    "english": "Need to log an update for Warehouse Row where the building tilted slightly but still stands. Our household need a non-emergency transport window within the next few hours. Non-urgent transport later today would reduce risk Case ref M200.",
+    "hindi": "Need to log an update for Wareघर Row where the building tilted slightly but still stands. Our घरhold need a non-emergency transport window within the next few hours. Non-urgent transport later today would reduce risk केस संदर्भ M200.",
+    "hinglish": "Need to log an update for Wareghar Row where the building tilted slightly but still stands. Our gharhold need a non-emergency transport window within the next few hours. Non-urgent transport later today would reduce risk Case ref M200."
+  },
+  {
+    "id": 73,
+    "priority_score": 49.4,
+    "ui_category": "Medium",
+    "english": "Citizen report near the canyon mouth neighborhood. Related to the local urban fire: neighboring apartments filled with smoke. Mud on the driveway may delay an ambulance if symptoms worsen. A supply drop or cleared exit path is requested Case ref M172.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Mud on the driveway may delay an ambulance if symptoms worsen. A supply drop or cleared exit path is requested केस संदर्भ M172.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Mud on the driveway may delay an ambulance if symptoms worsen. A supply drop or cleared exit path is requested Case ref M172."
+  },
+  {
+    "id": 74,
+    "priority_score": 49.8,
+    "ui_category": "Medium",
+    "english": "Wildfire smoke is dense and orange around the east levee area. Food for five people is nearly gone after two days indoors. Advice on the nearest accessible shelter would help Case ref M453.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the east levee area. Food for five लोग is nearly gone after two days indoors. Advice on the nearest accessible shelter would help केस संदर्भ M453.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the east levee area. Food for five log is nearly gone after two days indoors. Advice on the nearest accessible shelter would help Case ref M453."
+  },
+  {
+    "id": 75,
+    "priority_score": 50.2,
+    "ui_category": "Medium",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Heat left an older aunt dehydrated though she remains conscious. Please call back when signal allows Case ref M371.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Heat left an older aunt dehydrated though she remains conscious. Please call back when signal allows केस संदर्भ M371.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Heat left an older aunt dehydrated though she remains conscious. Please call back when signal allows Case ref M371."
+  },
+  {
+    "id": 76,
+    "priority_score": 50.5,
+    "ui_category": "Medium",
+    "english": "Need to log an update for Oakridge apartments. A teen twisted an ankle and needs support to move. Context: water rationing started in our ward. Non-urgent transport later today would reduce risk.",
+    "hindi": "Need to log an update for Oakridge apartments. A teen twisted an ankle and needs support to move. Context: पानी rationing started in our ward. Non-urgent transport later today would reduce risk.",
+    "hinglish": "Need to log an update for Oakridge apartments. A teen twisted an ankle and needs support to move. Context: paani rationing started in our ward. Non-urgent transport later today would reduce risk."
+  },
+  {
+    "id": 77,
+    "priority_score": 50.8,
+    "ui_category": "Medium",
+    "english": "Need to log an update for Warehouse Row. Our household need a non-emergency transport window within the next few hours. Context: water rationing started in our ward. Our household can wait a short while but need a plan today Case ref M360.",
+    "hindi": "Need to log an update for Wareघर Row. Our घरhold need a non-emergency transport window within the next few hours. Context: पानी rationing started in our ward. Our घरhold can wait a short while but need a plan today केस संदर्भ M360.",
+    "hinglish": "Need to log an update for Wareghar Row. Our gharhold need a non-emergency transport window within the next few hours. Context: paani rationing started in our ward. Our gharhold can wait a short while but need a plan today Case ref M360."
+  },
+  {
+    "id": 78,
+    "priority_score": 51.2,
+    "ui_category": "Medium",
+    "english": "Need to log an update for Warehouse Row where the building tilted slightly but still stands. Our household need a non-emergency transport window within the next few hours. Non-urgent transport later today would reduce risk Case ref M440.",
+    "hindi": "Need to log an update for Wareघर Row where the building tilted slightly but still stands. Our घरhold need a non-emergency transport window within the next few hours. Non-urgent transport later today would reduce risk केस संदर्भ M440.",
+    "hinglish": "Need to log an update for Wareghar Row where the building tilted slightly but still stands. Our gharhold need a non-emergency transport window within the next few hours. Non-urgent transport later today would reduce risk Case ref M440."
+  },
+  {
+    "id": 79,
+    "priority_score": 51.4,
+    "ui_category": "Medium",
+    "english": "Need to log an update for the riverside flats. Related to the local urban fire: neighboring apartments filled with smoke. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk Case ref M424.",
+    "hindi": "Need to log an update for the riverside flats. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk केस संदर्भ M424.",
+    "hinglish": "Need to log an update for the riverside flats. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk Case ref M424."
+  },
+  {
+    "id": 80,
+    "priority_score": 51.9,
+    "ui_category": "Medium",
+    "english": "Situation at South Canal ward. An elderly resident can walk but is exhausted and needs guided evacuation soon. Context: water rationing started in our ward. Please call back when signal allows Case ref M342.",
+    "hindi": "Situation at South Canal ward. An elderly resident can walk but is exhausted and needs guided evacuation soon. Context: पानी rationing started in our ward. Please call back when signal allows केस संदर्भ M342.",
+    "hinglish": "Situation at South Canal ward. An elderly resident can walk but is exhausted and needs guided evacuation soon. Context: paani rationing started in our ward. Please call back when signal allows Case ref M342."
+  },
+  {
+    "id": 81,
+    "priority_score": 52.2,
+    "ui_category": "Medium",
+    "english": "From Cedar Creek trailheads. Floodwater is creeping higher along the curb. Meanwhile, children missed meals and we have only a few snacks remaining. We can wait a short while but need a plan today Case ref M223.",
+    "hindi": "From Cedar Creek trailheads. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, children missed meals and we have only a few snacks remaining. We can wait a short while but need a plan today केस संदर्भ M223.",
+    "hinglish": "From Cedar Creek trailheads. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, children missed meals and we have only a few snacks remaining. We can wait a short while but need a plan today Case ref M223."
+  },
+  {
+    "id": 82,
+    "priority_score": 52.6,
+    "ui_category": "Medium",
+    "english": "Situation at Hillview Lane. Related to the local urban fire: neighboring apartments filled with smoke. We are stuck upstairs overnight with no elevator power. Please call back when signal allows Case ref M430.",
+    "hindi": "Situation at Hillview Lane. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. We are stuck upstairs overnight with no elevator power. Please call back when signal allows केस संदर्भ M430.",
+    "hinglish": "Situation at Hillview Lane. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. We are stuck upstairs overnight with no elevator power. Please call back when signal allows Case ref M430."
+  },
+  {
+    "id": 83,
+    "priority_score": 53.1,
+    "ui_category": "Medium",
+    "english": "During this landslide at Block C near the market, mud and rock buried part of the access road. A shallow cut needs cleaning; bleeding stopped but supplies are limited. Advice on the nearest accessible shelter would help Case ref M407.",
+    "hindi": "भूस्खलन के दौरान at Block C near the market, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A shallow cut needs cleaning; bleeding stopped but supplies are limited. Advice on the nearest accessible shelter would help केस संदर्भ M407.",
+    "hinglish": "Is landslide ke dauran at Block C near the market, keechad aur pathar se rasta block ho gaya hai. A shallow cut needs cleaning; bleeding stopped but supplies are limited. Advice on the nearest accessible shelter would help Case ref M407."
+  },
+  {
+    "id": 84,
+    "priority_score": 53.5,
+    "ui_category": "Medium",
+    "english": "We are at Hillview Lane where the building tilted slightly but still stands. We are stuck upstairs overnight with no elevator power. Non-urgent transport later today would reduce risk Case ref M170.",
+    "hindi": "We are at Hillview Lane where the building tilted slightly but still stands. We are stuck upstairs overnight with no elevator power. Non-urgent transport later today would reduce risk केस संदर्भ M170.",
+    "hinglish": "We are at Hillview Lane where the building tilted slightly but still stands. We are stuck upstairs overnight with no elevator power. Non-urgent transport later today would reduce risk Case ref M170."
+  },
+  {
+    "id": 85,
+    "priority_score": 53.7,
+    "ui_category": "Medium",
+    "english": "Citizen report near the riverside flats where the building tilted slightly but still stands. Phone signal drops often, so arranging pickup is unreliable. We can wait a short while but need a plan today Case ref M164.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the riverside flats where the building tilted slightly but still stands. Phone signal drops often, so arranging pickup is unreliable. We can wait a short while but need a plan today केस संदर्भ M164.",
+    "hinglish": "Citizen report area the riverside flats where the building tilted slightly but still stands. Phone signal drops often, so arranging pickup is unreliable. We can wait a short while but need a plan today Case ref M164."
+  },
+  {
+    "id": 86,
+    "priority_score": 54.1,
+    "ui_category": "Medium",
+    "english": "During this landslide at the farm cluster past mile marker 9, mud and rock buried part of the access road. A wheelchair ramp is blocked by debris, delaying a safe exit. Non-urgent transport later today would reduce risk Case ref M185.",
+    "hindi": "भूस्खलन के दौरान at the farm cluster past mile marker 9, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A wheelchair ramp is blocked by debris, delaying a safe exit. Non-urgent transport later today would reduce risk केस संदर्भ M185.",
+    "hinglish": "Is landslide ke dauran at the farm cluster past mile marker 9, keechad aur pathar se rasta block ho gaya hai. A wheelchair ramp is blocked by debris, delaying a safe exit. Non-urgent transport later today would reduce risk Case ref M185."
+  },
+  {
+    "id": 87,
+    "priority_score": 54.4,
+    "ui_category": "Medium",
+    "english": "During this landslide at the farm cluster past mile marker 9, mud and rock buried part of the access road. A wheelchair ramp is blocked by debris, delaying a safe exit. Non-urgent transport later today would reduce risk Case ref M245.",
+    "hindi": "भूस्खलन के दौरान at the farm cluster past mile marker 9, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A wheelchair ramp is blocked by debris, delaying a safe exit. Non-urgent transport later today would reduce risk केस संदर्भ M245.",
+    "hinglish": "Is landslide ke dauran at the farm cluster past mile marker 9, keechad aur pathar se rasta block ho gaya hai. A wheelchair ramp is blocked by debris, delaying a safe exit. Non-urgent transport later today would reduce risk Case ref M245."
+  },
+  {
+    "id": 88,
+    "priority_score": 54.7,
+    "ui_category": "Medium",
+    "english": "We are at the temporary shelter street. Related to the local urban fire: neighboring apartments filled with smoke. Bottled water will last through tomorrow at most. Advice on the nearest accessible shelter would help Case ref M346.",
+    "hindi": "We are at the temporary shelter street. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Bottled पानी will last through tomorrow at most. Advice on the nearest accessible shelter would help केस संदर्भ M346.",
+    "hinglish": "We are at the temporary shelter street. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Bottled paani will last through tomorrow at most. Advice on the nearest accessible shelter would help Case ref M346."
+  },
+  {
+    "id": 89,
+    "priority_score": 55.2,
+    "ui_category": "Medium",
+    "english": "Reporting from North Bridge approach. Floodwater is creeping higher along the curb. Meanwhile, a child's asthma is irritated by smoke and inhaler doses are short. Non-urgent transport later today would reduce risk Case ref M289.",
+    "hindi": "Reporting from North Bridge approach. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a child's asthma is irritated by smoke and inhaler doses are short. Non-urgent transport later today would reduce risk केस संदर्भ M289.",
+    "hinglish": "Reporting from North Bridge approach. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a child's asthma is irritated by smoke and inhaler doses are short. Non-urgent transport later today would reduce risk Case ref M289."
+  },
+  {
+    "id": 90,
+    "priority_score": 55.6,
+    "ui_category": "Medium",
+    "english": "Citizen report near Harbor Court where the building tilted slightly but still stands. Infant formula is running low and nearby shops look closed. A supply drop or cleared exit path is requested.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Harbor Court where the building tilted slightly but still stands. Infant formula is running low and nearby shops look closed. A supply drop or cleared exit path is requested.",
+    "hinglish": "Citizen report area Harbor Court where the building tilted slightly but still stands. Infant formula is running low and nearby shops look closed. A supply drop or cleared exit path is requested."
+  },
+  {
+    "id": 91,
+    "priority_score": 55.9,
+    "ui_category": "Medium",
+    "english": "Wildfire smoke is dense and orange around the senior complex on Pine. Heat left an older aunt dehydrated though she remains conscious. Non-urgent transport later today would reduce risk Case ref M231.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the senior complex on Pine. Heat left an older aunt dehydrated though she remains conscious. Non-urgent transport later today would reduce risk केस संदर्भ M231.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the senior complex on Pine. Heat left an older aunt dehydrated though she remains conscious. Non-urgent transport later today would reduce risk Case ref M231."
+  },
+  {
+    "id": 92,
+    "priority_score": 56.2,
+    "ui_category": "Medium",
+    "english": "Citizen report near the riverside flats. Related to the local urban fire: neighboring apartments filled with smoke. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk Case ref M484.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the riverside flats. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk केस संदर्भ M484.",
+    "hinglish": "Citizen report area the riverside flats. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Phone signal drops often, so arranging pickup is unreliable. Non-urgent transport later today would reduce risk Case ref M484."
+  },
+  {
+    "id": 93,
+    "priority_score": 56.6,
+    "ui_category": "Medium",
+    "english": "During this landslide at Maple Street, mud and rock buried part of the access road. We cannot drive out because the road is impassable for regular cars. Please call back when signal allows Case ref M461.",
+    "hindi": "भूस्खलन के दौरान at Maple Street, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. We cannot drive out because the road is impassable for regular cars. Please call back when signal allows केस संदर्भ M461.",
+    "hinglish": "Is landslide ke dauran at Maple Street, keechad aur pathar se rasta block ho gaya hai. We cannot drive out because the road is impassable for regular cars. Please call back when signal allows Case ref M461."
+  },
+  {
+    "id": 94,
+    "priority_score": 56.9,
+    "ui_category": "Medium",
+    "english": "Situation at the industrial spur. One calf looks weak from lack of water but is still standing. Context: water rationing started in our ward. Advice on the nearest accessible shelter would help.",
+    "hindi": "Situation at the industrial spur. One calf looks weak from lack of पानी but is still standing. Context: पानी rationing started in our ward. Advice on the nearest accessible shelter would help.",
+    "hinglish": "Situation at the industrial spur. One calf looks weak from lack of paani but is still standing. Context: paani rationing started in our ward. Advice on the nearest accessible shelter would help."
+  },
+  {
+    "id": 95,
+    "priority_score": 57.6,
+    "ui_category": "Medium",
+    "english": "We are at the temporary shelter street. Related to the local urban fire: neighboring apartments filled with smoke. Bottled water will last through tomorrow at most. Advice on the nearest accessible shelter would help Case ref M466.",
+    "hindi": "We are at the temporary shelter street. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Bottled पानी will last through tomorrow at most. Advice on the nearest accessible shelter would help केस संदर्भ M466.",
+    "hinglish": "We are at the temporary shelter street. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Bottled paani will last through tomorrow at most. Advice on the nearest accessible shelter would help Case ref M466."
+  },
+  {
+    "id": 96,
+    "priority_score": 58.3,
+    "ui_category": "Medium",
+    "english": "During this landslide at the old quarry road, mud and rock buried part of the access road. Communication with relatives failed after towers went intermittent. We can wait a short while but need a plan today Case ref M299.",
+    "hindi": "भूस्खलन के दौरान at the old quarry road, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Communication with relatives failed after towers went intermittent. We can wait a short while but need a plan today केस संदर्भ M299.",
+    "hinglish": "Is landslide ke dauran at the old quarry road, keechad aur pathar se rasta block ho gaya hai. Communication with relatives failed after towers went intermittent. We can wait a short while but need a plan today Case ref M299."
+  },
+  {
+    "id": 97,
+    "priority_score": 58.6,
+    "ui_category": "Medium",
+    "english": "Calling about the east levee area. Floodwater is creeping higher along the curb. Meanwhile, food for five people is nearly gone after two days indoors. We can wait a short while but need a plan today Case ref M133.",
+    "hindi": "Calling about the east levee area. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, food for five लोग is nearly gone after two days indoors. We can wait a short while but need a plan today केस संदर्भ M133.",
+    "hinglish": "Calling about the east levee area. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, food for five log is nearly gone after two days indoors. We can wait a short while but need a plan today Case ref M133."
+  },
+  {
+    "id": 98,
+    "priority_score": 58.9,
+    "ui_category": "Medium",
+    "english": "Citizen report near the riverside flats. Phone signal drops often, so arranging pickup is unreliable. Context: water rationing started in our ward. A supply drop or cleared exit path is requested Case ref M204.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the riverside flats. Phone signal drops often, so arranging pickup is unreliable. Context: पानी rationing started in our ward. A supply drop or cleared exit path is requested केस संदर्भ M204.",
+    "hinglish": "Citizen report area the riverside flats. Phone signal drops often, so arranging pickup is unreliable. Context: paani rationing started in our ward. A supply drop or cleared exit path is requested Case ref M204."
+  },
+  {
+    "id": 99,
+    "priority_score": 59.1,
+    "ui_category": "Medium",
+    "english": "Reporting from the east levee area. Floodwater is creeping higher along the curb. Meanwhile, food for five people is nearly gone after two days indoors. We can wait a short while but need a plan today Case ref M193.",
+    "hindi": "Reporting from the east levee area. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, food for five लोग is nearly gone after two days indoors. We can wait a short while but need a plan today केस संदर्भ M193.",
+    "hinglish": "Reporting from the east levee area. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, food for five log is nearly gone after two days indoors. We can wait a short while but need a plan today Case ref M193."
+  },
+  {
+    "id": 100,
+    "priority_score": 59.5,
+    "ui_category": "Medium",
+    "english": "We are at Valley Edge settlement. Related to the local urban fire: neighboring apartments filled with smoke. A pregnant neighbor cannot walk a long detour around barriers. Non-urgent transport later today would reduce risk Case ref M274.",
+    "hindi": "We are at Valley Edge settlement. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A pregnant neighbor cannot walk a long detour around barriers. Non-urgent transport later today would reduce risk केस संदर्भ M274.",
+    "hinglish": "We are at Valley Edge settlement. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A pregnant neighbor cannot walk a long detour around barriers. Non-urgent transport later today would reduce risk Case ref M274."
+  },
+  {
+    "id": 101,
+    "priority_score": 61.1,
+    "ui_category": "High",
+    "english": "Update from Lakeside Terrace. Floodwater is creeping higher along the curb. Meanwhile, an infant in wet clothes is shivering hard after night temperatures dropped. Coordinate an ambulance once debris is moved Case ref H235.",
+    "hindi": "Update from Lakeside Terrace. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, an infant in wet clothes is shivering hard after night temperatures dropped. Coordinate an ambulance once debris is moved केस संदर्भ H235.",
+    "hinglish": "Update from Lakeside Terrace. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, an infant in wet clothes is shivering hard after night temperatures dropped. Coordinate an ambulance once debris is moved Case ref H235."
+  },
+  {
+    "id": 102,
+    "priority_score": 61.6,
+    "ui_category": "High",
+    "english": "Wildfire smoke is dense and orange around Cedar Creek trailheads. Two adults are stuck behind a jammed door while smoke thickens. Send medical responders as soon as a route opens Case ref H63.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Cedar Creek trailheads. Two adults are stuck behind a jammed door while smoke thickens. रास्ता खुलते ही मेडिकल टीम भेजें केस संदर्भ H63.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Cedar Creek trailheads. Two adults are stuck behind a jammed door while smoke thickens. Rasta khulte hi medical team bhejo Case ref H63."
+  },
+  {
+    "id": 103,
+    "priority_score": 62.3,
+    "ui_category": "High",
+    "english": "During this landslide at Maple Street, mud and rock buried part of the access road. An elderly diabetic is trapped upstairs without insulin because stairs are unsafe. Coordinate an ambulance once debris is moved Case ref H461.",
+    "hindi": "भूस्खलन के दौरान at Maple Street, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. An elderly diabetic is फँसे हुए upstairs without insulin because stairs are unsafe. Coordinate an ambulance once debris is moved केस संदर्भ H461.",
+    "hinglish": "Is landslide ke dauran at Maple Street, keechad aur pathar se rasta block ho gaya hai. An elderly diabetic is phase hue upstairs without insulin because stairs are unsafe. Coordinate an ambulance once debris is moved Case ref H461."
+  },
+  {
+    "id": 104,
+    "priority_score": 62.5,
+    "ui_category": "High",
+    "english": "We are at South Canal ward. Related to the local urban fire: neighboring apartments filled with smoke. A child with a deep cut is bleeding through bandages and turning pale. Priority evacuation for vulnerable people is required now.",
+    "hindi": "We are at South Canal ward. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A child with a deep cut is bleeding through bandages and turning pale. Priority evacuation for vulnerable लोग is required now.",
+    "hinglish": "We are at South Canal ward. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A child with a deep cut is bleeding through bandages and turning pale. Priority evacuation for vulnerable log is required now."
+  },
+  {
+    "id": 105,
+    "priority_score": 62.8,
+    "ui_category": "High",
+    "english": "Reporting from North Bridge approach. Floodwater is creeping higher along the curb. Meanwhile, an oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Extraction support is needed without waiting until morning Case ref H169.",
+    "hindi": "Reporting from North Bridge approach. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, an oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Extraction support is needed without waiting until morning केस संदर्भ H169.",
+    "hinglish": "Reporting from North Bridge approach. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, an oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Extraction support is needed without waiting until morning Case ref H169."
+  },
+  {
+    "id": 106,
+    "priority_score": 63.2,
+    "ui_category": "High",
+    "english": "During this landslide at the old quarry road, mud and rock buried part of the access road. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible Case ref H359.",
+    "hindi": "भूस्खलन के दौरान at the old quarry road, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible केस संदर्भ H359.",
+    "hinglish": "Is landslide ke dauran at the old quarry road, keechad aur pathar se rasta block ho gaya hai. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible Case ref H359."
+  },
+  {
+    "id": 107,
+    "priority_score": 63.5,
+    "ui_category": "High",
+    "english": "During this landslide at North Bridge approach, mud and rock buried part of the access road. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible.",
+    "hindi": "भूस्खलन के दौरान at North Bridge approach, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible.",
+    "hinglish": "Is landslide ke dauran at North Bridge approach, keechad aur pathar se rasta block ho gaya hai. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible."
+  },
+  {
+    "id": 108,
+    "priority_score": 63.8,
+    "ui_category": "High",
+    "english": "Situation at Valley Edge settlement where the building tilted slightly but still stands. A child had repeated seizures and the rescue medication is gone. Bring medication and trauma supplies if possible.",
+    "hindi": "Situation at Valley Edge settlement where the building tilted slightly but still stands. A child had repeated seizures and the बचाव medication is gone. Bring medication and trauma supplies if possible.",
+    "hinglish": "Situation at Valley Edge settlement where the building tilted slightly but still stands. A child had repeated seizures and the rescue medication is gone. Bring medication and trauma supplies if possible."
+  },
+  {
+    "id": 109,
+    "priority_score": 64.3,
+    "ui_category": "High",
+    "english": "Need to log an update for Oakridge apartments. Related to the local urban fire: neighboring apartments filled with smoke. An older couple cannot climb over rubble blocking their only exit. Send medical responders as soon as a route opens.",
+    "hindi": "Need to log an update for Oakridge apartments. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. An older couple cannot climb over rubble blocking their only exit. रास्ता खुलते ही मेडिकल टीम भेजें.",
+    "hinglish": "Need to log an update for Oakridge apartments. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. An older couple cannot climb over rubble blocking their only exit. Rasta khulte hi medical team bhejo."
+  },
+  {
+    "id": 110,
+    "priority_score": 64.8,
+    "ui_category": "High",
+    "english": "During this landslide at the east levee area, mud and rock buried part of the access road. A family of four is cut off with almost no drinking water left. Priority evacuation for vulnerable people is required now Case ref H173.",
+    "hindi": "भूस्खलन के दौरान at the east levee area, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A family of four is cut off with almost no drinking पानी left. Priority evacuation for vulnerable लोग is required now केस संदर्भ H173.",
+    "hinglish": "Is landslide ke dauran at the east levee area, keechad aur pathar se rasta block ho gaya hai. A family of four is cut off with almost no drinking paani left. Priority evacuation for vulnerable log is required now Case ref H173."
+  },
+  {
+    "id": 111,
+    "priority_score": 65.1,
+    "ui_category": "High",
+    "english": "Citizen report near the riverside flats where the building tilted slightly but still stands. An infant has a dangerous fever and clinics are unreachable by road. Bring medication and trauma supplies if possible.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the riverside flats where the building tilted slightly but still stands. An infant has a dangerous fever and clinics are unreachable by road. Bring medication and trauma supplies if possible.",
+    "hinglish": "Citizen report area the riverside flats where the building tilted slightly but still stands. An infant has a dangerous fever and clinics are unreachable by road. Bring medication and trauma supplies if possible."
+  },
+  {
+    "id": 112,
+    "priority_score": 65.4,
+    "ui_category": "High",
+    "english": "From Lakeside Terrace. Floodwater is creeping higher along the curb. Meanwhile, an infant in wet clothes is shivering hard after night temperatures dropped. Coordinate an ambulance once debris is moved Case ref H295.",
+    "hindi": "From Lakeside Terrace. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, an infant in wet clothes is shivering hard after night temperatures dropped. Coordinate an ambulance once debris is moved केस संदर्भ H295.",
+    "hinglish": "From Lakeside Terrace. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, an infant in wet clothes is shivering hard after night temperatures dropped. Coordinate an ambulance once debris is moved Case ref H295."
+  },
+  {
+    "id": 113,
+    "priority_score": 65.9,
+    "ui_category": "High",
+    "english": "Situation at Valley Edge settlement. A child had repeated seizures and the rescue medication is gone. Context: water rationing started in our ward. Priority evacuation for vulnerable people is required now Case ref H414.",
+    "hindi": "Situation at Valley Edge settlement. A child had repeated seizures and the बचाव medication is gone. Context: पानी rationing started in our ward. Priority evacuation for vulnerable लोग is required now केस संदर्भ H414.",
+    "hinglish": "Situation at Valley Edge settlement. A child had repeated seizures and the rescue medication is gone. Context: paani rationing started in our ward. Priority evacuation for vulnerable log is required now Case ref H414."
+  },
+  {
+    "id": 114,
+    "priority_score": 66.2,
+    "ui_category": "High",
+    "english": "Situation at Valley Edge settlement. Related to the local urban fire: neighboring apartments filled with smoke. A child had repeated seizures and the rescue medication is gone. Extraction support is needed without waiting until morning.",
+    "hindi": "Situation at Valley Edge settlement. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A child had repeated seizures and the बचाव medication is gone. Extraction support is needed without waiting until morning.",
+    "hinglish": "Situation at Valley Edge settlement. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A child had repeated seizures and the rescue medication is gone. Extraction support is needed without waiting until morning."
+  },
+  {
+    "id": 115,
+    "priority_score": 66.5,
+    "ui_category": "High",
+    "english": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: water rationing started in our ward. Extraction support is needed without waiting until morning Case ref H306.",
+    "hindi": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: पानी rationing started in our ward. Extraction support is needed without waiting until morning केस संदर्भ H306.",
+    "hinglish": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: paani rationing started in our ward. Extraction support is needed without waiting until morning Case ref H306."
+  },
+  {
+    "id": 116,
+    "priority_score": 66.9,
+    "ui_category": "High",
+    "english": "Citizen report near Harbor Court. Related to the local urban fire: neighboring apartments filled with smoke. Three people including a toddler remain on a low rooftop as water rises. Bring medication and trauma supplies if possible Case ref H268.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Harbor Court. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Three लोग including a toddler remain on a low rooftop as पानी rises. Bring medication and trauma supplies if possible केस संदर्भ H268.",
+    "hinglish": "Citizen report area Harbor Court. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Three log including a toddler remain on a low rooftop as paani rises. Bring medication and trauma supplies if possible Case ref H268."
+  },
+  {
+    "id": 117,
+    "priority_score": 67.3,
+    "ui_category": "High",
+    "english": "Wildfire smoke is dense and orange around the old quarry road. A child with asthma is wheezing constantly after smoke filled the unit. Priority evacuation for vulnerable people is required now Case ref H399.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the old quarry road. A child with asthma is wheezing constantly after smoke filled the unit. Priority evacuation for vulnerable लोग is required now केस संदर्भ H399.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the old quarry road. A child with asthma is wheezing constantly after smoke filled the unit. Priority evacuation for vulnerable log is required now Case ref H399."
+  },
+  {
+    "id": 118,
+    "priority_score": 67.5,
+    "ui_category": "High",
+    "english": "During this landslide at Cedar Creek trailheads, mud and rock buried part of the access road. Two adults are stuck behind a jammed door while smoke thickens. Priority evacuation for vulnerable people is required now Case ref H443.",
+    "hindi": "भूस्खलन के दौरान at Cedar Creek trailheads, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Two adults are stuck behind a jammed door while smoke thickens. Priority evacuation for vulnerable लोग is required now केस संदर्भ H443.",
+    "hinglish": "Is landslide ke dauran at Cedar Creek trailheads, keechad aur pathar se rasta block ho gaya hai. Two adults are stuck behind a jammed door while smoke thickens. Priority evacuation for vulnerable log is required now Case ref H443."
+  },
+  {
+    "id": 119,
+    "priority_score": 68.0,
+    "ui_category": "High",
+    "english": "During this landslide at the old quarry road, mud and rock buried part of the access road. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible Case ref H299.",
+    "hindi": "भूस्खलन के दौरान at the old quarry road, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible केस संदर्भ H299.",
+    "hinglish": "Is landslide ke dauran at the old quarry road, keechad aur pathar se rasta block ho gaya hai. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible Case ref H299."
+  },
+  {
+    "id": 120,
+    "priority_score": 68.6,
+    "ui_category": "High",
+    "english": "During this landslide at North Bridge approach, mud and rock buried part of the access road. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible Case ref H449.",
+    "hindi": "भूस्खलन के दौरान at North Bridge approach, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible केस संदर्भ H449.",
+    "hinglish": "Is landslide ke dauran at North Bridge approach, keechad aur pathar se rasta block ho gaya hai. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible Case ref H449."
+  },
+  {
+    "id": 121,
+    "priority_score": 69.0,
+    "ui_category": "High",
+    "english": "Need to log an update for the riverside flats where the building tilted slightly but still stands. An infant has a dangerous fever and clinics are unreachable by road. Bring medication and trauma supplies if possible.",
+    "hindi": "Need to log an update for the riverside flats where the building tilted slightly but still stands. An infant has a dangerous fever and clinics are unreachable by road. Bring medication and trauma supplies if possible.",
+    "hinglish": "Need to log an update for the riverside flats where the building tilted slightly but still stands. An infant has a dangerous fever and clinics are unreachable by road. Bring medication and trauma supplies if possible."
+  },
+  {
+    "id": 122,
+    "priority_score": 69.4,
+    "ui_category": "High",
+    "english": "Citizen report near the canyon mouth neighborhood where the building tilted slightly but still stands. Severe burns on both arms need urgent care; blistering is spreading. Send medical responders as soon as a route opens Case ref H332.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood where the building tilted slightly but still stands. Severe burns on both arms need urgent care; blistering is spreading. रास्ता खुलते ही मेडिकल टीम भेजें केस संदर्भ H332.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood where the building tilted slightly but still stands. Severe burns on both arms need urgent care; blistering is spreading. Rasta khulte hi medical team bhejo Case ref H332."
+  },
+  {
+    "id": 123,
+    "priority_score": 69.6,
+    "ui_category": "High",
+    "english": "Calling about the school zone by Route 14. Floodwater is creeping higher along the curb. Meanwhile, strong gas odor inside; one person is dizzy and nauseous. Priority evacuation for vulnerable people is required now.",
+    "hindi": "Calling about the school zone by Route 14. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, strong gas odor inside; one person is dizzy and nauseous. Priority evacuation for vulnerable लोग is required now.",
+    "hinglish": "Calling about the school zone by Route 14. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, strong gas odor inside; one person is dizzy and nauseous. Priority evacuation for vulnerable log is required now."
+  },
+  {
+    "id": 124,
+    "priority_score": 70.2,
+    "ui_category": "High",
+    "english": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: water rationing started in our ward. Extraction support is needed without waiting until morning Case ref H426.",
+    "hindi": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: पानी rationing started in our ward. Extraction support is needed without waiting until morning केस संदर्भ H426.",
+    "hinglish": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: paani rationing started in our ward. Extraction support is needed without waiting until morning Case ref H426."
+  },
+  {
+    "id": 125,
+    "priority_score": 70.6,
+    "ui_category": "High",
+    "english": "Reporting from the farm cluster past mile marker 9. Floodwater is creeping higher along the curb. Meanwhile, a wheelchair user is alone as water starts entering the ground floor. Coordinate an ambulance once debris is moved Case ref H265.",
+    "hindi": "Reporting from the farm cluster past mile marker 9. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a wheelchair user is alone as पानी starts entering the ground floor. Coordinate an ambulance once debris is moved केस संदर्भ H265.",
+    "hinglish": "Reporting from the farm cluster past mile marker 9. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a wheelchair user is alone as paani starts entering the ground floor. Coordinate an ambulance once debris is moved Case ref H265."
+  },
+  {
+    "id": 126,
+    "priority_score": 71.1,
+    "ui_category": "High",
+    "english": "Wildfire smoke is dense and orange around North Bridge approach. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Priority evacuation for vulnerable people is required now Case ref H189.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around North Bridge approach. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Priority evacuation for vulnerable लोग is required now केस संदर्भ H189.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around North Bridge approach. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Priority evacuation for vulnerable log is required now Case ref H189."
+  },
+  {
+    "id": 127,
+    "priority_score": 71.4,
+    "ui_category": "High",
+    "english": "Wildfire smoke is dense and orange around Lakeside Terrace. An infant in wet clothes is shivering hard after night temperatures dropped. Bring medication and trauma supplies if possible Case ref H495.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Lakeside Terrace. An infant in wet clothes is shivering hard after night temperatures dropped. Bring medication and trauma supplies if possible केस संदर्भ H495.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Lakeside Terrace. An infant in wet clothes is shivering hard after night temperatures dropped. Bring medication and trauma supplies if possible Case ref H495."
+  },
+  {
+    "id": 128,
+    "priority_score": 71.6,
+    "ui_category": "High",
+    "english": "Situation at Hillview Lane. Related to the local urban fire: neighboring apartments filled with smoke. A disabled teen's caregiver left for supplies and has not returned. Coordinate an ambulance once debris is moved Case ref H310.",
+    "hindi": "Situation at Hillview Lane. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A disabled teen's caregiver left for supplies and has not returned. Coordinate an ambulance once debris is moved केस संदर्भ H310.",
+    "hinglish": "Situation at Hillview Lane. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A disabled teen's caregiver left for supplies and has not returned. Coordinate an ambulance once debris is moved Case ref H310."
+  },
+  {
+    "id": 129,
+    "priority_score": 72.1,
+    "ui_category": "High",
+    "english": "Calling about the farm cluster past mile marker 9. Floodwater is creeping higher along the curb. Meanwhile, a wheelchair user is alone as water starts entering the ground floor. Coordinate an ambulance once debris is moved.",
+    "hindi": "Calling about the farm cluster past mile marker 9. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a wheelchair user is alone as पानी starts entering the ground floor. Coordinate an ambulance once debris is moved.",
+    "hinglish": "Calling about the farm cluster past mile marker 9. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a wheelchair user is alone as paani starts entering the ground floor. Coordinate an ambulance once debris is moved."
+  },
+  {
+    "id": 130,
+    "priority_score": 72.5,
+    "ui_category": "High",
+    "english": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Three people including a toddler remain on a low rooftop as water rises. Priority evacuation for vulnerable people is required now Case ref H128.",
+    "hindi": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Three लोग including a toddler remain on a low rooftop as पानी rises. Priority evacuation for vulnerable लोग is required now केस संदर्भ H128.",
+    "hinglish": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Three log including a toddler remain on a low rooftop as paani rises. Priority evacuation for vulnerable log is required now Case ref H128."
+  },
+  {
+    "id": 131,
+    "priority_score": 72.8,
+    "ui_category": "High",
+    "english": "Update from Block C near the market. Floodwater is creeping higher along the curb. Meanwhile, a pregnant woman is in early labor and ambulances cannot enter. Priority evacuation for vulnerable people is required now Case ref H187.",
+    "hindi": "Update from Block C near the market. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a pregnant woman is in early labor and ambulances cannot enter. Priority evacuation for vulnerable लोग is required now केस संदर्भ H187.",
+    "hinglish": "Update from Block C near the market. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a pregnant woman is in early labor and ambulances cannot enter. Priority evacuation for vulnerable log is required now Case ref H187."
+  },
+  {
+    "id": 132,
+    "priority_score": 73.1,
+    "ui_category": "High",
+    "english": "From Cedar Creek trailheads. Floodwater is creeping higher along the curb. Meanwhile, two adults are stuck behind a jammed door while smoke thickens. Bring medication and trauma supplies if possible Case ref H463.",
+    "hindi": "From Cedar Creek trailheads. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, two adults are stuck behind a jammed door while smoke thickens. Bring medication and trauma supplies if possible केस संदर्भ H463.",
+    "hinglish": "From Cedar Creek trailheads. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, two adults are stuck behind a jammed door while smoke thickens. Bring medication and trauma supplies if possible Case ref H463."
+  },
+  {
+    "id": 133,
+    "priority_score": 73.3,
+    "ui_category": "High",
+    "english": "Calling about the east levee area. Floodwater is creeping higher along the curb. Meanwhile, a family of four is cut off with almost no drinking water left. Bring medication and trauma supplies if possible Case ref H493.",
+    "hindi": "Calling about the east levee area. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a family of four is cut off with almost no drinking पानी left. Bring medication and trauma supplies if possible केस संदर्भ H493.",
+    "hinglish": "Calling about the east levee area. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a family of four is cut off with almost no drinking paani left. Bring medication and trauma supplies if possible Case ref H493."
+  },
+  {
+    "id": 134,
+    "priority_score": 73.5,
+    "ui_category": "High",
+    "english": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: water rationing started in our ward. Extraction support is needed without waiting until morning.",
+    "hindi": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: पानी rationing started in our ward. Extraction support is needed without waiting until morning.",
+    "hinglish": "We are at the temporary shelter street. My father fell, cannot stand, and reports crushing chest pain. Context: paani rationing started in our ward. Extraction support is needed without waiting until morning."
+  },
+  {
+    "id": 135,
+    "priority_score": 73.9,
+    "ui_category": "High",
+    "english": "Reporting from Maple Street. Floodwater is creeping higher along the curb. Meanwhile, an elderly diabetic is trapped upstairs without insulin because stairs are unsafe. Send medical responders as soon as a route opens Case ref H481.",
+    "hindi": "Reporting from Maple Street. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, an elderly diabetic is फँसे हुए upstairs without insulin because stairs are unsafe. रास्ता खुलते ही मेडिकल टीम भेजें केस संदर्भ H481.",
+    "hinglish": "Reporting from Maple Street. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, an elderly diabetic is phase hue upstairs without insulin because stairs are unsafe. Rasta khulte hi medical team bhejo Case ref H481."
+  },
+  {
+    "id": 136,
+    "priority_score": 74.2,
+    "ui_category": "High",
+    "english": "From the old quarry road. Floodwater is creeping higher along the curb. Meanwhile, a child with asthma is wheezing constantly after smoke filled the unit. Extraction support is needed without waiting until morning Case ref H439.",
+    "hindi": "From the old quarry road. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a child with asthma is wheezing constantly after smoke filled the unit. Extraction support is needed without waiting until morning केस संदर्भ H439.",
+    "hinglish": "From the old quarry road. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a child with asthma is wheezing constantly after smoke filled the unit. Extraction support is needed without waiting until morning Case ref H439."
+  },
+  {
+    "id": 137,
+    "priority_score": 74.4,
+    "ui_category": "High",
+    "english": "Update from the old quarry road. Floodwater is creeping higher along the curb. Meanwhile, a child with asthma is wheezing constantly after smoke filled the unit. Extraction support is needed without waiting until morning Case ref H379.",
+    "hindi": "Update from the old quarry road. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a child with asthma is wheezing constantly after smoke filled the unit. Extraction support is needed without waiting until morning केस संदर्भ H379.",
+    "hinglish": "Update from the old quarry road. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a child with asthma is wheezing constantly after smoke filled the unit. Extraction support is needed without waiting until morning Case ref H379."
+  },
+  {
+    "id": 138,
+    "priority_score": 74.8,
+    "ui_category": "High",
+    "english": "Situation at Valley Edge settlement where the building tilted slightly but still stands. A child had repeated seizures and the rescue medication is gone. Bring medication and trauma supplies if possible Case ref H494.",
+    "hindi": "Situation at Valley Edge settlement where the building tilted slightly but still stands. A child had repeated seizures and the बचाव medication is gone. Bring medication and trauma supplies if possible केस संदर्भ H494.",
+    "hinglish": "Situation at Valley Edge settlement where the building tilted slightly but still stands. A child had repeated seizures and the rescue medication is gone. Bring medication and trauma supplies if possible Case ref H494."
+  },
+  {
+    "id": 139,
+    "priority_score": 75.3,
+    "ui_category": "High",
+    "english": "Citizen report near the canyon mouth neighborhood where the building tilted slightly but still stands. Severe burns on both arms need urgent care; blistering is spreading. Send medical responders as soon as a route opens.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood where the building tilted slightly but still stands. Severe burns on both arms need urgent care; blistering is spreading. रास्ता खुलते ही मेडिकल टीम भेजें.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood where the building tilted slightly but still stands. Severe burns on both arms need urgent care; blistering is spreading. Rasta khulte hi medical team bhejo."
+  },
+  {
+    "id": 140,
+    "priority_score": 75.6,
+    "ui_category": "High",
+    "english": "Situation at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable people is required now Case ref H278.",
+    "hindi": "Situation at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable लोग is required now केस संदर्भ H278.",
+    "hinglish": "Situation at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable log is required now Case ref H278."
+  },
+  {
+    "id": 141,
+    "priority_score": 76.0,
+    "ui_category": "High",
+    "english": "Calling about the farm cluster past mile marker 9. Floodwater is creeping higher along the curb. Meanwhile, a wheelchair user is alone as water starts entering the ground floor. Coordinate an ambulance once debris is moved Case ref H325.",
+    "hindi": "Calling about the farm cluster past mile marker 9. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a wheelchair user is alone as पानी starts entering the ground floor. Coordinate an ambulance once debris is moved केस संदर्भ H325.",
+    "hinglish": "Calling about the farm cluster past mile marker 9. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a wheelchair user is alone as paani starts entering the ground floor. Coordinate an ambulance once debris is moved Case ref H325."
+  },
+  {
+    "id": 142,
+    "priority_score": 76.4,
+    "ui_category": "High",
+    "english": "During this landslide at North Bridge approach, mud and rock buried part of the access road. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible Case ref H89.",
+    "hindi": "भूस्खलन के दौरान at North Bridge approach, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible केस संदर्भ H89.",
+    "hinglish": "Is landslide ke dauran at North Bridge approach, keechad aur pathar se rasta block ho gaya hai. An oxygen-dependent neighbor ran out of tanks and is struggling to breathe. Bring medication and trauma supplies if possible Case ref H89."
+  },
+  {
+    "id": 143,
+    "priority_score": 76.7,
+    "ui_category": "High",
+    "english": "From Block C near the market. Floodwater is creeping higher along the curb. Meanwhile, a pregnant woman is in early labor and ambulances cannot enter. Priority evacuation for vulnerable people is required now.",
+    "hindi": "From Block C near the market. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a pregnant woman is in early labor and ambulances cannot enter. Priority evacuation for vulnerable लोग is required now.",
+    "hinglish": "From Block C near the market. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a pregnant woman is in early labor and ambulances cannot enter. Priority evacuation for vulnerable log is required now."
+  },
+  {
+    "id": 144,
+    "priority_score": 76.9,
+    "ui_category": "High",
+    "english": "We are at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable people is required now Case ref H458.",
+    "hindi": "We are at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable लोग is required now केस संदर्भ H458.",
+    "hinglish": "We are at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable log is required now Case ref H458."
+  },
+  {
+    "id": 145,
+    "priority_score": 77.3,
+    "ui_category": "High",
+    "english": "Situation at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable people is required now Case ref H398.",
+    "hindi": "Situation at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable लोग is required now केस संदर्भ H398.",
+    "hinglish": "Situation at the industrial spur where the building tilted slightly but still stands. A missing elderly man with dementia walked toward the hazard hours ago. Priority evacuation for vulnerable log is required now Case ref H398."
+  },
+  {
+    "id": 146,
+    "priority_score": 77.7,
+    "ui_category": "High",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Someone is pinned under light debris in the courtyard and calling out. Coordinate an ambulance once debris is moved Case ref H131.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Someone is pinned under light debris in the courtyard and calling out. Coordinate an ambulance once debris is moved केस संदर्भ H131.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Someone is pinned under light debris in the courtyard and calling out. Coordinate an ambulance once debris is moved Case ref H131."
+  },
+  {
+    "id": 147,
+    "priority_score": 78.2,
+    "ui_category": "High",
+    "english": "During this landslide at the old quarry road, mud and rock buried part of the access road. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible Case ref H479.",
+    "hindi": "भूस्खलन के दौरान at the old quarry road, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible केस संदर्भ H479.",
+    "hinglish": "Is landslide ke dauran at the old quarry road, keechad aur pathar se rasta block ho gaya hai. A child with asthma is wheezing constantly after smoke filled the unit. Bring medication and trauma supplies if possible Case ref H479."
+  },
+  {
+    "id": 148,
+    "priority_score": 78.7,
+    "ui_category": "High",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Someone is pinned under light debris in the courtyard and calling out. Coordinate an ambulance once debris is moved Case ref H311.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Someone is pinned under light debris in the courtyard and calling out. Coordinate an ambulance once debris is moved केस संदर्भ H311.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Someone is pinned under light debris in the courtyard and calling out. Coordinate an ambulance once debris is moved Case ref H311."
+  },
+  {
+    "id": 149,
+    "priority_score": 79.2,
+    "ui_category": "High",
+    "english": "Citizen report near Harbor Court. Three people including a toddler remain on a low rooftop as water rises. Context: water rationing started in our ward. Send medical responders as soon as a route opens Case ref H468.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Harbor Court. Three लोग including a toddler remain on a low rooftop as पानी rises. Context: पानी rationing started in our ward. रास्ता खुलते ही मेडिकल टीम भेजें केस संदर्भ H468.",
+    "hinglish": "Citizen report area Harbor Court. Three log including a toddler remain on a low rooftop as paani rises. Context: paani rationing started in our ward. Rasta khulte hi medical team bhejo Case ref H468."
+  },
+  {
+    "id": 150,
+    "priority_score": 79.5,
+    "ui_category": "High",
+    "english": "Need to log an update for the riverside flats. Related to the local urban fire: neighboring apartments filled with smoke. An infant has a dangerous fever and clinics are unreachable by road. Extraction support is required without waiting until morning Case ref H184.",
+    "hindi": "Need to log an update for the riverside flats. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. An infant has a dangerous fever and clinics are unreachable by road. Extraction support is required without waiting until morning केस संदर्भ H184.",
+    "hinglish": "Need to log an update for the riverside flats. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. An infant has a dangerous fever and clinics are unreachable by road. Extraction support is required without waiting until morning Case ref H184."
+  },
+  {
+    "id": 151,
+    "priority_score": 81.0,
+    "ui_category": "Critical",
+    "english": "Citizen report near Warehouse Row where the building tilted slightly but still stands. An infant and caregiver are trapped in an elevator shaft after power loss. Air or boat extraction may be the only remaining option Case ref C260.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र Wareघर Row where the building tilted slightly but still stands. An infant and caregiver are फँसे हुए in an elevator shaft after power loss. Air or boat extraction may be the only remaining option केस संदर्भ C260.",
+    "hinglish": "Citizen report area Wareghar Row where the building tilted slightly but still stands. An infant and caregiver are phase hue in an elevator shaft after power loss. Air or boat extraction may be the only remaining option Case ref C260."
+  },
+  {
+    "id": 152,
+    "priority_score": 81.3,
+    "ui_category": "Critical",
+    "english": "From Block C near the market. Floodwater is creeping higher along the curb. Meanwhile, a school bus overturned; children are hurt and one is breathing irregularly. Treat this as a life-threatening mass-casualty call Case ref C247.",
+    "hindi": "From Block C near the market. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a school bus overturned; children are hurt and one is breathing irregularly. Treat this as a life-threatening mass-casualty call केस संदर्भ C247.",
+    "hinglish": "From Block C near the market. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a school bus overturned; children are hurt and one is breathing irregularly. Treat this as a life-threatening mass-casualty call Case ref C247."
+  },
+  {
+    "id": 153,
+    "priority_score": 81.5,
+    "ui_category": "Critical",
+    "english": "Update from Cedar Creek trailheads. Floodwater is creeping higher along the curb. Meanwhile, a mother and infant are unconscious from smoke inhalation inside a burning unit. Every minute counts; people may not survive the hour.",
+    "hindi": "Update from Cedar Creek trailheads. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a mother and infant are unconscious from smoke inhalation inside a burning unit. Every minute counts; लोग may not survive the hour.",
+    "hinglish": "Update from Cedar Creek trailheads. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a mother and infant are unconscious from smoke inhalation inside a burning unit. Every minute counts; log may not survive the hour."
+  },
+  {
+    "id": 154,
+    "priority_score": 82.0,
+    "ui_category": "Critical",
+    "english": "During this landslide at the school zone by Route 14, mud and rock buried part of the access road. Hikers including children are under landslide rubble; only faint voices remain. Dispatch multiple rescue units with trauma care immediately Case ref C257.",
+    "hindi": "भूस्खलन के दौरान at the school zone by Route 14, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Hikers including children are under landslide rubble; only faint voices remain. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C257.",
+    "hinglish": "Is landslide ke dauran at the school zone by Route 14, keechad aur pathar se rasta block ho gaya hai. Hikers including children are under landslide rubble; only faint voices remain. Dispatch multiple rescue units with trauma care immediately Case ref C257."
+  },
+  {
+    "id": 155,
+    "priority_score": 82.3,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around Cedar Creek trailheads. A mother and infant are unconscious from smoke inhalation inside a burning unit. Dispatch multiple rescue units with trauma care immediately Case ref C423.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Cedar Creek trailheads. A mother and infant are unconscious from smoke inhalation inside a burning unit. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C423.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Cedar Creek trailheads. A mother and infant are unconscious from smoke inhalation inside a burning unit. Dispatch multiple rescue units with trauma care immediately Case ref C423."
+  },
+  {
+    "id": 156,
+    "priority_score": 82.7,
+    "ui_category": "Critical",
+    "english": "Calling about the farm cluster past mile marker 9. Floodwater is creeping higher along the curb. Meanwhile, workers are trapped under fallen beams with heavy bleeding visible. Heavy equipment and medics are needed within minutes Case ref C325.",
+    "hindi": "Calling about the farm cluster past mile marker 9. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, workers are फँसे हुए under fallen beams with heavy bleeding visible. Heavy equipment and medics are needed within minutes केस संदर्भ C325.",
+    "hinglish": "Calling about the farm cluster past mile marker 9. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, workers are phase hue under fallen beams with heavy bleeding visible. Heavy equipment and medics are needed within minutes Case ref C325."
+  },
+  {
+    "id": 157,
+    "priority_score": 83.0,
+    "ui_category": "Critical",
+    "english": "Need to log an update for Warehouse Row where the building tilted slightly but still stands. An infant and caregiver are trapped in an elevator shaft after power loss. Air or boat extraction may be the only remaining option.",
+    "hindi": "Need to log an update for Wareघर Row where the building tilted slightly but still stands. An infant and caregiver are फँसे हुए in an elevator shaft after power loss. Air or boat extraction may be the only remaining option.",
+    "hinglish": "Need to log an update for Wareghar Row where the building tilted slightly but still stands. An infant and caregiver are phase hue in an elevator shaft after power loss. Air or boat extraction may be the only remaining option."
+  },
+  {
+    "id": 158,
+    "priority_score": 83.6,
+    "ui_category": "Critical",
+    "english": "Need to log an update for Oakridge apartments. An elderly couple on oxygen is trapped with fire blocking the exits. Context: water rationing started in our ward. Air or boat extraction may be the only remaining option Case ref C336.",
+    "hindi": "Need to log an update for Oakridge apartments. An elderly couple on oxygen is फँसे हुए with आग blocking the exits. Context: पानी rationing started in our ward. Air or boat extraction may be the only remaining option केस संदर्भ C336.",
+    "hinglish": "Need to log an update for Oakridge apartments. An elderly couple on oxygen is phase hue with aag blocking the exits. Context: paani rationing started in our ward. Air or boat extraction may be the only remaining option Case ref C336."
+  },
+  {
+    "id": 159,
+    "priority_score": 83.9,
+    "ui_category": "Critical",
+    "english": "Need to log an update for the riverside flats. A landslide buried a car; occupants are responding weakly from inside. Context: water rationing started in our ward. Treat this as a life-threatening mass-casualty call Case ref C264.",
+    "hindi": "Need to log an update for the riverside flats. A landslide buried a car; occupants are responding weakly from inside. Context: पानी rationing started in our ward. Treat this as a life-threatening mass-casualty call केस संदर्भ C264.",
+    "hinglish": "Need to log an update for the riverside flats. A landslide buried a car; occupants are responding weakly from inside. Context: paani rationing started in our ward. Treat this as a life-threatening mass-casualty call Case ref C264."
+  },
+  {
+    "id": 160,
+    "priority_score": 84.1,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around the east levee area. An explosion left three people with severe burns and no ambulance access. Dispatch multiple rescue units with trauma care immediately Case ref C333.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the east levee area. An explosion left three लोग with severe burns and no ambulance access. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C333.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the east levee area. An explosion left three log with severe burns and no ambulance access. Dispatch multiple rescue units with trauma care immediately Case ref C333."
+  },
+  {
+    "id": 161,
+    "priority_score": 84.5,
+    "ui_category": "Critical",
+    "english": "During this landslide at the east levee area, mud and rock buried part of the access road. An explosion left three people with severe burns and no ambulance access. Treat this as a life-threatening mass-casualty call Case ref C353.",
+    "hindi": "भूस्खलन के दौरान at the east levee area, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. An explosion left three लोग with severe burns and no ambulance access. Treat this as a life-threatening mass-casualty call केस संदर्भ C353.",
+    "hinglish": "Is landslide ke dauran at the east levee area, keechad aur pathar se rasta block ho gaya hai. An explosion left three log with severe burns and no ambulance access. Treat this as a life-threatening mass-casualty call Case ref C353."
+  },
+  {
+    "id": 162,
+    "priority_score": 84.8,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around the senior complex on Pine. Floors are collapsing and neighbors are buried under concrete slabs. Air or boat extraction may be the only remaining option Case ref C471.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the senior complex on Pine. Floors are collapsing and neighbors are buried under concrete slabs. Air or boat extraction may be the only remaining option केस संदर्भ C471.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the senior complex on Pine. Floors are collapsing and neighbors are buried under concrete slabs. Air or boat extraction may be the only remaining option Case ref C471."
+  },
+  {
+    "id": 163,
+    "priority_score": 85.1,
+    "ui_category": "Critical",
+    "english": "We are at Valley Edge settlement. Related to the local urban fire: neighboring apartments filled with smoke. A clinic has no IV fluids while dehydrated infants keep arriving. Air or boat extraction may be the only remaining option.",
+    "hindi": "We are at Valley Edge settlement. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A clinic has no IV fluids while dehydrated infants keep arriving. Air or boat extraction may be the only remaining option.",
+    "hinglish": "We are at Valley Edge settlement. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A clinic has no IV fluids while dehydrated infants keep arriving. Air or boat extraction may be the only remaining option."
+  },
+  {
+    "id": 164,
+    "priority_score": 85.4,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around Cedar Creek trailheads. A mother and infant are unconscious from smoke inhalation inside a burning unit. Dispatch multiple rescue units with trauma care immediately Case ref C63.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Cedar Creek trailheads. A mother and infant are unconscious from smoke inhalation inside a burning unit. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C63.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Cedar Creek trailheads. A mother and infant are unconscious from smoke inhalation inside a burning unit. Dispatch multiple rescue units with trauma care immediately Case ref C63."
+  },
+  {
+    "id": 165,
+    "priority_score": 85.9,
+    "ui_category": "Critical",
+    "english": "From the senior complex on Pine. Floodwater is creeping higher along the curb. Meanwhile, floors are collapsing and neighbors are buried under concrete slabs. Dispatch multiple rescue units with trauma care immediately.",
+    "hindi": "From the senior complex on Pine. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, floors are collapsing and neighbors are buried under concrete slabs. Dispatch multiple बचाव units with trauma care immediately.",
+    "hinglish": "From the senior complex on Pine. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, floors are collapsing and neighbors are buried under concrete slabs. Dispatch multiple rescue units with trauma care immediately."
+  },
+  {
+    "id": 166,
+    "priority_score": 86.1,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around Lakeside Terrace. People trapped in rising mudflow; one adult stopped responding minutes ago. Every minute counts; people may not survive the hour Case ref C255.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Lakeside Terrace. People फँसे हुए in rising mudflow; one adult stopped responding minutes ago. Every minute counts; लोग may not survive the hour केस संदर्भ C255.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Lakeside Terrace. People phase hue in rising mudflow; one adult stopped responding minutes ago. Every minute counts; log may not survive the hour Case ref C255."
+  },
+  {
+    "id": 167,
+    "priority_score": 86.3,
+    "ui_category": "Critical",
+    "english": "During this landslide at the school zone by Route 14, mud and rock buried part of the access road. Hikers including children are under landslide rubble; only faint voices remain. Dispatch multiple rescue units with trauma care immediately Case ref C197.",
+    "hindi": "भूस्खलन के दौरान at the school zone by Route 14, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Hikers including children are under landslide rubble; only faint voices remain. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C197.",
+    "hinglish": "Is landslide ke dauran at the school zone by Route 14, keechad aur pathar se rasta block ho gaya hai. Hikers including children are under landslide rubble; only faint voices remain. Dispatch multiple rescue units with trauma care immediately Case ref C197."
+  },
+  {
+    "id": 168,
+    "priority_score": 86.9,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around the old quarry road. Market collapse caused many casualties; some are unresponsive and phones are dead. Treat this as a life-threatening mass-casualty call Case ref C99.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the old quarry road. Market collapse caused many casualties; some are unresponsive and phones are dead. Treat this as a life-threatening mass-casualty call केस संदर्भ C99.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the old quarry road. Market collapse caused many casualties; some are unresponsive and phones are dead. Treat this as a life-threatening mass-casualty call Case ref C99."
+  },
+  {
+    "id": 169,
+    "priority_score": 87.2,
+    "ui_category": "Critical",
+    "english": "Situation at South Canal ward. Four adults and two children are stranded on a rooftop as water reaches the eaves. Context: water rationing started in our ward. Heavy equipment and medics are needed within minutes Case ref C342.",
+    "hindi": "Situation at South Canal ward. Four adults and two children are stranded on a rooftop as पानी reaches the eaves. Context: पानी rationing started in our ward. Heavy equipment and medics are needed within minutes केस संदर्भ C342.",
+    "hinglish": "Situation at South Canal ward. Four adults and two children are stranded on a rooftop as paani reaches the eaves. Context: paani rationing started in our ward. Heavy equipment and medics are needed within minutes Case ref C342."
+  },
+  {
+    "id": 170,
+    "priority_score": 87.5,
+    "ui_category": "Critical",
+    "english": "Citizen report near the canyon mouth neighborhood. Related to the local urban fire: neighboring apartments filled with smoke. A pregnant woman is hemorrhaging and every road to hospital is washed out. Treat this as a life-threatening mass-casualty call Case ref C292.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A pregnant woman is hemorrhaging and every road to hospital is washed out. Treat this as a life-threatening mass-casualty call केस संदर्भ C292.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A pregnant woman is hemorrhaging and every road to hospital is washed out. Treat this as a life-threatening mass-casualty call Case ref C292."
+  },
+  {
+    "id": 171,
+    "priority_score": 87.8,
+    "ui_category": "Critical",
+    "english": "Update from Lakeside Terrace. Floodwater is creeping higher along the curb. Meanwhile, people trapped in rising mudflow; one adult stopped responding minutes ago. Heavy equipment and medics are needed within minutes.",
+    "hindi": "Update from Lakeside Terrace. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, लोग फँसे हुए in rising mudflow; one adult stopped responding minutes ago. Heavy equipment and medics are needed within minutes.",
+    "hinglish": "Update from Lakeside Terrace. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, log phase hue in rising mudflow; one adult stopped responding minutes ago. Heavy equipment and medics are needed within minutes."
+  },
+  {
+    "id": 172,
+    "priority_score": 88.2,
+    "ui_category": "Critical",
+    "english": "From Cedar Creek trailheads. Floodwater is creeping higher along the curb. Meanwhile, a mother and infant are unconscious from smoke inhalation inside a burning unit. Every minute counts; people may not survive the hour Case ref C223.",
+    "hindi": "From Cedar Creek trailheads. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, a mother and infant are unconscious from smoke inhalation inside a burning unit. Every minute counts; लोग may not survive the hour केस संदर्भ C223.",
+    "hinglish": "From Cedar Creek trailheads. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, a mother and infant are unconscious from smoke inhalation inside a burning unit. Every minute counts; log may not survive the hour Case ref C223."
+  },
+  {
+    "id": 173,
+    "priority_score": 88.6,
+    "ui_category": "Critical",
+    "english": "We are at South Canal ward. Related to the local urban fire: neighboring apartments filled with smoke. Four adults and two children are stranded on a rooftop as water reaches the eaves. Treat this as a life-threatening mass-casualty call Case ref C322.",
+    "hindi": "We are at South Canal ward. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. Four adults and two children are stranded on a rooftop as पानी reaches the eaves. Treat this as a life-threatening mass-casualty call केस संदर्भ C322.",
+    "hinglish": "We are at South Canal ward. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. Four adults and two children are stranded on a rooftop as paani reaches the eaves. Treat this as a life-threatening mass-casualty call Case ref C322."
+  },
+  {
+    "id": 174,
+    "priority_score": 88.8,
+    "ui_category": "Critical",
+    "english": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Wildfire surrounded a care home; bedridden residents need stretcher evacuation. Treat this as a life-threatening mass-casualty call Case ref C248.",
+    "hindi": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Wildआग surrounded a care home; bedridden residents need stretcher evacuation. Treat this as a life-threatening mass-casualty call केस संदर्भ C248.",
+    "hinglish": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Wildaag surrounded a care home; bedridden residents need stretcher evacuation. Treat this as a life-threatening mass-casualty call Case ref C248."
+  },
+  {
+    "id": 175,
+    "priority_score": 89.3,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around the farm cluster past mile marker 9. Workers are trapped under fallen beams with heavy bleeding visible. Every minute counts; people may not survive the hour Case ref C225.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the farm cluster past mile marker 9. Workers are फँसे हुए under fallen beams with heavy bleeding visible. Every minute counts; लोग may not survive the hour केस संदर्भ C225.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the farm cluster past mile marker 9. Workers are phase hue under fallen beams with heavy bleeding visible. Every minute counts; log may not survive the hour Case ref C225."
+  },
+  {
+    "id": 176,
+    "priority_score": 89.7,
+    "ui_category": "Critical",
+    "english": "Calling about North Bridge approach. Floodwater is creeping higher along the curb. Meanwhile, two disabled adults and a caregiver are trapped as flames near the stairwell. Air or boat extraction may be the only remaining option Case ref C229.",
+    "hindi": "Calling about North Bridge approach. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, two disabled adults and a caregiver are फँसे हुए as flames near the stairwell. Air or boat extraction may be the only remaining option केस संदर्भ C229.",
+    "hinglish": "Calling about North Bridge approach. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, two disabled adults and a caregiver are phase hue as flames near the stairwell. Air or boat extraction may be the only remaining option Case ref C229."
+  },
+  {
+    "id": 177,
+    "priority_score": 90.0,
+    "ui_category": "Critical",
+    "english": "Citizen report near the canyon mouth neighborhood. Related to the local urban fire: neighboring apartments filled with smoke. A pregnant woman is hemorrhaging and every road to hospital is washed out. Treat this as a life-threatening mass-casualty call.",
+    "hindi": "नागरिक रिपोर्ट क्षेत्र the canyon mouth neighborhood. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. A pregnant woman is hemorrhaging and every road to hospital is washed out. Treat this as a life-threatening mass-casualty call.",
+    "hinglish": "Citizen report area the canyon mouth neighborhood. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. A pregnant woman is hemorrhaging and every road to hospital is washed out. Treat this as a life-threatening mass-casualty call."
+  },
+  {
+    "id": 178,
+    "priority_score": 90.2,
+    "ui_category": "Critical",
+    "english": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Wildfire surrounded a care home; bedridden residents need stretcher evacuation. Treat this as a life-threatening mass-casualty call Case ref C368.",
+    "hindi": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Wildआग surrounded a care home; bedridden residents need stretcher evacuation. Treat this as a life-threatening mass-casualty call केस संदर्भ C368.",
+    "hinglish": "Need to log an update for Harbor Court where the building tilted slightly but still stands. Wildaag surrounded a care home; bedridden residents need stretcher evacuation. Treat this as a life-threatening mass-casualty call Case ref C368."
+  },
+  {
+    "id": 179,
+    "priority_score": 90.5,
+    "ui_category": "Critical",
+    "english": "Situation at the industrial spur. Rooftop survivors are signaling; water is filling stairwells rapidly. Context: water rationing started in our ward. Dispatch multiple rescue units with trauma care immediately Case ref C438.",
+    "hindi": "Situation at the industrial spur. Rooftop survivors are signaling; पानी is filling stairwells rapidly. Context: पानी rationing started in our ward. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C438.",
+    "hinglish": "Situation at the industrial spur. Rooftop survivors are signaling; paani is filling stairwells rapidly. Context: paani rationing started in our ward. Dispatch multiple rescue units with trauma care immediately Case ref C438."
+  },
+  {
+    "id": 180,
+    "priority_score": 90.8,
+    "ui_category": "Critical",
+    "english": "We are at Hillview Lane where the building tilted slightly but still stands. People entered flood currents after a bridge failure; a child is missing. Air or boat extraction may be the only remaining option Case ref C290.",
+    "hindi": "We are at Hillview Lane where the building tilted slightly but still stands. People entered बाढ़ currents after a bridge failure; a child is missing. Air or boat extraction may be the only remaining option केस संदर्भ C290.",
+    "hinglish": "We are at Hillview Lane where the building tilted slightly but still stands. People entered baadh currents after a bridge failure; a child is missing. Air or boat extraction may be the only remaining option Case ref C290."
+  },
+  {
+    "id": 181,
+    "priority_score": 91.3,
+    "ui_category": "Critical",
+    "english": "Situation at the temporary shelter street. An entire family including grandparents has no food, water, or phone signal. Context: water rationing started in our ward. Air or boat extraction may be the only remaining option Case ref C486.",
+    "hindi": "Situation at the temporary shelter street. An entire family including grandparents has no food, पानी, or phone signal. Context: पानी rationing started in our ward. Air or boat extraction may be the only remaining option केस संदर्भ C486.",
+    "hinglish": "Situation at the temporary shelter street. An entire family including grandparents has no food, paani, or phone signal. Context: paani rationing started in our ward. Air or boat extraction may be the only remaining option Case ref C486."
+  },
+  {
+    "id": 182,
+    "priority_score": 91.6,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around Maple Street. Multiple injured people are trapped in a partially collapsed building and screaming. Air or boat extraction may be the only remaining option.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around Maple Street. Multiple घायल लोग are फँसे हुए in a partially collapsed building and screaming. Air or boat extraction may be the only remaining option.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around Maple Street. Multiple ghayal log are phase hue in a partially collapsed building and screaming. Air or boat extraction may be the only remaining option."
+  },
+  {
+    "id": 183,
+    "priority_score": 92.0,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around the farm cluster past mile marker 9. Workers are trapped under fallen beams with heavy bleeding visible. Every minute counts; people may not survive the hour.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the farm cluster past mile marker 9. Workers are फँसे हुए under fallen beams with heavy bleeding visible. Every minute counts; लोग may not survive the hour.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the farm cluster past mile marker 9. Workers are phase hue under fallen beams with heavy bleeding visible. Every minute counts; log may not survive the hour."
+  },
+  {
+    "id": 184,
+    "priority_score": 92.3,
+    "ui_category": "Critical",
+    "english": "Situation at the temporary shelter street. Related to the local urban fire: neighboring apartments filled with smoke. An entire family including grandparents has no food, water, or phone signal. Dispatch multiple rescue units with trauma care immediately Case ref C286.",
+    "hindi": "Situation at the temporary shelter street. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. An entire family including grandparents has no food, पानी, or phone signal. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C286.",
+    "hinglish": "Situation at the temporary shelter street. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. An entire family including grandparents has no food, paani, or phone signal. Dispatch multiple rescue units with trauma care immediately Case ref C286."
+  },
+  {
+    "id": 185,
+    "priority_score": 92.7,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around North Bridge approach. Two disabled adults and a caregiver are trapped as flames near the stairwell. Treat this as a life-threatening mass-casualty call Case ref C489.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around North Bridge approach. Two disabled adults and a caregiver are फँसे हुए as flames near the stairwell. Treat this as a life-threatening mass-casualty call केस संदर्भ C489.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around North Bridge approach. Two disabled adults and a caregiver are phase hue as flames near the stairwell. Treat this as a life-threatening mass-casualty call Case ref C489."
+  },
+  {
+    "id": 186,
+    "priority_score": 93.2,
+    "ui_category": "Critical",
+    "english": "Situation at the temporary shelter street. Related to the local urban fire: neighboring apartments filled with smoke. An entire family including grandparents has no food, water, or phone signal. Dispatch multiple rescue units with trauma care immediately Case ref C406.",
+    "hindi": "Situation at the temporary shelter street. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. An entire family including grandparents has no food, पानी, or phone signal. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C406.",
+    "hinglish": "Situation at the temporary shelter street. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. An entire family including grandparents has no food, paani, or phone signal. Dispatch multiple rescue units with trauma care immediately Case ref C406."
+  },
+  {
+    "id": 187,
+    "priority_score": 93.5,
+    "ui_category": "Critical",
+    "english": "During this landslide at the senior complex on Pine, mud and rock buried part of the access road. Floors are collapsing and neighbors are buried under concrete slabs. Heavy equipment and medics are needed within minutes.",
+    "hindi": "भूस्खलन के दौरान at the senior complex on Pine, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Floors are collapsing and neighbors are buried under concrete slabs. Heavy equipment and medics are needed within minutes.",
+    "hinglish": "Is landslide ke dauran at the senior complex on Pine, keechad aur pathar se rasta block ho gaya hai. Floors are collapsing and neighbors are buried under concrete slabs. Heavy equipment and medics are needed within minutes."
+  },
+  {
+    "id": 188,
+    "priority_score": 93.7,
+    "ui_category": "Critical",
+    "english": "We are at Hillview Lane. Related to the local urban fire: neighboring apartments filled with smoke. People entered flood currents after a bridge failure; a child is missing. Heavy equipment and medics are needed within minutes Case ref C370.",
+    "hindi": "We are at Hillview Lane. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. People entered बाढ़ currents after a bridge failure; a child is missing. Heavy equipment and medics are needed within minutes केस संदर्भ C370.",
+    "hinglish": "We are at Hillview Lane. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. People entered baadh currents after a bridge failure; a child is missing. Heavy equipment and medics are needed within minutes Case ref C370."
+  },
+  {
+    "id": 189,
+    "priority_score": 93.9,
+    "ui_category": "Critical",
+    "english": "During this landslide at the farm cluster past mile marker 9, mud and rock buried part of the access road. Workers are trapped under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option Case ref C425.",
+    "hindi": "भूस्खलन के दौरान at the farm cluster past mile marker 9, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Workers are फँसे हुए under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option केस संदर्भ C425.",
+    "hinglish": "Is landslide ke dauran at the farm cluster past mile marker 9, keechad aur pathar se rasta block ho gaya hai. Workers are phase hue under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option Case ref C425."
+  },
+  {
+    "id": 190,
+    "priority_score": 94.2,
+    "ui_category": "Critical",
+    "english": "Need to log an update for Warehouse Row. Related to the local urban fire: neighboring apartments filled with smoke. An infant and caregiver are trapped in an elevator shaft after power loss. Heavy equipment and medics are required within minutes Case ref C280.",
+    "hindi": "Need to log an update for Wareघर Row. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. An infant and caregiver are फँसे हुए in an elevator shaft after power loss. Heavy equipment and medics are required within minutes केस संदर्भ C280.",
+    "hinglish": "Need to log an update for Wareghar Row. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. An infant and caregiver are phase hue in an elevator shaft after power loss. Heavy equipment and medics are required within minutes Case ref C280."
+  },
+  {
+    "id": 191,
+    "priority_score": 94.8,
+    "ui_category": "Critical",
+    "english": "During this landslide at the farm cluster past mile marker 9, mud and rock buried part of the access road. Workers are trapped under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option Case ref C245.",
+    "hindi": "भूस्खलन के दौरान at the farm cluster past mile marker 9, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Workers are फँसे हुए under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option केस संदर्भ C245.",
+    "hinglish": "Is landslide ke dauran at the farm cluster past mile marker 9, keechad aur pathar se rasta block ho gaya hai. Workers are phase hue under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option Case ref C245."
+  },
+  {
+    "id": 192,
+    "priority_score": 95.2,
+    "ui_category": "Critical",
+    "english": "We are at the industrial spur. Rooftop survivors are signaling; water is filling stairwells rapidly. Context: water rationing started in our ward. Dispatch multiple rescue units with trauma care immediately Case ref C258.",
+    "hindi": "We are at the industrial spur. Rooftop survivors are signaling; पानी is filling stairwells rapidly. Context: पानी rationing started in our ward. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C258.",
+    "hinglish": "We are at the industrial spur. Rooftop survivors are signaling; paani is filling stairwells rapidly. Context: paani rationing started in our ward. Dispatch multiple rescue units with trauma care immediately Case ref C258."
+  },
+  {
+    "id": 193,
+    "priority_score": 95.6,
+    "ui_category": "Critical",
+    "english": "Wildfire smoke is dense and orange around the east levee area. An explosion left three people with severe burns and no ambulance access. Dispatch multiple rescue units with trauma care immediately Case ref C213.",
+    "hindi": "जंगल की आग का धुआँ घना है and orange around the east levee area. An explosion left three लोग with severe burns and no ambulance access. Dispatch multiple बचाव units with trauma care immediately केस संदर्भ C213.",
+    "hinglish": "Jangal ki aag ka dhua bohot zyada hai and orange around the east levee area. An explosion left three log with severe burns and no ambulance access. Dispatch multiple rescue units with trauma care immediately Case ref C213."
+  },
+  {
+    "id": 194,
+    "priority_score": 95.7,
+    "ui_category": "Critical",
+    "english": "During this landslide at Cedar Creek trailheads, mud and rock buried part of the access road. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call Case ref C83.",
+    "hindi": "भूस्खलन के दौरान at Cedar Creek trailheads, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call केस संदर्भ C83.",
+    "hinglish": "Is landslide ke dauran at Cedar Creek trailheads, keechad aur pathar se rasta block ho gaya hai. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call Case ref C83."
+  },
+  {
+    "id": 195,
+    "priority_score": 95.9,
+    "ui_category": "Critical",
+    "english": "During this landslide at Cedar Creek trailheads, mud and rock buried part of the access road. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call Case ref C143.",
+    "hindi": "भूस्खलन के दौरान at Cedar Creek trailheads, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call केस संदर्भ C143.",
+    "hinglish": "Is landslide ke dauran at Cedar Creek trailheads, keechad aur pathar se rasta block ho gaya hai. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call Case ref C143."
+  },
+  {
+    "id": 196,
+    "priority_score": 96.2,
+    "ui_category": "Critical",
+    "english": "During this landslide at the farm cluster past mile marker 9, mud and rock buried part of the access road. Workers are trapped under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option Case ref C185.",
+    "hindi": "भूस्खलन के दौरान at the farm cluster past mile marker 9, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. Workers are फँसे हुए under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option केस संदर्भ C185.",
+    "hinglish": "Is landslide ke dauran at the farm cluster past mile marker 9, keechad aur pathar se rasta block ho gaya hai. Workers are phase hue under fallen beams with heavy bleeding visible. Air or boat extraction may be the only remaining option Case ref C185."
+  },
+  {
+    "id": 197,
+    "priority_score": 96.5,
+    "ui_category": "Critical",
+    "english": "Situation at Hillview Lane. Related to the local urban fire: neighboring apartments filled with smoke. People entered flood currents after a bridge failure; a child is missing. Heavy equipment and medics are needed within minutes Case ref C310.",
+    "hindi": "Situation at Hillview Lane. Related to the local urban आग: पड़ोसी अपार्टमेंट धुएँ से भर गए हैं. People entered बाढ़ currents after a bridge failure; a child is missing. Heavy equipment and medics are needed within minutes केस संदर्भ C310.",
+    "hinglish": "Situation at Hillview Lane. Related to the local urban aag: as paas ke apartments me dhua bhar gaya hai. People entered baadh currents after a bridge failure; a child is missing. Heavy equipment and medics are needed within minutes Case ref C310."
+  },
+  {
+    "id": 198,
+    "priority_score": 96.9,
+    "ui_category": "Critical",
+    "english": "Reporting from the school zone by Route 14. Floodwater is creeping higher along the curb. Meanwhile, hikers including children are under landslide rubble; only faint voices remain. Treat this as a life-threatening mass-casualty call Case ref C457.",
+    "hindi": "Reporting from the school zone by Route 14. बाढ़ का पानी लगातार बढ़ रहा है along the curb. Meanwhile, hikers including children are under landslide rubble; only faint voices remain. Treat this as a life-threatening mass-casualty call केस संदर्भ C457.",
+    "hinglish": "Reporting from the school zone by Route 14. Baadh ka paani lagatar badh raha hai along the curb. Meanwhile, hikers including children are under landslide rubble; only faint voices remain. Treat this as a life-threatening mass-casualty call Case ref C457."
+  },
+  {
+    "id": 199,
+    "priority_score": 97.4,
+    "ui_category": "Critical",
+    "english": "During this landslide at Cedar Creek trailheads, mud and rock buried part of the access road. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call.",
+    "hindi": "भूस्खलन के दौरान at Cedar Creek trailheads, कीचड़ और चट्टानों ने रास्ते को अवरुद्ध कर दिया है. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call.",
+    "hinglish": "Is landslide ke dauran at Cedar Creek trailheads, keechad aur pathar se rasta block ho gaya hai. A mother and infant are unconscious from smoke inhalation inside a burning unit. Treat this as a life-threatening mass-casualty call."
+  },
+  {
+    "id": 200,
+    "priority_score": 97.8,
+    "ui_category": "Critical",
+    "english": "Situation at Hillview Lane. People entered flood currents after a bridge failure; a child is missing. Context: water rationing started in our ward. Every minute counts; people may not survive the hour.",
+    "hindi": "Situation at Hillview Lane. People entered बाढ़ currents after a bridge failure; a child is missing. Context: पानी rationing started in our ward. Every minute counts; लोग may not survive the hour.",
+    "hinglish": "Situation at Hillview Lane. People entered baadh currents after a bridge failure; a child is missing. Context: paani rationing started in our ward. Every minute counts; log may not survive the hour."
+  }
+]

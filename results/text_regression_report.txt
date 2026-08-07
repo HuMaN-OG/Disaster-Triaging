@@ -1,6 +1,0 @@
-Tuned Text Priority Regressor — Validation Report
-Sentence model           : all-MiniLM-L6-v2
-MAE                      : 6.5609
-RMSE                     : 8.1466
-R²                       : 0.9056
-Best Hyperparameters     : {"subsample": 0.7, "reg_lambda": 5.0, "reg_alpha": 5.0, "n_estimators": 600, "min_child_weight": 3, "max_depth": 5, "learning_rate": 0.05, "colsample_bytree": 0.7}
