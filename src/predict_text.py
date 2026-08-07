@@ -19,6 +19,7 @@ from xgboost import XGBRegressor
 
 from src.text_dataset import (
     MODEL_META_PATH,
+    MODELS_DIR,
     SENTENCE_MODEL_NAME,
     XGBOOST_PATH,
     clip_score,
@@ -45,10 +46,13 @@ def parse_args() -> argparse.Namespace:
 def load_pipeline(
     model_path: Path,
     meta_path: Path,
-) -> tuple[XGBRegressor, SentenceTransformer]:
-    if not model_path.is_file():
+) -> tuple[Any, SentenceTransformer]:
+    cbm_path = MODELS_DIR / "priority_catboost.cbm"
+    target_path = cbm_path if cbm_path.exists() and not model_path.exists() else model_path
+
+    if not target_path.is_file():
         raise FileNotFoundError(
-            f"Model not found: {model_path}. Train first with: python -m src.train_text_classifier"
+            f"Model not found: {target_path}. Train first with: python -m src.train_text_classifier"
         )
 
     meta: dict[str, Any] = {}
@@ -56,8 +60,15 @@ def load_pipeline(
         meta = joblib.load(meta_path)
 
     sentence_model_name = meta.get("sentence_model", SENTENCE_MODEL_NAME)
-    model = XGBRegressor()
-    model.load_model(str(model_path))
+    
+    if str(target_path).endswith(".cbm"):
+        from catboost import CatBoostRegressor
+        model = CatBoostRegressor()
+        model.load_model(str(target_path))
+    else:
+        model = XGBRegressor()
+        model.load_model(str(target_path))
+
     encoder = SentenceTransformer(sentence_model_name)
     return model, encoder
 

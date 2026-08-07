@@ -1,0 +1,123 @@
+{
+  "baseline_r2": 0.9056,
+  "baseline_mae": 6.5609,
+  "winning_embedding": {
+    "embedding_name": "BAAI/bge-base-en-v1.5",
+    "display_name": "bge-base-v1.5 (768-d)",
+    "dim": 768,
+    "r2": 0.9199767112731934,
+    "mae": 6.172550201416016,
+    "rmse": 7.499264235964122,
+    "encoding_time_sec": 0.0,
+    "fit_time_sec": 15.336482200000319
+  },
+  "winning_regressor": {
+    "regressor_name": "CatBoost",
+    "r2": 0.9217255954240552,
+    "mae": 6.037986210096806,
+    "rmse": 7.41686506662352,
+    "fit_time_sec": 42.543793099997856
+  },
+  "embedding_leaderboard": [
+    {
+      "embedding_name": "BAAI/bge-base-en-v1.5",
+      "display_name": "bge-base-v1.5 (768-d)",
+      "dim": 768,
+      "r2": 0.9199767112731934,
+      "mae": 6.172550201416016,
+      "rmse": 7.499264235964122,
+      "encoding_time_sec": 0.0,
+      "fit_time_sec": 15.336482200000319
+    },
+    {
+      "embedding_name": "sentence-transformers/all-mpnet-base-v2",
+      "display_name": "mpnet-base-v2 (768-d)",
+      "dim": 768,
+      "r2": 0.9083827137947083,
+      "mae": 6.496034145355225,
+      "rmse": 8.024152536298226,
+      "encoding_time_sec": 0.0,
+      "fit_time_sec": 43.74930350000068
+    },
+    {
+      "embedding_name": "all-MiniLM-L6-v2",
+      "display_name": "MiniLM-L6-v2 (384-d)",
+      "dim": 384,
+      "r2": 0.9012925028800964,
+      "mae": 6.6924896240234375,
+      "rmse": 8.328859221709694,
+      "encoding_time_sec": 0.0,
+      "fit_time_sec": 10.891111400000227
+    },
+    {
+      "embedding_name": "BAAI/bge-large-en-v1.5",
+      "display_name": "bge-large-v1.5 (1024-d)",
+      "dim": 1024,
+      "r2": 0.9000274538993835,
+      "mae": 6.669133186340332,
+      "rmse": 8.382061614494354,
+      "encoding_time_sec": 0.0,
+      "fit_time_sec": 23.494864200001757
+    }
+  ],
+  "regressor_leaderboard": [
+    {
+      "regressor_name": "CatBoost",
+      "r2": 0.9217255954240552,
+      "mae": 6.037986210096806,
+      "rmse": 7.41686506662352,
+      "fit_time_sec": 42.543793099997856
+    },
+    {
+      "regressor_name": "LightGBM",
+      "r2": 0.9196789482516248,
+      "mae": 6.142662423124348,
+      "rmse": 7.513204068940395,
+      "fit_time_sec": 14.475865699998394
+    },
+    {
+      "regressor_name": "XGBoost",
+      "r2": 0.9181793332099915,
+      "mae": 6.199523448944092,
+      "rmse": 7.583017056196073,
+      "fit_time_sec": 33.46930359999533
+    }
+  ],
+  "top_prediction_errors": [
+    {
+      "rank": 1,
+      "error_points": 28.47265943430248,
+      "true_score": 5.199999809265137,
+      "predicted_score": 33.672659243567615,
+      "report_text": "Citizen report near Warehouse Row. Our household plan to shelter in place overnight and monitor official alerts. Context: water rationing started in our ward. Sharing so teams can focus elsewhere Case ref L180."
+    },
+    {
+      "rank": 2,
+      "error_points": 21.05356790844334,
+      "true_score": 29.600000381469727,
+      "predicted_score": 8.546432473026385,
+      "report_text": "Citizen report near the canyon mouth neighborhood where the building tilted slightly but still stands. Power blinked once, then returned; lights and radio work. No dispatch required unless you want us on the awareness list."
+    },
+    {
+      "rank": 3,
+      "error_points": 20.508817966079874,
+      "true_score": 14.5,
+      "predicted_score": 35.008817966079874,
+      "report_text": "Citizen report near Warehouse Row. Our household plan to shelter in place overnight and monitor official alerts. Context: water rationing started in our ward. Sharing so teams can focus elsewhere Case ref L420."
+    },
+    {
+      "rank": 4,
+      "error_points": 19.989448005656705,
+      "true_score": 7.0,
+      "predicted_score": 26.989448005656705,
+      "report_text": "Calling about the east levee area. Floodwater is creeping higher along the curb. Meanwhile, basement dampness is annoying but not dangerous to anyone. Sharing so teams can focus elsewhere Case ref L133."
+    },
+    {
+      "rank": 5,
+      "error_points": 18.997851173143296,
+      "true_score": 5.099999904632568,
+      "predicted_score": 24.097851077775864,
+      "report_text": "During this landslide at the old quarry road, mud and rock buried part of the access road. No trapped persons, no missing persons, and no urgent medical needs. Sharing so teams can focus elsewhere Case ref L239."
+    }
+  ]
+}
