@@ -20,12 +20,12 @@ from sklearn.model_selection import train_test_split
 # ---------------------------------------------------------------------------
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
 DEFAULT_JSON_PATH: Path = PROJECT_ROOT / "disaster_dataset.json"
-MODELS_DIR: Path = PROJECT_ROOT / "models"
-RESULTS_DIR: Path = PROJECT_ROOT / "results"
+MODELS_DIR: Path = PROJECT_ROOT / "models" / "text"
+RESULTS_DIR: Path = PROJECT_ROOT / "results" / "text"
 
+CATBOOST_PATH: Path = MODELS_DIR / "priority_catboost.cbm"
 XGBOOST_PATH: Path = MODELS_DIR / "priority_xgboost.json"
 MODEL_META_PATH: Path = MODELS_DIR / "priority_model_meta.pkl"
-# Kept as an alias so older CLI flags / docs referring to label_encoder still resolve.
 LABEL_ENCODER_PATH: Path = MODEL_META_PATH
 
 REGRESSION_REPORT_PATH: Path = RESULTS_DIR / "text_regression_report.txt"

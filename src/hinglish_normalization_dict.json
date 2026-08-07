@@ -1,0 +1,141 @@
+{
+  "_comment": "External Hinglish Normalization Dictionary. Edit this file to extend normalization rules without changing code.",
+  "_version": "2.0",
+
+  "water_flood": {
+    "pani": "paani",
+    "paanee": "paani",
+    "paani": "paani",
+    "baad": "baadh",
+    "baadh": "baadh",
+    "baarish": "baarish",
+    "barish": "baarish",
+    "barsaat": "barsaat",
+    "dub": "doob",
+    "doob": "doob",
+    "dooba": "dooba",
+    "ubra": "ubra",
+    "bhar": "bhar",
+    "bhar gaya": "bhar gaya",
+    "ubh": "ubh"
+  },
+
+  "trapped_emergency": {
+    "phasa": "phanse",
+    "fasa": "phanse",
+    "fase": "phanse",
+    "phase": "phanse",
+    "phans": "phanse",
+    "faase": "phanse",
+    "fanse": "phanse",
+    "phanse": "phanse",
+    "fasa hua": "phansa hua",
+    "atka": "phansa",
+    "atke": "phanse"
+  },
+
+  "help_response": {
+    "madad": "madad",
+    "maddad": "madad",
+    "bhejo": "bhejo",
+    "bhejdo": "bhejo",
+    "jarurat": "zaroorat",
+    "jaroorat": "zaroorat",
+    "zarurat": "zaroorat",
+    "zaroorat": "zaroorat",
+    "chahiye": "chahiye",
+    "chahie": "chahiye",
+    "urgent": "urgent",
+    "jaldi": "jaldi",
+    "jald": "jaldi",
+    "turant": "turant",
+    "abhi": "abhi"
+  },
+
+  "fire_smoke": {
+    "dhua": "dhua",
+    "dhuwa": "dhua",
+    "dhuan": "dhua",
+    "aag": "aag",
+    "aage": "aag",
+    "jwala": "jwala",
+    "jal raha": "jal raha",
+    "jal rahi": "jal rahi"
+  },
+
+  "transport_access": {
+    "rasta": "rasta",
+    "raasta": "rasta",
+    "raaste": "raste",
+    "sadak": "sadak",
+    "sarak": "sadak",
+    "road blocked": "rasta band",
+    "block": "band"
+  },
+
+  "quantifiers": {
+    "bohot": "bohot",
+    "bahut": "bohot",
+    "bhot": "bohot",
+    "zyada": "zyada",
+    "ziyada": "zyada",
+    "jyada": "zyada",
+    "thoda": "thoda",
+    "kuch": "kuch",
+    "bilkul": "bilkul",
+    "poora": "poora",
+    "pura": "poora",
+    "sara": "saara",
+    "saara": "saara"
+  },
+
+  "location": {
+    "ghar": "ghar",
+    "gharon": "gharon",
+    "kamra": "kamra",
+    "kamre": "kamre",
+    "chhat": "chhat",
+    "chhath": "chhat",
+    "upar": "upar",
+    "neeche": "neeche",
+    "andar": "andar",
+    "bahar": "bahar",
+    "paas": "paas",
+    "nazdeek": "nazdeek",
+    "yahan": "yahan",
+    "idhar": "idhar"
+  },
+
+  "people_victims": {
+    "log": "log",
+    "aadmi": "aadmi",
+    "aurat": "aurat",
+    "bacha": "bacha",
+    "bachche": "bachche",
+    "bujurg": "bujurg",
+    "pregnant": "pregnant",
+    "ghayal": "ghayal",
+    "behoosh": "behosh",
+    "behosh": "behosh",
+    "marij": "marez",
+    "bimaar": "bimaar"
+  },
+
+  "phrases": {
+    "ghar me": "ghar mein",
+    "ghar mai": "ghar mein",
+    "madad kro": "madad karo",
+    "madad krdo": "madad karo",
+    "madad kijiye": "madad karo",
+    "log fase hue": "log phanse hue",
+    "log phasa hue": "log phanse hue",
+    "aa gaya": "aa gaya",
+    "agaya": "aa gaya",
+    "ho gaya": "ho gaya",
+    "hogaya": "ho gaya",
+    "bhar gaya": "bhar gaya",
+    "bhargaya": "bhar gaya",
+    "nikal lo": "nikaalo",
+    "nikaalo": "nikaalo"
+  }
+}

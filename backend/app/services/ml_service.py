@@ -74,25 +74,25 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
             return {
                 "disaster_type": res.disaster_type,
                 "priority_score": round(float(res.priority_score), 1),
-                "priority_level": res.priority_class,
-                "confidence": round(float(res.image_confidence), 4),
-                "language_detected": lang,
+                "priority_level": res.priority_level,
+                "confidence": round(float(res.confidence), 4),
+                "language_detected": getattr(res, "language_detected", lang),
                 "class_probabilities": {
-                    k: round(float(v), 4) for k, v in res.image_class_probabilities.items()
+                    k: round(float(v), 4) for k, v in res.class_probabilities.items()
                 },
             }
 
         elif has_image and not has_text:
             # Image only inference
-            img_res = self._predictor.image_predictor.predict(image_input)
+            disaster_type, confidence, class_probabilities = self._predictor.image_predictor.predict(image_input)
             return {
-                "disaster_type": img_res.predicted_class,
+                "disaster_type": disaster_type,
                 "priority_score": 50.0,  # Default neutral score when text is absent
                 "priority_level": "Medium",
-                "confidence": round(float(img_res.confidence), 4),
+                "confidence": round(float(confidence), 4),
                 "language_detected": "English",
                 "class_probabilities": {
-                    k: round(float(v), 4) for k, v in img_res.class_probabilities.items()
+                    k: round(float(v), 4) for k, v in class_probabilities.items()
                 },
             }
 
@@ -101,8 +101,8 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
             from src.predict_text import predict_priority_score
             text_res = predict_priority_score(
                 text_report,
-                self._predictor.text_model,
-                self._predictor.text_encoder,
+                self._predictor.text_predictor.model,
+                self._predictor.text_predictor.encoder,
             )
             # Default uniform class probabilities when image is absent
             default_classes = ["Flood", "Earthquake", "Urban Fire", "Wild Fire", "Landslide", "Drought"]
@@ -138,14 +138,13 @@ class PredictionService:
 
 # Global singleton instance for Dependency Injection
 _predictor_adapter = ProductionMultimodalPredictorAdapter()
-_prediction_service_instance = PredictionService(predictor=_predictor_adapter)
-
-
-def get_prediction_service() -> PredictionService:
-    """Dependency Injection provider for PredictionService."""
-    return _prediction_service_instance
 
 
 def initialize_ml_models() -> None:
-    """Invoked during FastAPI startup lifespan event."""
+    """Explicit startup hook called by FastAPI lifespan."""
     _predictor_adapter.load_models()
+
+
+def get_prediction_service() -> PredictionService:
+    """Dependency Provider for PredictionService."""
+    return PredictionService(predictor=_predictor_adapter)

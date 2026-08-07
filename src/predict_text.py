@@ -73,19 +73,24 @@ def load_pipeline(
     return model, encoder
 
 
+from src.hinglish_normalizer import normalize_hinglish_text
+
+
 def predict_priority_score(
     text: str,
-    model: XGBRegressor,
+    model: Any,
     encoder: SentenceTransformer,
 ) -> dict[str, Any]:
     """
     Embed ``text`` and return a clipped priority score plus UI-only category.
+    Supports English, Devanagari Hindi, and Romanized Hinglish natively.
     """
     if not text or not text.strip():
         raise ValueError("Input text must be a non-empty citizen report.")
 
+    normalized_text = normalize_hinglish_text(text.strip())
     embedding = encoder.encode(
-        [text.strip()],
+        [normalized_text],
         convert_to_numpy=True,
         show_progress_bar=False,
     )
