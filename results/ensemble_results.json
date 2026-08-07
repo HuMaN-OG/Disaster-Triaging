@@ -1,0 +1,39 @@
+{
+  "ensemble_accuracy": 0.8526119402985075,
+  "ensemble_precision": 0.8520060657521714,
+  "ensemble_recall": 0.852457834340909,
+  "ensemble_f1": 0.851781528687264,
+  "weights": {
+    "swin_t": 0.3,
+    "convnext_tiny": 0.2,
+    "vit_b_16": 0.2,
+    "efficientnet_v2_s": 0.3
+  },
+  "classification_report": "              precision    recall  f1-score   support\n\n       Flood     0.9134    0.9134    0.9134       127\n  Earthquake     0.8152    0.8242    0.8197        91\n  Urban Fire     0.8421    0.7619    0.8000        84\n   Wild Fire     0.8889    0.9320    0.9100       103\n   Landslide     0.7500    0.7582    0.7541        91\n     Drought     0.9024    0.9250    0.9136        40\n\n    accuracy                         0.8526       536\n   macro avg     0.8520    0.8525    0.8518       536\nweighted avg     0.8523    0.8526    0.8520       536\n",
+  "single_models_with_tta": {
+    "swin_t": {
+      "accuracy": 0.8432835820895522,
+      "precision": 0.8416777171963542,
+      "recall": 0.8433003251833999,
+      "f1": 0.841839427517094
+    },
+    "convnext_tiny": {
+      "accuracy": 0.8208955223880597,
+      "precision": 0.8212124051532245,
+      "recall": 0.8224219253679922,
+      "f1": 0.8210800669213927
+    },
+    "vit_b_16": {
+      "accuracy": 0.8227611940298507,
+      "precision": 0.8316447625068314,
+      "recall": 0.8200093185233848,
+      "f1": 0.8249902477587431
+    },
+    "efficientnet_v2_s": {
+      "accuracy": 0.8152985074626866,
+      "precision": 0.8045172537833986,
+      "recall": 0.8142864680189809,
+      "f1": 0.8064526514297422
+    }
+  }
+}

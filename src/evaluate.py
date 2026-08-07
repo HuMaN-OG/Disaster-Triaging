@@ -144,7 +144,7 @@ def evaluate(args: argparse.Namespace) -> dict:
         save_path=Path(args.cm_path),
         title=f"Confusion Matrix ({args.split})",
     )
-    print(f"Confusion matrix → {cm_path}")
+    print(f"Confusion matrix -> {cm_path}")
 
     return {"loss": avg_loss, "metrics": metrics, "checkpoint": str(checkpoint_path)}
 

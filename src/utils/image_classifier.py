@@ -75,13 +75,47 @@ IMAGE_SIZE: int = 224
 TRAIN_RATIO: float = 0.80
 VAL_RATIO: float = 0.20
 BATCH_SIZE: int = 32
-NUM_EPOCHS: int = 20
+NUM_EPOCHS: int = 40
 LEARNING_RATE: float = 1e-4
 WEIGHT_DECAY: float = 1e-4
-EARLY_STOPPING_PATIENCE: int = 5
+EARLY_STOPPING_PATIENCE: int = 8
 NUM_WORKERS: int = 0  # Windows-friendly default; raise on Linux/macOS
 RANDOM_SEED: int = 42
 FREEZE_BACKBONE: bool = True
+PARTIAL_FINETUNE: bool = True
+UNFREEZE_LAST_N_BLOCKS: int = 5
+BACKBONE_LR: float = 1e-5
+CLASSIFIER_LR: float = 1e-4
+USE_CLASS_WEIGHTS: bool = True
+
+# ---------------------------------------------------------------------------
+# Phase 2 — optimization hyper-parameters
+# ---------------------------------------------------------------------------
+LABEL_SMOOTHING: float = 0.05        # CrossEntropyLoss label smoothing epsilon
+USE_MIXUP: bool = False              # MixUp data augmentation during training (postponed)
+MIXUP_ALPHA: float = 0.4            # MixUp Beta distribution alpha
+GRAD_CLIP_MAX_NORM: float = 1.0     # Gradient clipping max L2 norm (0 = off)
+WARMUP_EPOCHS: int = 3              # Linear LR warm-up epochs before cosine
+
+
+def compute_class_weights(
+    samples: Sequence[tuple],
+    num_classes: int = NUM_CLASSES,
+) -> "torch.Tensor":
+    """
+    Compute balanced class weights for CrossEntropyLoss from training samples.
+
+    Uses inverse-frequency weighting: weight_i = total / (num_classes * count_i).
+    """
+    import torch
+    from collections import Counter
+
+    counts = Counter(label for _, label in samples)
+    total = sum(counts.values())
+    weights = [
+        total / (num_classes * max(counts.get(i, 0), 1)) for i in range(num_classes)
+    ]
+    return torch.tensor(weights, dtype=torch.float32)
 
 
 def set_seed(seed: int = RANDOM_SEED) -> None:

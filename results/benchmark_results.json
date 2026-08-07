@@ -1,0 +1,111 @@
+{
+  "results": [
+    {
+      "model": "convnext_tiny",
+      "display_name": "ConvNeXt-Tiny",
+      "accuracy": 0.8246268656716418,
+      "precision": 0.8216242684547262,
+      "recall": 0.82593176716428,
+      "f1": 0.8231458140083636,
+      "trainable_params": 27507846,
+      "training_time_sec": 4370.473260164261,
+      "training_time_min": 72.84122100273768,
+      "best_epoch": 12,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_convnext_tiny.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_convnext_tiny.png",
+      "efficiency_score": 0.1108450404038299
+    },
+    {
+      "model": "swin_t",
+      "display_name": "Swin-T",
+      "accuracy": 0.8451492537313433,
+      "precision": 0.8431939334039859,
+      "recall": 0.8452844521675268,
+      "f1": 0.8437501814360071,
+      "trainable_params": 27218346,
+      "training_time_sec": 4460.654607772827,
+      "training_time_min": 74.34424346288046,
+      "best_epoch": 10,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_swin_t.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_swin_t.png",
+      "efficiency_score": 0.11367383609308183
+    },
+    {
+      "model": "vit_b_16",
+      "display_name": "ViT-B/16",
+      "accuracy": 0.8264925373134329,
+      "precision": 0.8353366253905335,
+      "recall": 0.8234589433322328,
+      "f1": 0.8285279814345045,
+      "trainable_params": 35443974,
+      "training_time_sec": 6023.417333841324,
+      "training_time_min": 100.3902888973554,
+      "best_epoch": 5,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_vit_b_16.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_vit_b_16.png",
+      "efficiency_score": 0.10947584535646805
+    },
+    {
+      "model": "efficientnet_v2_s",
+      "display_name": "EfficientNetV2-S",
+      "accuracy": 0.8227611940298507,
+      "precision": 0.8098662118426209,
+      "recall": 0.8228028955305158,
+      "f1": 0.8136696555353639,
+      "trainable_params": 19870462,
+      "training_time_sec": 4895.869338274002,
+      "training_time_min": 81.5978223045667,
+      "best_epoch": 14,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_efficientnet_v2_s.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_efficientnet_v2_s.png",
+      "efficiency_score": 0.11273468747323007
+    },
+    {
+      "model": "efficientnet_b2",
+      "display_name": "EfficientNet-B2",
+      "accuracy": 0.8059701492537313,
+      "precision": 0.7975668590117447,
+      "recall": 0.803878338023281,
+      "f1": 0.7985842574098854,
+      "trainable_params": 7575902,
+      "training_time_sec": 4285.44110751152,
+      "training_time_min": 71.42401845852534,
+      "best_epoch": 21,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_efficientnet_b2.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_efficientnet_b2.png",
+      "efficiency_score": 0.11715645625366208
+    }
+  ],
+  "recommendation": {
+    "best_accuracy": {
+      "model": "swin_t",
+      "display_name": "Swin-T",
+      "accuracy": 0.8451492537313433,
+      "precision": 0.8431939334039859,
+      "recall": 0.8452844521675268,
+      "f1": 0.8437501814360071,
+      "trainable_params": 27218346,
+      "training_time_sec": 4460.654607772827,
+      "training_time_min": 74.34424346288046,
+      "best_epoch": 10,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_swin_t.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_swin_t.png",
+      "efficiency_score": 0.11367383609308183
+    },
+    "best_efficiency": {
+      "model": "efficientnet_b2",
+      "display_name": "EfficientNet-B2",
+      "accuracy": 0.8059701492537313,
+      "precision": 0.7975668590117447,
+      "recall": 0.803878338023281,
+      "f1": 0.7985842574098854,
+      "trainable_params": 7575902,
+      "training_time_sec": 4285.44110751152,
+      "training_time_min": 71.42401845852534,
+      "best_epoch": 21,
+      "checkpoint": "C:\\Users\\HP\\disaster-triaging\\models\\disaster_classifier_efficientnet_b2.pth",
+      "confusion_matrix": "C:\\Users\\HP\\disaster-triaging\\results\\confusion_matrix_efficientnet_b2.png",
+      "efficiency_score": 0.11715645625366208
+    }
+  }
+}

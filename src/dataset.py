@@ -76,10 +76,10 @@ def get_train_transforms() -> transforms.Compose:
     """Augmentation pipeline for training images."""
     return transforms.Compose(
         [
-            transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
             transforms.RandomResizedCrop(IMAGE_SIZE, scale=(0.8, 1.0)),
             transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(10),
+            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
+            transforms.RandomAffine(degrees=15, translate=(0.1, 0.1), scale=(0.9, 1.1)),
             transforms.ToTensor(),
             transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
         ]
