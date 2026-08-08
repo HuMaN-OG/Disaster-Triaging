@@ -1,0 +1,18 @@
+============================================================
+AI IMAGE AUTHENTICITY EVALUATION REPORT
+============================================================
+
+Accuracy:                    0.9541
+Precision (AI Class):         0.8598
+Recall (AI Class):            0.9860
+F1 Score:                    0.9186
+ROC-AUC:                     0.9931
+PR-AUC:                      0.9870
+Expected Calibration Error:  0.6582
+
+Confusion Matrix:
+  True Negatives (Real -> Real): 379
+  False Positives (Real -> AI):  23
+  False Negatives (AI -> Real): 2
+  True Positives (AI -> AI):   141
+

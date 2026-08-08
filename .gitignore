@@ -111,3 +111,18 @@ frontend/.vite/
 *_results.json
 eval_*.json
 
+# ─────────────────────────────────────────────
+# AI Authenticity Classifier (Unignore rules)
+# ─────────────────────────────────────────────
+!data/authenticity/
+!data/authenticity/**
+!dataset/AI_Images/
+!dataset/AI_Images/**
+!checkpoints/authenticity/
+!checkpoints/authenticity/**
+!results/authenticity/
+!results/authenticity/**
+!models/authenticity/
+!models/authenticity/**
+
+

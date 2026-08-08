@@ -1,0 +1,261 @@
+{
+  "accuracy": 0.9541284403669725,
+  "precision": 0.8597560975609756,
+  "recall": 0.986013986013986,
+  "f1_score": 0.9185667752442996,
+  "roc_auc": 0.9931287617854783,
+  "pr_auc": 0.9870269061216542,
+  "expected_calibration_error": 0.6581510945163462,
+  "confusion_matrix": {
+    "true_negative": 379,
+    "false_positive": 23,
+    "false_negative": 2,
+    "true_positive": 141
+  },
+  "false_positives_count": 23,
+  "false_negatives_count": 2,
+  "worst_predictions": [
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\AI_Images\\Fire\\Wild fire\\Burnout_ops_on_Mangum_Fire_McCall_Smokejumpers.jpg",
+      "ai_probability": 0.0581546276807785,
+      "true_label": 1,
+      "predicted_label": 0,
+      "error_margin": 0.9418453723192215,
+      "uncertainty_margin": 0.4418453723192215
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0355.png",
+      "ai_probability": 0.9239339828491211,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.9239339828491211,
+      "uncertainty_margin": 0.4239339828491211
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Land_Disaster\\Drought\\04_02_0092.png",
+      "ai_probability": 0.9114639163017273,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.9114639163017273,
+      "uncertainty_margin": 0.4114639163017273
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Damaged_Infrastructure\\Infrastructure\\05_01_1357.png",
+      "ai_probability": 0.8816229701042175,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.8816229701042175,
+      "uncertainty_margin": 0.38162297010421753
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\AI_Images\\earthquake\\OIF-3351838832.jpg",
+      "ai_probability": 0.1294449269771576,
+      "true_label": 1,
+      "predicted_label": 0,
+      "error_margin": 0.8705550730228424,
+      "uncertainty_margin": 0.3705550730228424
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0449.png",
+      "ai_probability": 0.8317209482192993,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.8317209482192993,
+      "uncertainty_margin": 0.3317209482192993
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Fire_Disaster\\Wild_Fire\\01_02_0207.png",
+      "ai_probability": 0.8248598575592041,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.8248598575592041,
+      "uncertainty_margin": 0.3248598575592041
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0103.png",
+      "ai_probability": 0.7650699615478516,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.7650699615478516,
+      "uncertainty_margin": 0.26506996154785156
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0579.png",
+      "ai_probability": 0.7603731751441956,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.7603731751441956,
+      "uncertainty_margin": 0.26037317514419556
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0723.png",
+      "ai_probability": 0.7478485703468323,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.7478485703468323,
+      "uncertainty_margin": 0.24784857034683228
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Land_Disaster\\Drought\\04_02_0084.png",
+      "ai_probability": 0.734307050704956,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.734307050704956,
+      "uncertainty_margin": 0.23430705070495605
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_1005.png",
+      "ai_probability": 0.7210049033164978,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.7210049033164978,
+      "uncertainty_margin": 0.2210049033164978
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Land_Disaster\\Drought\\04_02_0011.png",
+      "ai_probability": 0.7024261355400085,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.7024261355400085,
+      "uncertainty_margin": 0.20242613554000854
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Fire_Disaster\\Urban_Fire\\01_01_0080.png",
+      "ai_probability": 0.7017094492912292,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.7017094492912292,
+      "uncertainty_margin": 0.20170944929122925
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0935.png",
+      "ai_probability": 0.6979426741600037,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.6979426741600037,
+      "uncertainty_margin": 0.19794267416000366
+    }
+  ],
+  "most_uncertain_predictions": [
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\AI_Images\\flood\\jeffjacobs1990-jesus-3548007_1920.jpg",
+      "ai_probability": 0.50072181224823,
+      "true_label": 1,
+      "predicted_label": 1,
+      "error_margin": 0.49927818775177,
+      "uncertainty_margin": 0.0007218122482299805
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0806.png",
+      "ai_probability": 0.4991874694824219,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.4991874694824219,
+      "uncertainty_margin": 0.000812530517578125
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Damaged_Infrastructure\\Infrastructure\\05_01_1377.png",
+      "ai_probability": 0.4937251806259155,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.4937251806259155,
+      "uncertainty_margin": 0.006274819374084473
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Damaged_Infrastructure\\Infrastructure\\05_01_1232.png",
+      "ai_probability": 0.5251971483230591,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.5251971483230591,
+      "uncertainty_margin": 0.025197148323059082
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\AI_Images\\flood\\Screenshot 2026-08-06 171933.png",
+      "ai_probability": 0.5283252596855164,
+      "true_label": 1,
+      "predicted_label": 1,
+      "error_margin": 0.47167474031448364,
+      "uncertainty_margin": 0.028325259685516357
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Damaged_Infrastructure\\Infrastructure\\05_01_1130.png",
+      "ai_probability": 0.5289162397384644,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.5289162397384644,
+      "uncertainty_margin": 0.028916239738464355
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0458.png",
+      "ai_probability": 0.45780062675476074,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.45780062675476074,
+      "uncertainty_margin": 0.04219937324523926
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Fire_Disaster\\Wild_Fire\\01_02_0452.png",
+      "ai_probability": 0.45266908407211304,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.45266908407211304,
+      "uncertainty_margin": 0.04733091592788696
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0051.png",
+      "ai_probability": 0.45219460129737854,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.45219460129737854,
+      "uncertainty_margin": 0.04780539870262146
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Land_Disaster\\Drought\\04_02_0053.png",
+      "ai_probability": 0.5527927279472351,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.5527927279472351,
+      "uncertainty_margin": 0.05279272794723511
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Damaged_Infrastructure\\Infrastructure\\05_01_1005.png",
+      "ai_probability": 0.5587929487228394,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.5587929487228394,
+      "uncertainty_margin": 0.058792948722839355
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Land_Disaster\\Land_Slide\\04_01_0044.png",
+      "ai_probability": 0.4296731948852539,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.4296731948852539,
+      "uncertainty_margin": 0.0703268051147461
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Land_Disaster\\Drought\\04_02_0162.png",
+      "ai_probability": 0.42334502935409546,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.42334502935409546,
+      "uncertainty_margin": 0.07665497064590454
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Damaged_Infrastructure\\Infrastructure\\05_01_1329.png",
+      "ai_probability": 0.5827072262763977,
+      "true_label": 0,
+      "predicted_label": 1,
+      "error_margin": 0.5827072262763977,
+      "uncertainty_margin": 0.0827072262763977
+    },
+    {
+      "image_path": "c:\\Users\\ALINGAN PAL\\disaster-triaging\\dataset\\Water_Disaster\\03_0500.png",
+      "ai_probability": 0.416903555393219,
+      "true_label": 0,
+      "predicted_label": 0,
+      "error_margin": 0.416903555393219,
+      "uncertainty_margin": 0.083096444606781
+    }
+  ]
+}

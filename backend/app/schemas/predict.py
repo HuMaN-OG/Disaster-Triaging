@@ -16,6 +16,15 @@ class PredictionResultSchema(BaseModel):
     class_probabilities: Dict[str, float]
 
 
+class AuthenticityResultSchema(BaseModel):
+    classification: str
+    confidence: float
+    ai_probability: float
+    assessment: str
+    is_ai_generated: bool
+    model_info: Optional[Dict[str, Any]] = None
+
+
 class PredictionAPIResponse(BaseModel):
     incident_id: Optional[int] = None
     disaster_type: str
@@ -24,4 +33,16 @@ class PredictionAPIResponse(BaseModel):
     confidence: float
     language_detected: str
     class_probabilities: Dict[str, float]
+    authenticity: Optional[AuthenticityResultSchema] = None
     created_at: datetime
+
+
+class AuthenticityAPIResponse(BaseModel):
+    classification: str
+    confidence: float
+    ai_probability: float
+    assessment: str
+    is_ai_generated: bool
+    model_info: Dict[str, Any]
+    created_at: datetime
+

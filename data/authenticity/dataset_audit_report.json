@@ -1,0 +1,30 @@
+{
+  "total_images": 3636,
+  "total_real_images": 2679,
+  "total_ai_images": 957,
+  "imbalance_ratio_real_vs_ai": "2.8:1",
+  "real_breakdown": {
+    "Damaged_Infrastructure": 454,
+    "Fire_Disaster": 933,
+    "Land_Disaster": 657,
+    "Water_Disaster": 635
+  },
+  "ai_breakdown": {
+    "drought": 198,
+    "earthquake": 229,
+    "Fire\\Urban fire": 161,
+    "Fire\\Wild fire": 151,
+    "flood": 218
+  },
+  "image_formats": {
+    ".png": 2814,
+    ".jpg": 807,
+    ".webp": 15
+  },
+  "average_dimensions": {
+    "width": 561,
+    "height": 468
+  },
+  "corrupted_images_count": 0,
+  "corrupted_files": []
+}

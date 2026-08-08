@@ -42,6 +42,7 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
 
     def __init__(self):
         self._predictor = None
+        self._authenticity_predictor = None
         self.is_loaded = False
 
     def load_models(self) -> None:
@@ -49,7 +50,20 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
         if not self.is_loaded:
             from src.inference.predict import MultimodalPredictor
             self._predictor = MultimodalPredictor(image_model_type="ensemble")
+            try:
+                from src.authenticity.predict import AuthenticityInference
+                self._authenticity_predictor = AuthenticityInference()
+            except Exception as e:
+                import logging
+                logging.getLogger("uvicorn.error").warning(f"Could not load AuthenticityInference: {e}")
             self.is_loaded = True
+
+    def predict_authenticity(self, image_input: Union[str, Path, Image.Image]) -> Dict[str, Any]:
+        if not self.is_loaded or self._authenticity_predictor is None:
+            from src.authenticity.predict import AuthenticityInference
+            self._authenticity_predictor = AuthenticityInference()
+            self.is_loaded = True
+        return self._authenticity_predictor.predict(image_input)
 
     def predict(
         self,
@@ -67,6 +81,16 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
 
         # Detect language if text provided
         lang = detect_language(text_report) if has_text else "English"
+        authenticity_info = None
+
+        if has_image:
+            try:
+                if self._authenticity_predictor is None:
+                    from src.authenticity.predict import AuthenticityInference
+                    self._authenticity_predictor = AuthenticityInference()
+                authenticity_info = self._authenticity_predictor.predict(image_input)
+            except Exception:
+                authenticity_info = None
 
         if has_image and has_text:
             # Full multimodal inference
@@ -80,6 +104,7 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
                 "class_probabilities": {
                     k: round(float(v), 4) for k, v in res.class_probabilities.items()
                 },
+                "authenticity": authenticity_info,
             }
 
         elif has_image and not has_text:
@@ -94,6 +119,7 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
                 "class_probabilities": {
                     k: round(float(v), 4) for k, v in class_probabilities.items()
                 },
+                "authenticity": authenticity_info,
             }
 
         else:  # has_text and not has_image
@@ -116,6 +142,7 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
                 "confidence": 0.5,
                 "language_detected": lang,
                 "class_probabilities": class_probs,
+                "authenticity": None,
             }
 
 
@@ -134,6 +161,15 @@ class PredictionService:
         text_report: Optional[str] = None,
     ) -> Dict[str, Any]:
         return self.predictor.predict(image_input=image_input, text_report=text_report)
+
+    def run_authenticity_prediction(
+        self,
+        image_input: Union[str, Path, Image.Image]
+    ) -> Dict[str, Any]:
+        if hasattr(self.predictor, "predict_authenticity"):
+            return self.predictor.predict_authenticity(image_input)
+        from src.authenticity.predict import predict_authenticity
+        return predict_authenticity(image_input)
 
 
 # Global singleton instance for Dependency Injection

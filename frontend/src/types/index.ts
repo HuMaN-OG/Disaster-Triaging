@@ -32,6 +32,15 @@ export interface StatusHistoryItem {
   created_at: string;
 }
 
+export interface AuthenticityResult {
+  classification: string;
+  confidence: number;
+  ai_probability: number;
+  assessment: string;
+  is_ai_generated: boolean;
+  model_info?: Record<string, any>;
+}
+
 export interface PredictionResult {
   incident_id?: number;
   disaster_type: string;
@@ -40,6 +49,7 @@ export interface PredictionResult {
   confidence: number;
   language_detected: string;
   class_probabilities: Record<string, number>;
+  authenticity?: AuthenticityResult;
   created_at: string;
 }
 

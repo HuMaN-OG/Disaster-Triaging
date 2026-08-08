@@ -4,6 +4,7 @@ import { IncidentDetail } from '../types';
 import { ProbabilityBars } from '../components/ProbabilityBars';
 import { RecommendationCard } from '../components/RecommendationCard';
 import { LeafletMap } from '../components/LeafletMap';
+import { AuthenticityCard } from '../components/AuthenticityCard';
 import {
   UploadCloud,
   MapPin,
@@ -326,8 +327,10 @@ export const CitizenPortal: React.FC = () => {
           </form>
         </div>
 
-        {/* Informational Panel / Feature Cards */}
+        {/* Informational Panel / Feature Cards & AI Authenticity Detector */}
         <div className="lg:col-span-5 space-y-6">
+          <AuthenticityCard />
+
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
             <h3 className="text-sm font-mono font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
               <Cpu className="w-4 h-4 text-blue-400" /> AI System Architecture
