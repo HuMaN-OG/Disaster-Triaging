@@ -35,3 +35,4 @@ class Incident(Base):
     location = relationship("Location", back_populates="incident", uselist=False, cascade="all, delete-orphan")
     assignments = relationship("Assignment", back_populates="incident", cascade="all, delete-orphan")
     status_history = relationship("StatusHistory", back_populates="incident", cascade="all, delete-orphan")
+    attachments = relationship("Attachment", back_populates="incident", cascade="all, delete-orphan")

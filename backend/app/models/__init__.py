@@ -7,6 +7,7 @@ from app.models.assignment import Assignment
 from app.models.status_history import StatusHistory
 from app.models.notification import Notification
 from app.models.audit_log import AuditLog
+from app.models.attachment import Attachment
 
 __all__ = [
     "User",
@@ -18,4 +19,5 @@ __all__ = [
     "StatusHistory",
     "Notification",
     "AuditLog",
+    "Attachment",
 ]

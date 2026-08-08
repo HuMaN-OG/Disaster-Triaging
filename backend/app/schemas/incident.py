@@ -52,10 +52,23 @@ class IncidentResponse(BaseModel):
     location: Optional[LocationSchema]
 
 
+class AttachmentResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    incident_id: int
+    file_name: str
+    file_path: str
+    content_type: str
+    file_size: int
+    created_at: datetime
+
+
 class IncidentDetailResponse(IncidentResponse):
     class_probabilities: Dict[str, float]
     recommendations: List[str]
     status_history: List[StatusHistorySchema]
+    attachments: List[AttachmentResponse] = []
 
 
 class IncidentUpdate(BaseModel):
@@ -87,6 +100,7 @@ class ResponseBriefResponse(BaseModel):
     assigned_responder: Optional[str]
     assigned_team: Optional[str]
     timeline: List[TimelineEvent]
+    attachments: List[AttachmentResponse] = []
 
     risk_summary: str
     immediate_actions: List[str]

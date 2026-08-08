@@ -10,10 +10,12 @@ from app.schemas.incident import (
     IncidentUpdate,
     ResponseBriefResponse,
     TimelineEvent,
+    AttachmentResponse,
 )
 from app.services.incident_service import IncidentService
-from app.utils.file_upload import save_uploaded_image
+from app.utils.file_upload import save_uploaded_image, save_uploaded_file
 from app.repositories.incident_repository import IncidentRepository
+from app.models.attachment import Attachment
 from app.models.user import User
 
 router = APIRouter(prefix="/incidents", tags=["Incidents"])
@@ -255,7 +257,60 @@ def get_incident_brief(id: int, db: Session = Depends(get_db)):
         assigned_responder=assigned_responder,
         assigned_team=assigned_team,
         timeline=timeline,
+        attachments=detail.get("attachments", []),
         risk_summary=risk_summary,
         immediate_actions=immediate_actions,
         recommended_resources=recommended_resources
     )
+
+
+@router.post("/{id}/attachments", response_model=List[AttachmentResponse])
+async def upload_attachments(
+    id: int,
+    files: List[UploadFile] = File(...),
+    db: Session = Depends(get_db)
+):
+    """
+    Upload multiple attachments for a specific incident.
+    """
+    repo = IncidentRepository(db)
+    incident = repo.get_by_id(id)
+    if not incident:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Incident with ID {id} not found",
+        )
+
+    saved_attachments = []
+    for file in files:
+        meta = await save_uploaded_file(file)
+        db_attachment = Attachment(
+            incident_id=id,
+            file_name=meta["file_name"],
+            file_path=meta["file_path"],
+            content_type=meta["content_type"],
+            file_size=meta["file_size"],
+        )
+        db.add(db_attachment)
+        saved_attachments.append(db_attachment)
+
+    db.commit()
+    for att in saved_attachments:
+        db.refresh(att)
+
+    return saved_attachments
+
+
+@router.get("/{id}/attachments", response_model=List[AttachmentResponse])
+def list_incident_attachments(id: int, db: Session = Depends(get_db)):
+    """
+    List all attachments for a specific incident.
+    """
+    repo = IncidentRepository(db)
+    incident = repo.get_by_id(id)
+    if not incident:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Incident with ID {id} not found",
+        )
+    return incident.attachments

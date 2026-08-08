@@ -51,3 +51,56 @@ async def save_uploaded_image(file: UploadFile) -> str:
     await file.seek(0)
 
     return f"/uploads/{unique_filename}"
+
+
+ALLOWED_ATTACHMENT_EXTENSIONS = {
+    ".jpg", ".jpeg", ".png", ".webp",
+    ".pdf", ".doc", ".docx", ".txt", ".xls", ".xlsx"
+}
+
+
+async def save_uploaded_file(file: UploadFile) -> dict:
+    """
+    Validate and save uploaded attachment file.
+    Returns metadata dict: file_name, file_path, content_type, file_size.
+    """
+    if not file:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No file uploaded",
+        )
+
+    # Validate file extension
+    ext = Path(file.filename).suffix.lower() if file.filename else ""
+    if ext not in ALLOWED_ATTACHMENT_EXTENSIONS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Unsupported file type '{ext}'.",
+        )
+
+    # Read content & check size
+    contents = await file.read()
+    max_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
+    if len(contents) > max_bytes:
+        raise HTTPException(
+            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            detail=f"File size exceeds maximum allowed size of {settings.MAX_UPLOAD_SIZE_MB}MB",
+        )
+
+    # Generate unique filename
+    unique_filename = f"{uuid.uuid4().hex}{ext}"
+    file_path = settings.UPLOAD_DIR / unique_filename
+
+    # Save to disk
+    with open(file_path, "wb") as f:
+        f.write(contents)
+
+    # Reset file seek position
+    await file.seek(0)
+
+    return {
+        "file_name": file.filename or "unknown",
+        "file_path": f"/uploads/{unique_filename}",
+        "content_type": file.content_type or "application/octet-stream",
+        "file_size": len(contents),
+    }

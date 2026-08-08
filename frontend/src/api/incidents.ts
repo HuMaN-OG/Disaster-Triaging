@@ -46,3 +46,16 @@ export const updateIncidentApi = async (
 export const deleteIncidentApi = async (id: number): Promise<void> => {
   await apiClient.delete(`/incidents/${id}`);
 };
+
+export const uploadAttachmentsApi = async (id: number, files: File[]): Promise<any[]> => {
+  const formData = new FormData();
+  files.forEach((file) => {
+    formData.append('files', file);
+  });
+  const response = await apiClient.post<any[]>(`/incidents/${id}/attachments`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};

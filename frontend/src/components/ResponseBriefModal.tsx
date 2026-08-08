@@ -45,6 +45,9 @@ Assigned Team: ${brief.assigned_team || 'None'}
 Citizen Report:
 "${brief.citizen_report || ''}"
 
+Attachments:
+${brief.attachments && brief.attachments.length > 0 ? brief.attachments.map((att: any) => ` - ${att.file_name} (${att.file_path})`).join('\n') : ' - None'}
+
 Timeline of Events:
 ${brief.timeline.map((t: any) => ` - [${new Date(t.timestamp).toLocaleString()}] ${t.status}: ${t.notes || ''}`).join('\n')}
 
@@ -155,6 +158,29 @@ ${brief.recommended_resources.map((res: string) => ` - ${res}`).join('\n')}
                     <span className="text-[11px] text-slate-500 font-mono">CITIZEN REPORT TEXT</span>
                     <div className="bg-slate-950 p-3 rounded-xl border border-slate-800/80 italic text-slate-300">
                       "{brief.citizen_report}"
+                    </div>
+                  </div>
+                )}
+
+                {brief.attachments && brief.attachments.length > 0 && (
+                  <div className="space-y-1 mt-2">
+                    <span className="text-[11px] text-slate-500 font-mono">ATTACHED EVIDENCE / FILES</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                      {brief.attachments.map((att: any) => (
+                        <div key={att.id} className="bg-slate-900 p-2 rounded-lg border border-slate-800 flex items-center justify-between gap-2 text-xs">
+                          <span className="truncate text-slate-300 font-mono text-[11px]" title={att.file_name}>
+                            {att.file_name}
+                          </span>
+                          <a
+                            href={att.file_path.startsWith('/') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${att.file_path}` : att.file_path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 hover:text-blue-300 shrink-0 font-bold"
+                          >
+                            View
+                          </a>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}

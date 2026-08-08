@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { IncidentDetail, UserRole } from '../types';
-import { getIncidentByIdApi, updateIncidentApi } from '../api/incidents';
+import { getIncidentByIdApi, updateIncidentApi, uploadAttachmentsApi } from '../api/incidents';
 import { acceptIncidentApi, updateResponderStatusApi } from '../api/responder';
 import { ProbabilityBars } from './ProbabilityBars';
 import { RecommendationCard } from './RecommendationCard';
 import { ResponseBriefModal } from './ResponseBriefModal';
-import { X, Clock, MapPin, UserCheck, Shield, CheckCircle, Flame, AlertCircle, Clipboard } from 'lucide-react';
+import { X, Clock, MapPin, UserCheck, Shield, CheckCircle, Flame, AlertCircle, Clipboard, Paperclip, Upload } from 'lucide-react';
 
 interface IncidentDrawerProps {
   incidentId: number | null;
@@ -26,6 +26,8 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
   const [notes, setNotes] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [showBrief, setShowBrief] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (!incidentId) return;
@@ -66,6 +68,24 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
       setError(err.response?.data?.detail || 'Failed to update status.');
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFiles || !incident) return;
+    setUploading(true);
+    setError(null);
+    try {
+      const filesArray = Array.from(selectedFiles);
+      await uploadAttachmentsApi(incident.id, filesArray);
+      setSelectedFiles(null);
+      const updatedData = await getIncidentByIdApi(incident.id);
+      setIncident(updatedData);
+      if (onIncidentUpdated) onIncidentUpdated();
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Failed to upload attachments.');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -177,6 +197,57 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
                   </div>
                 </div>
               )}
+
+              {/* Attachments Section */}
+              <div className="space-y-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 text-xs">
+                <h4 className="font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <Paperclip className="w-4 h-4 text-blue-500" /> Attachments & Documents
+                </h4>
+
+                {incident.attachments && incident.attachments.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {incident.attachments.map((att: any) => (
+                      <div key={att.id} className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between gap-2">
+                        <div className="min-w-0 flex-1">
+                          <p className="truncate text-slate-200 font-mono text-[11px] font-bold" title={att.file_name}>
+                            {att.file_name}
+                          </p>
+                          <span className="text-[10px] text-slate-500 font-mono">
+                            {(att.file_size / 1024).toFixed(1)} KB
+                          </span>
+                        </div>
+                        <a
+                          href={att.file_path.startsWith('/') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${att.file_path}` : att.file_path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2 py-1 bg-slate-800 hover:bg-blue-600 hover:text-white text-[10px] rounded-lg transition-colors font-mono"
+                        >
+                          View
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-slate-500 font-mono text-[11px]">No additional files attached.</p>
+                )}
+
+                <div className="pt-2 border-t border-slate-800/50 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <input
+                    type="file"
+                    multiple
+                    onChange={(e) => setSelectedFiles(e.target.files)}
+                    className="flex-1 text-slate-400 bg-slate-950 border border-slate-800 rounded-lg p-1 text-[11px] file:bg-slate-800 file:text-slate-200 file:border-0 file:rounded file:px-2 file:py-0.5 file:mr-2 file:hover:bg-slate-700 cursor-pointer"
+                  />
+                  <button
+                    onClick={handleUpload}
+                    disabled={uploading || !selectedFiles}
+                    className="py-1 px-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 transition-colors font-mono disabled:opacity-50 text-[11px]"
+                  >
+                    <Upload className="w-3.5 h-3.5" />
+                    <span>{uploading ? 'Uploading...' : 'Upload'}</span>
+                  </button>
+                </div>
+              </div>
 
               {/* Response Directives */}
               <RecommendationCard

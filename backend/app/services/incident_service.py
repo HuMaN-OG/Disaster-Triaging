@@ -112,6 +112,7 @@ class IncidentService:
             "class_probabilities": class_probabilities,
             "recommendations": recommendations,
             "status_history": incident.status_history,
+            "attachments": incident.attachments,
         }
 
     def update_incident_status(

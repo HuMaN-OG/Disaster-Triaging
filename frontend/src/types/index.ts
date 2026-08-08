@@ -62,10 +62,21 @@ export interface Incident {
   location?: LocationData;
 }
 
+export interface AttachmentData {
+  id: number;
+  incident_id: number;
+  file_name: string;
+  file_path: string;
+  content_type: string;
+  file_size: number;
+  created_at: string;
+}
+
 export interface IncidentDetail extends Incident {
   class_probabilities: Record<string, number>;
   recommendations: string[];
   status_history: StatusHistoryItem[];
+  attachments?: AttachmentData[];
 }
 
 export interface DashboardStats {
