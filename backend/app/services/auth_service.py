@@ -47,26 +47,33 @@ class AuthService:
 
 
 def seed_initial_users_and_teams(db: Session) -> None:
-    """Ensure at least one default Admin, Responder, and Team exist on startup."""
+    """Ensure deterministic Admin, Responder, and Team exist on startup."""
+    from app.core.config import settings
     user_repo = UserRepository(db)
     
     # Default Admin
-    if not user_repo.get_by_email("admin@disaster.org"):
+    admin_user = user_repo.get_by_email(settings.DEMO_ADMIN_EMAIL)
+    if not admin_user:
         user_repo.create(
-            email="admin@disaster.org",
-            password="Admin@123",
+            email=settings.DEMO_ADMIN_EMAIL,
+            password=settings.DEMO_ADMIN_PASSWORD,
             full_name="System Administrator",
             role="Admin",
         )
+    elif not verify_password(settings.DEMO_ADMIN_PASSWORD, admin_user.hashed_password):
+        user_repo.update(admin_user.id, password=settings.DEMO_ADMIN_PASSWORD)
 
     # Default Responder
-    if not user_repo.get_by_email("responder@disaster.org"):
+    responder_user = user_repo.get_by_email(settings.DEMO_RESPONDER_EMAIL)
+    if not responder_user:
         user_repo.create(
-            email="responder@disaster.org",
-            password="Responder@123",
+            email=settings.DEMO_RESPONDER_EMAIL,
+            password=settings.DEMO_RESPONDER_PASSWORD,
             full_name="Lead Disaster Responder",
             role="Responder",
         )
+    elif not verify_password(settings.DEMO_RESPONDER_PASSWORD, responder_user.hashed_password):
+        user_repo.update(responder_user.id, password=settings.DEMO_RESPONDER_PASSWORD)
 
     # Default Rescue Team
     from app.models.team import Team

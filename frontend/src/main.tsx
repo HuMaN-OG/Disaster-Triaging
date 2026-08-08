@@ -119,6 +119,9 @@ async function apiCall<T>(method: string, path: string, body?: any, isForm = fal
   });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      localStorage.removeItem('disaster_triage_token');
+    }
     const err = await res.json().catch(() => ({ detail: res.statusText }));
     throw new Error(err.detail || 'Request failed');
   }
@@ -610,7 +613,7 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
   const handleStatusUpdate = async (incId: number, newStatus: string) => {
     setActionMsg('Updating status...');
     try {
-      await apiCall('PATCH', `/responder/incidents/${incId}/status`, {
+      await apiCall('PATCH', `/responder/${incId}/status`, {
         status: newStatus,
         notes: `Status changed to ${newStatus}`,
       });
@@ -701,7 +704,11 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
               />
               {incidents.map((inc) =>
-                inc.location ? (
+                inc.location &&
+                typeof inc.location.latitude === 'number' &&
+                typeof inc.location.longitude === 'number' &&
+                !isNaN(inc.location.latitude) &&
+                !isNaN(inc.location.longitude) ? (
                   <Marker
                     key={inc.id}
                     position={[inc.location.latitude, inc.location.longitude]}
@@ -1164,6 +1171,7 @@ function App() {
           onSuccess={(u) => {
             setUser(u);
             setShowLogin(false);
+            setTab('dashboard');
           }}
         />
       )}

@@ -29,3 +29,32 @@ def test_auth_flow(client):
     assert res_me.status_code == 200
     me_data = res_me.json()
     assert me_data["email"] == "testcitizen@disaster.org"
+
+
+def test_responder_login_success(client):
+    login_payload = {
+        "username": "responder@disaster.org",
+        "password": "Responder@123",
+    }
+    res = client.post("/auth/login", json=login_payload)
+    assert res.status_code == 200
+    data = res.json()
+    assert "access_token" in data
+    assert data["role"] == "Responder"
+    assert data["full_name"] == "Lead Disaster Responder"
+
+
+def test_responder_login_invalid_password(client):
+    login_payload = {
+        "username": "responder@disaster.org",
+        "password": "WrongPassword123",
+    }
+    res = client.post("/auth/login", json=login_payload)
+    assert res.status_code == 401
+    assert res.json()["detail"] == "Incorrect email or password"
+
+
+def test_unauthenticated_me_request_rejected(client):
+    res = client.get("/auth/me")
+    assert res.status_code == 401
+

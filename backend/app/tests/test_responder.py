@@ -53,3 +53,28 @@ def test_responder_workflow(client):
     )
     assert st3_res.status_code == 200
     assert st3_res.json()["status"] == "Completed"
+
+
+def test_unauthenticated_responder_endpoint_rejected(client):
+    res = client.get("/responder/incidents")
+    assert res.status_code == 401
+
+
+def test_citizen_role_access_responder_endpoint_forbidden(client):
+    # 1. Register citizen
+    client.post(
+        "/auth/register",
+        json={"email": "citizen_user@disaster.org", "password": "Pass123!user", "full_name": "Citizen User", "role": "Citizen"},
+    )
+    # 2. Login citizen
+    login_res = client.post(
+        "/auth/login",
+        json={"username": "citizen_user@disaster.org", "password": "Pass123!user"},
+    )
+    token = login_res.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # 3. Access responder endpoint
+    res = client.get("/responder/incidents", headers=headers)
+    assert res.status_code == 403
+
