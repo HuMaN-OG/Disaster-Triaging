@@ -178,7 +178,15 @@ const LocationPicker: React.FC<{ onSelect: (lat: number, lng: number) => void }>
 };
 
 // ── LOGIN MODAL ────────────────────────────────────────────────────────────
-function LoginModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: (u: AuthUser) => void }) {
+function LoginModal({
+  onClose,
+  onSuccess,
+  inline = false,
+}: {
+  onClose?: () => void;
+  onSuccess: (u: AuthUser) => void;
+  inline?: boolean;
+}) {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [err, setErr] = useState('');
@@ -193,7 +201,7 @@ function LoginModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: (u
       const tok = await apiCall<any>('POST', '/auth/login', { username: targetEmail, password: targetPass });
       localStorage.setItem('disaster_triage_token', tok.access_token);
       onSuccess({ email: targetEmail, role: tok.role, full_name: tok.full_name });
-      onClose();
+      if (onClose) onClose();
     } catch (ex: any) {
       setErr(ex.message);
     } finally {
@@ -201,86 +209,94 @@ function LoginModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: (u
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
-      <div className="w-full max-w-sm bg-[#181818] border border-[#2D2D2D] rounded-lg p-5 shadow-2xl relative">
+  const card = (
+    <div className={`w-full ${inline ? 'h-full flex flex-col justify-center' : 'max-w-sm'} bg-[#181818] border border-[#2D2D2D] rounded-lg p-5 shadow-2xl relative`}>
+      {!inline && onClose && (
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-200 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
+      )}
 
-        <div className="flex items-center gap-2 mb-1">
-          <Shield className="w-4 h-4 text-[#D97706]" />
-          <h2 className="text-sm font-semibold text-[#FAFAFA]">Responder Authentication</h2>
+      <div className="flex items-center gap-2 mb-1">
+        <Shield className="w-4 h-4 text-[#D97706]" />
+        <h2 className="text-sm font-semibold text-[#FAFAFA]">Responder Authentication</h2>
+      </div>
+      <p className="text-xs text-[#A3A3A3] mb-4">Sign in to manage incident status and response units.</p>
+
+      {err && (
+        <div className="mb-4 p-2.5 bg-red-950/50 border border-red-900/60 rounded text-xs text-red-300">
+          {err}
         </div>
-        <p className="text-xs text-[#A3A3A3] mb-4">Sign in to manage incident status and response units.</p>
+      )}
 
-        {err && (
-          <div className="mb-4 p-2.5 bg-red-950/50 border border-red-900/60 rounded text-xs text-red-300">
-            {err}
-          </div>
-        )}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin();
+        }}
+        className="space-y-3"
+      >
+        <div>
+          <label className="block text-[11px] font-medium text-[#A3A3A3] mb-1">Email</label>
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="responder@disaster.org"
+            className="w-full px-3 py-2 bg-[#111111] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
+          />
+        </div>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleLogin();
-          }}
-          className="space-y-3"
+        <div>
+          <label className="block text-[11px] font-medium text-[#A3A3A3] mb-1">Password</label>
+          <input
+            type="password"
+            required
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            placeholder="••••••••"
+            className="w-full px-3 py-2 bg-[#111111] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-2 bg-[#D97706] hover:bg-[#b45309] text-white font-medium rounded text-xs transition-colors disabled:opacity-50"
         >
-          <div>
-            <label className="block text-[11px] font-medium text-[#A3A3A3] mb-1">Email</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="responder@disaster.org"
-              className="w-full px-3 py-2 bg-[#111111] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
-            />
-          </div>
+          {loading ? 'Authenticating...' : 'Sign In'}
+        </button>
+      </form>
 
-          <div>
-            <label className="block text-[11px] font-medium text-[#A3A3A3] mb-1">Password</label>
-            <input
-              type="password"
-              required
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-              placeholder="••••••••"
-              className="w-full px-3 py-2 bg-[#111111] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
-            />
-          </div>
-
+      <div className="mt-4 pt-3 border-t border-[#2D2D2D]">
+        <p className="text-[10px] text-[#A3A3A3] mb-2 font-mono uppercase">Quick Demo Access</p>
+        <div className="grid grid-cols-2 gap-2">
           <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2 bg-[#D97706] hover:bg-[#b45309] text-white font-medium rounded text-xs transition-colors disabled:opacity-50"
+            onClick={() => handleLogin('responder@disaster.org', 'Responder@123')}
+            className="py-1.5 px-2 bg-[#202020] hover:bg-[#2A2A2A] text-xs text-[#FAFAFA] border border-[#2D2D2D] rounded transition-colors"
           >
-            {loading ? 'Authenticating...' : 'Sign In'}
+            Responder
           </button>
-        </form>
-
-        <div className="mt-4 pt-3 border-t border-[#2D2D2D]">
-          <p className="text-[10px] text-[#A3A3A3] mb-2 font-mono uppercase">Quick Demo Access</p>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => handleLogin('responder@disaster.org', 'Responder@123')}
-              className="py-1.5 px-2 bg-[#202020] hover:bg-[#2A2A2A] text-xs text-[#FAFAFA] border border-[#2D2D2D] rounded transition-colors"
-            >
-              Responder
-            </button>
-            <button
-              onClick={() => handleLogin('admin@disaster.org', 'Admin@123')}
-              className="py-1.5 px-2 bg-[#202020] hover:bg-[#2A2A2A] text-xs text-[#FAFAFA] border border-[#2D2D2D] rounded transition-colors"
-            >
-              Admin
-            </button>
-          </div>
+          <button
+            onClick={() => handleLogin('admin@disaster.org', 'Admin@123')}
+            className="py-1.5 px-2 bg-[#202020] hover:bg-[#2A2A2A] text-xs text-[#FAFAFA] border border-[#2D2D2D] rounded transition-colors"
+          >
+            Admin
+          </button>
         </div>
       </div>
+    </div>
+  );
+
+  if (inline) return card;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
+      {card}
     </div>
   );
 }
@@ -570,7 +586,13 @@ function CitizenPortal() {
 }
 
 // ── RESCUE DASHBOARD ───────────────────────────────────────────────────────
-function RescueDashboard({ userRole }: { userRole: Role }) {
+function RescueDashboard({
+  userRole,
+  onLoginSuccess,
+}: {
+  userRole: Role;
+  onLoginSuccess?: (u: AuthUser) => void;
+}) {
   const [stats, setStats] = useState<DashStats | null>(null);
   const [incidents, setIncidents] = useState<Incident[]>([]);
   const [search, setSearch] = useState('');
@@ -588,6 +610,9 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
   const [categoryFilter, setCategoryFilter] = useState('ALL');
   const [locationFilter, setLocationFilter] = useState('');
   const [contextFilter, setContextFilter] = useState('ALL');
+
+  // True when a responder/admin is authenticated (role is not the guest 'Citizen' default)
+  const isAuth = userRole !== 'Citizen';
 
   const resetFilters = () => {
     setSearch('');
@@ -760,50 +785,101 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
         </div>
       )}
 
-      {/* Main Split Screen: GIS Map + Incident Data Table */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Left: GIS Map Panel */}
-        <div className="lg:col-span-5 h-[420px] bg-[#181818] border border-[#2D2D2D] rounded flex flex-col p-2 space-y-2">
-          <div className="flex justify-between items-center px-1 text-xs text-[#A3A3A3]">
-            <span className="font-medium text-[#FAFAFA] flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-[#D97706]" /> Operational GIS Map
-            </span>
-            <span className="font-mono text-[10px]">{incidents.length} Markers</span>
+      {/* Main Layout Section */}
+      {!isAuth && (
+        /* Unauthenticated Side-by-Side View: Operational GIS Map (Left) + Responder Authentication (Right) */
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div className="lg:col-span-6 h-[480px] bg-[#181818] border border-[#2D2D2D] rounded flex flex-col p-2 space-y-2">
+            <div className="flex justify-between items-center px-1 text-xs text-[#A3A3A3]">
+              <span className="font-medium text-[#FAFAFA] flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-[#D97706]" /> Operational GIS Map
+              </span>
+              <span className="font-mono text-[10px]">{incidents.length} Markers</span>
+            </div>
+            <div className="flex-1 rounded overflow-hidden border border-[#2D2D2D]">
+              <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ width: '100%', height: '100%' }}>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                />
+                {incidents.map((inc) =>
+                  inc.location &&
+                  typeof inc.location.latitude === 'number' &&
+                  typeof inc.location.longitude === 'number' &&
+                  !isNaN(inc.location.latitude) &&
+                  !isNaN(inc.location.longitude) ? (
+                    <Marker
+                      key={inc.id}
+                      position={[inc.location.latitude, inc.location.longitude]}
+                      icon={getMarkerIcon(inc.priority_level)}
+                      eventHandlers={{ click: () => setSelectedIncident(inc) }}
+                    >
+                      <Popup>
+                        <div className="p-1 text-xs space-y-1">
+                          <div className="font-semibold text-[#FAFAFA]">{inc.disaster_type}</div>
+                          <div>Priority: {inc.priority_level}</div>
+                          <div>Status: {inc.status}</div>
+                        </div>
+                      </Popup>
+                    </Marker>
+                  ) : null
+                )}
+              </MapContainer>
+            </div>
           </div>
-          <div className="flex-1 rounded overflow-hidden border border-[#2D2D2D]">
-            <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ width: '100%', height: '100%' }}>
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-              />
-              {incidents.map((inc) =>
-                inc.location &&
-                typeof inc.location.latitude === 'number' &&
-                typeof inc.location.longitude === 'number' &&
-                !isNaN(inc.location.latitude) &&
-                !isNaN(inc.location.longitude) ? (
-                  <Marker
-                    key={inc.id}
-                    position={[inc.location.latitude, inc.location.longitude]}
-                    icon={getMarkerIcon(inc.priority_level)}
-                    eventHandlers={{ click: () => setSelectedIncident(inc) }}
-                  >
-                    <Popup>
-                      <div className="p-1 text-xs space-y-1">
-                        <div className="font-semibold text-[#FAFAFA]">{inc.disaster_type}</div>
-                        <div>Priority: {inc.priority_level}</div>
-                        <div>Status: {inc.status}</div>
-                      </div>
-                    </Popup>
-                  </Marker>
-                ) : null
-              )}
-            </MapContainer>
+
+          <div className="lg:col-span-6 min-h-[480px]">
+            <LoginModal inline={true} onSuccess={onLoginSuccess || (() => {})} />
           </div>
         </div>
+      )}
+
+      {/* Main Split Screen: GIS Map + Incident Data Table (when logged in) OR Data Table (when unauthenticated) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Left: GIS Map Panel (only when logged in) */}
+        {isAuth && (
+          <div className="lg:col-span-5 h-[420px] bg-[#181818] border border-[#2D2D2D] rounded flex flex-col p-2 space-y-2">
+            <div className="flex justify-between items-center px-1 text-xs text-[#A3A3A3]">
+              <span className="font-medium text-[#FAFAFA] flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-[#D97706]" /> Operational GIS Map
+              </span>
+              <span className="font-mono text-[10px]">{incidents.length} Markers</span>
+            </div>
+            <div className="flex-1 rounded overflow-hidden border border-[#2D2D2D]">
+              <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ width: '100%', height: '100%' }}>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                />
+                {incidents.map((inc) =>
+                  inc.location &&
+                  typeof inc.location.latitude === 'number' &&
+                  typeof inc.location.longitude === 'number' &&
+                  !isNaN(inc.location.latitude) &&
+                  !isNaN(inc.location.longitude) ? (
+                    <Marker
+                      key={inc.id}
+                      position={[inc.location.latitude, inc.location.longitude]}
+                      icon={getMarkerIcon(inc.priority_level)}
+                      eventHandlers={{ click: () => setSelectedIncident(inc) }}
+                    >
+                      <Popup>
+                        <div className="p-1 text-xs space-y-1">
+                          <div className="font-semibold text-[#FAFAFA]">{inc.disaster_type}</div>
+                          <div>Priority: {inc.priority_level}</div>
+                          <div>Status: {inc.status}</div>
+                        </div>
+                      </Popup>
+                    </Marker>
+                  ) : null
+                )}
+              </MapContainer>
+            </div>
+          </div>
+        )}
 
         {/* Right: Data Table */}
-        <div className="lg:col-span-7 space-y-3">
+        <div className={isAuth ? "lg:col-span-7 space-y-3" : "lg:col-span-12 space-y-3"}>
           {/* Controls */}
           <div className="flex flex-col sm:flex-row gap-2">
             <div className="relative flex-1">
@@ -1356,7 +1432,16 @@ function App() {
       {/* Main Page Body */}
       <main className="flex-1">
         {tab === 'citizen' && <CitizenPortal />}
-        {tab === 'dashboard' && <RescueDashboard userRole={user?.role || 'Citizen'} />}
+        {tab === 'dashboard' && (
+          <RescueDashboard
+            userRole={user?.role || 'Citizen'}
+            onLoginSuccess={(u) => {
+              setUser(u);
+              setShowLogin(false);
+              setTab('dashboard');
+            }}
+          />
+        )}
         {tab === 'analytics' && <AnalyticsPage />}
       </main>
 
@@ -1369,7 +1454,7 @@ function App() {
         <div>FastAPI · PyTorch Ensemble · CatBoost Regressor</div>
       </footer>
 
-      {showLogin && (
+      {showLogin && tab !== 'dashboard' && (
         <LoginModal
           onClose={() => setShowLogin(false)}
           onSuccess={(u) => {
