@@ -15,6 +15,12 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
     
+    # Demo User Accounts Configuration
+    DEMO_RESPONDER_EMAIL: str = "responder@disaster.org"
+    DEMO_RESPONDER_PASSWORD: str = "Responder@123"
+    DEMO_ADMIN_EMAIL: str = "admin@disaster.org"
+    DEMO_ADMIN_PASSWORD: str = "Admin@123"
+    
     # Database settings
     DATABASE_URL: str = f"sqlite:///{BASE_DIR}/disaster_triage.db"
     
