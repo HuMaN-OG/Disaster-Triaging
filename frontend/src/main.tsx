@@ -25,10 +25,13 @@ import {
   Flame,
   Globe,
   SlidersHorizontal,
+  Paperclip,
+  Clipboard,
 } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { ResponseBriefModal } from './components/ResponseBriefModal';
 
 // ── Leaflet Marker SVG Helper ──────────────────────────────────────────────
 const createMarkerIcon = (color: string) => {
@@ -395,7 +398,7 @@ function CitizenPortal() {
         <div className="space-y-1.5">
           <div className="flex justify-between items-center">
             <label className="block text-xs font-medium text-[#FAFAFA]">Description</label>
-            <span className="text-[10px] text-[#A3A3A3] font-mono">English / Hindi / Hinglish</span>
+            <span className="text-[10px] text-[#A3A3A3] font-mono">English / Hindi</span>
           </div>
           <textarea
             value={desc}
@@ -573,13 +576,48 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
   const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null);
   const [loading, setLoading] = useState(true);
   const [actionMsg, setActionMsg] = useState('');
+  const [selectedIncidentDetail, setSelectedIncidentDetail] = useState<any | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [showBrief, setShowBrief] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const [categoryFilter, setCategoryFilter] = useState('ALL');
+  const [locationFilter, setLocationFilter] = useState('');
+  const [contextFilter, setContextFilter] = useState('ALL');
+
+  const resetFilters = () => {
+    setSearch('');
+    setPriorityFilter('ALL');
+    setStatusFilter('ALL');
+    setCategoryFilter('ALL');
+    setLocationFilter('');
+    setContextFilter('ALL');
+  };
+
+  useEffect(() => {
+    if (!selectedIncident) {
+      setSelectedIncidentDetail(null);
+      return;
+    }
+    setDetailLoading(true);
+    apiCall<any>('GET', `/incidents/${selectedIncident.id}`)
+      .then((data) => setSelectedIncidentDetail(data))
+      .catch((err) => console.error("Failed to load details", err))
+      .finally(() => setDetailLoading(false));
+  }, [selectedIncident]);
 
   const loadData = async () => {
     setLoading(true);
     try {
+      let url = '/incidents?limit=200';
+      if (categoryFilter !== 'ALL') url += `&category=${encodeURIComponent(categoryFilter)}`;
+      if (locationFilter) url += `&location=${encodeURIComponent(locationFilter)}`;
+      if (contextFilter !== 'ALL') url += `&context=${encodeURIComponent(contextFilter)}`;
+
       const [sData, iData] = await Promise.all([
         apiCall<DashStats>('GET', '/dashboard/stats'),
-        apiCall<Incident[]>('GET', '/incidents?limit=200'),
+        apiCall<Incident[]>('GET', url),
       ]);
       setStats(sData);
       setIncidents(iData);
@@ -589,6 +627,10 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadData();
+  }, [categoryFilter, locationFilter, contextFilter]);
 
   useEffect(() => {
     loadData();
@@ -626,6 +668,28 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
     setTimeout(() => setActionMsg(''), 3000);
   };
 
+  const handleUpload = async () => {
+    if (!selectedFiles || !selectedIncident) return;
+    setUploading(true);
+    setActionMsg('Uploading attachments...');
+    try {
+      const formData = new FormData();
+      Array.from(selectedFiles).forEach((file) => {
+        formData.append('files', file);
+      });
+      await apiCall('POST', `/incidents/${selectedIncident.id}/attachments`, formData, true);
+      setSelectedFiles(null);
+      setActionMsg('Attachments uploaded successfully');
+      const updated = await apiCall<any>('GET', `/incidents/${selectedIncident.id}`);
+      setSelectedIncidentDetail(updated);
+      await loadData();
+    } catch (ex: any) {
+      setActionMsg(ex.message || 'Upload failed');
+    }
+    setTimeout(() => setActionMsg(''), 3000);
+    setUploading(false);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 space-y-5">
       {/* Top Bar */}
@@ -634,14 +698,23 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
           <h1 className="text-base font-semibold text-[#FAFAFA]">Rescue Operations Command Center</h1>
           <p className="text-xs text-[#A3A3A3]">Real-time incident dispatch & GIS operational monitoring</p>
         </div>
-        <button
-          onClick={loadData}
-          disabled={loading}
-          className="px-3 py-1.5 bg-[#202020] hover:bg-[#2A2A2A] border border-[#2D2D2D] text-xs text-[#FAFAFA] rounded transition-colors flex items-center gap-1.5"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-          <span>Refresh</span>
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={resetFilters}
+            className="px-3 py-1.5 bg-[#202020] hover:bg-red-950/40 hover:text-red-400 border border-[#2D2D2D] hover:border-red-900/40 text-xs text-[#FAFAFA] rounded transition-colors flex items-center gap-1.5"
+          >
+            <SlidersHorizontal className="w-3.5 h-3.5" />
+            <span>Reset Filters</span>
+          </button>
+          <button
+            onClick={loadData}
+            disabled={loading}
+            className="px-3 py-1.5 bg-[#202020] hover:bg-[#2A2A2A] border border-[#2D2D2D] text-xs text-[#FAFAFA] rounded transition-colors flex items-center gap-1.5"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            <span>Refresh</span>
+          </button>
+        </div>
       </div>
 
       {/* Metrics Row */}
@@ -763,6 +836,48 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
             </div>
           </div>
 
+          {/* Bounty Phase 1 Filters Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-[#151515] p-3.5 rounded border border-[#2D2D2D] text-xs">
+            <div className="flex flex-col gap-1">
+              <label className="text-[10px] font-mono text-[#A3A3A3] uppercase tracking-wider">Disaster Category</label>
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="w-full px-2.5 py-1.5 bg-[#181818] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
+              >
+                <option value="ALL">All Categories</option>
+                <option value="Flood">Flood</option>
+                <option value="Earthquake">Earthquake</option>
+                <option value="Urban Fire">Urban Fire</option>
+                <option value="Wild Fire">Wild Fire</option>
+                <option value="Landslide">Landslide</option>
+                <option value="Drought">Drought</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-[10px] font-mono text-[#A3A3A3] uppercase tracking-wider">Location / Address</label>
+              <input
+                type="text"
+                placeholder="Filter by location/address..."
+                value={locationFilter}
+                onChange={(e) => setLocationFilter(e.target.value)}
+                className="w-full px-2.5 py-1.5 bg-[#181818] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-[10px] font-mono text-[#A3A3A3] uppercase tracking-wider">Application / Context</label>
+              <select
+                value={contextFilter}
+                onChange={(e) => setContextFilter(e.target.value)}
+                className="w-full px-2.5 py-1.5 bg-[#181818] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA] focus:outline-none focus:border-[#D97706]"
+              >
+                <option value="ALL">All Contexts</option>
+                <option value="Citizen Portal">Citizen Portal</option>
+                <option value="Web dispatch">Web dispatch</option>
+              </select>
+            </div>
+          </div>
+
           {/* Table Container */}
           <div className="bg-[#181818] border border-[#2D2D2D] rounded overflow-hidden">
             <table className="w-full text-left text-xs border-collapse">
@@ -773,7 +888,7 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
                   <th className="py-2 px-3">Priority</th>
                   <th className="py-2 px-3">Score</th>
                   <th className="py-2 px-3">Status</th>
-                  <th className="py-2 px-3 text-right">View</th>
+                  <th className="py-2 px-3 text-right">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#2D2D2D] text-[#FAFAFA]">
@@ -788,9 +903,8 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
                     <tr
                       key={inc.id}
                       onClick={() => setSelectedIncident(inc)}
-                      className={`hover:bg-[#202020] cursor-pointer transition-colors ${
-                        selectedIncident?.id === inc.id ? 'bg-[#202020]' : ''
-                      }`}
+                      className={`hover:bg-[#202020] cursor-pointer transition-colors ${selectedIncident?.id === inc.id ? 'bg-[#202020]' : ''
+                        }`}
                     >
                       <td className="py-2 px-3 font-mono text-[11px] text-[#A3A3A3]">#{inc.id}</td>
                       <td className="py-2 px-3 font-medium">{inc.disaster_type}</td>
@@ -802,7 +916,9 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
                         <StatusBadge status={inc.status} />
                       </td>
                       <td className="py-2 px-3 text-right">
-                        <ChevronRight className="w-4 h-4 text-[#A3A3A3] inline-block" />
+                        <span className="text-xs text-blue-400 hover:text-blue-300 font-semibold font-mono">
+                          Details &rarr;
+                        </span>
                       </td>
                     </tr>
                   ))
@@ -815,8 +931,9 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
 
       {/* Incident Detail Drawer / Sidebar Panel */}
       {selectedIncident && (
-        <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-[#181818] border-l border-[#2D2D2D] shadow-2xl p-5 overflow-y-auto space-y-4">
-          <div className="flex justify-between items-center border-b border-[#2D2D2D] pb-3">
+        <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-[#181818] border-l border-[#2D2D2D] shadow-2xl flex flex-col min-h-0 overflow-hidden font-sans">
+          {/* Header */}
+          <div className="px-5 py-4 border-b border-[#2D2D2D] flex justify-between items-center bg-[#151515] flex-shrink-0">
             <div>
               <span className="text-[10px] font-mono text-[#A3A3A3]">INCIDENT #{selectedIncident.id}</span>
               <h3 className="text-sm font-semibold text-[#FAFAFA]">{selectedIncident.title}</h3>
@@ -829,105 +946,195 @@ function RescueDashboard({ userRole }: { userRole: Role }) {
             </button>
           </div>
 
-          {actionMsg && (
-            <div className="p-2 bg-emerald-950/60 border border-emerald-900/60 rounded text-xs text-emerald-300 font-mono">
-              {actionMsg}
-            </div>
-          )}
+          {/* Scrollable Content Container */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-4 min-h-0">
+            {actionMsg && (
+              <div className="p-2 bg-emerald-950/60 border border-emerald-900/60 rounded text-xs text-emerald-300 font-mono">
+                {actionMsg}
+              </div>
+            )}
 
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
-              <span className="text-[10px] text-[#A3A3A3] block font-mono">Disaster Type</span>
-              <span className="font-medium text-[#FAFAFA]">{selectedIncident.disaster_type}</span>
-            </div>
-            <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
-              <span className="text-[10px] text-[#A3A3A3] block font-mono">Priority Score</span>
-              <span className="font-mono text-emerald-400 font-semibold">{selectedIncident.priority_score.toFixed(1)} / 100</span>
-            </div>
-            <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
-              <span className="text-[10px] text-[#A3A3A3] block font-mono">Priority Level</span>
-              <PriorityBadge level={selectedIncident.priority_level} />
-            </div>
-            <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
-              <span className="text-[10px] text-[#A3A3A3] block font-mono">Confidence</span>
-              <span className="font-mono text-[#FAFAFA]">{(selectedIncident.confidence * 100).toFixed(1)}%</span>
-            </div>
-          </div>
+            {detailLoading && (
+              <div className="flex items-center justify-center py-6">
+                <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            )}
 
-          {selectedIncident.description && (
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono text-[#A3A3A3]">Citizen Report Text</span>
-              <div className="p-2.5 bg-[#111111] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA]">
-                "{selectedIncident.description}"
+            {/* Base Telemetry */}
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
+                <span className="text-[10px] text-[#A3A3A3] block font-mono">Disaster Type</span>
+                <span className="font-medium text-[#FAFAFA]">{selectedIncident.disaster_type}</span>
+              </div>
+              <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
+                <span className="text-[10px] text-[#A3A3A3] block font-mono">Priority Score</span>
+                <span className="font-mono text-emerald-400 font-semibold">{selectedIncident.priority_score.toFixed(1)} / 100</span>
+              </div>
+              <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
+                <span className="text-[10px] text-[#A3A3A3] block font-mono">Priority Level</span>
+                <PriorityBadge level={selectedIncident.priority_level} />
+              </div>
+              <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
+                <span className="text-[10px] text-[#A3A3A3] block font-mono">Confidence</span>
+                <span className="font-mono text-[#FAFAFA]">{(selectedIncident.confidence * 100).toFixed(1)}%</span>
               </div>
             </div>
-          )}
 
-          {/* Probability Breakdown */}
-          {selectedIncident.class_probabilities && (
-            <div className="space-y-1.5 pt-2 border-t border-[#2D2D2D]">
-              <span className="text-[10px] font-mono text-[#A3A3A3]">Vision Model Class Breakdown</span>
-              <div className="space-y-1 text-xs">
-                {Object.entries(selectedIncident.class_probabilities)
-                  .sort((a, b) => b[1] - a[1])
-                  .map(([cls, prob]) => (
-                    <div key={cls} className="space-y-0.5">
-                      <div className="flex justify-between text-[11px]">
-                        <span className={cls === selectedIncident.disaster_type ? 'text-[#FAFAFA] font-medium' : 'text-[#A3A3A3]'}>
-                          {cls}
+            {/* Language & Status Telemetry */}
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
+                <span className="text-[10px] text-[#A3A3A3] block font-mono">Detected Language</span>
+                <span className="font-medium text-[#FAFAFA]">{selectedIncident.language_detected || 'Unknown'}</span>
+              </div>
+              <div className="bg-[#111111] p-2 rounded border border-[#2D2D2D]">
+                <span className="text-[10px] text-[#A3A3A3] block font-mono">Status</span>
+                <span className="font-medium text-cyan-400">{selectedIncident.status}</span>
+              </div>
+            </div>
+
+            {/* Generate Response Brief Button */}
+            <button
+              onClick={() => setShowBrief(true)}
+              className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold flex items-center justify-center gap-1.5 transition-colors text-xs"
+            >
+              <Clipboard className="w-4 h-4" />
+              <span>Generate Response Brief</span>
+            </button>
+
+            {selectedIncident.description && (
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono text-[#A3A3A3]">Citizen Report Text</span>
+                <div className="p-2.5 bg-[#111111] border border-[#2D2D2D] rounded text-xs text-[#FAFAFA]">
+                  "{selectedIncident.description}"
+                </div>
+              </div>
+            )}
+
+            {/* Attachments Section */}
+            <div className="space-y-3 bg-[#111111] p-3.5 rounded border border-[#2D2D2D] text-xs">
+              <h4 className="font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5 text-[10px]">
+                <Paperclip className="w-3.5 h-3.5 text-blue-500" /> Attachments & Documents
+              </h4>
+
+              {selectedIncidentDetail?.attachments && selectedIncidentDetail.attachments.length > 0 ? (
+                <div className="space-y-1.5">
+                  {selectedIncidentDetail.attachments.map((att: any) => (
+                    <div key={att.id} className="bg-[#181818] p-2 rounded border border-[#2D2D2D] flex items-center justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-slate-300 font-mono text-[10px] font-bold" title={att.file_name}>
+                          {att.file_name}
+                        </p>
+                        <span className="text-[9px] text-slate-500 font-mono">
+                          {(att.file_size / 1024).toFixed(1)} KB
                         </span>
-                        <span className="font-mono text-[10px] text-[#A3A3A3]">{(prob * 100).toFixed(1)}%</span>
                       </div>
-                      <div className="bg-[#111111] h-1 rounded overflow-hidden">
-                        <div
-                          className={`h-full ${cls === selectedIncident.disaster_type ? 'bg-[#D97706]' : 'bg-neutral-700'}`}
-                          style={{ width: `${prob * 100}%` }}
-                        />
-                      </div>
+                      <a
+                        href={att.file_path.startsWith('/') ? `${BASE}${att.file_path}` : att.file_path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-2 py-0.5 bg-[#202020] hover:bg-blue-600 hover:text-white text-[10px] rounded transition-colors font-mono"
+                      >
+                        View
+                      </a>
                     </div>
                   ))}
-              </div>
-            </div>
-          )}
+                </div>
+              ) : (
+                <p className="text-slate-500 font-mono text-[10px]">No additional files attached.</p>
+              )}
 
-          {/* Dispatch Controls */}
-          {(userRole === 'Responder' || userRole === 'Admin') && (
-            <div className="space-y-2 pt-3 border-t border-[#2D2D2D]">
-              <span className="text-[10px] font-mono text-[#D97706]">Responder Status Controls</span>
-              <div className="grid grid-cols-2 gap-2">
-                {selectedIncident.status === 'Pending' && (
-                  <button
-                    onClick={() => handleStatusUpdate(selectedIncident.id, 'Assigned')}
-                    className="col-span-2 py-1.5 bg-[#D97706] hover:bg-[#b45309] text-white text-xs font-medium rounded transition-colors"
-                  >
-                    Accept Incident
-                  </button>
-                )}
+              <div className="pt-2 border-t border-[#2D2D2D] flex flex-col gap-1.5">
+                <input
+                  type="file"
+                  multiple
+                  onChange={(e) => setSelectedFiles(e.target.files)}
+                  className="w-full text-slate-400 bg-[#181818] border border-[#2D2D2D] rounded p-1 text-[10px] file:bg-[#2D2D2D] file:text-slate-200 file:border-0 file:rounded file:px-2 file:py-0.5 file:mr-2 file:hover:bg-[#3D3D3D] cursor-pointer"
+                />
                 <button
-                  onClick={() => handleStatusUpdate(selectedIncident.id, 'En Route')}
-                  disabled={selectedIncident.status === 'En Route'}
-                  className="py-1.5 bg-[#202020] hover:bg-[#2A2A2A] border border-[#2D2D2D] text-xs text-[#FAFAFA] rounded transition-colors disabled:opacity-40"
+                  onClick={handleUpload}
+                  disabled={uploading || !selectedFiles}
+                  className="w-full py-1 bg-blue-600 hover:bg-blue-500 disabled:bg-[#202020] text-white rounded font-bold flex items-center justify-center gap-1.5 transition-colors font-mono disabled:opacity-50 text-[10px]"
                 >
-                  En Route
-                </button>
-                <button
-                  onClick={() => handleStatusUpdate(selectedIncident.id, 'Rescue In Progress')}
-                  disabled={selectedIncident.status === 'Rescue In Progress'}
-                  className="py-1.5 bg-[#202020] hover:bg-[#2A2A2A] border border-[#2D2D2D] text-xs text-[#FAFAFA] rounded transition-colors disabled:opacity-40"
-                >
-                  In Progress
-                </button>
-                <button
-                  onClick={() => handleStatusUpdate(selectedIncident.id, 'Completed')}
-                  disabled={selectedIncident.status === 'Completed'}
-                  className="col-span-2 py-1.5 bg-emerald-900/60 hover:bg-emerald-800/60 border border-emerald-800/60 text-emerald-300 text-xs font-medium rounded transition-colors disabled:opacity-40"
-                >
-                  Mark Completed
+                  <Upload className="w-3.5 h-3.5" />
+                  <span>{uploading ? 'Uploading...' : 'Upload'}</span>
                 </button>
               </div>
             </div>
-          )}
+
+            {/* Probability Breakdown */}
+            {selectedIncidentDetail?.class_probabilities && (
+              <div className="space-y-1.5 pt-2 border-t border-[#2D2D2D]">
+                <span className="text-[10px] font-mono text-[#A3A3A3]">Vision Model Class Breakdown</span>
+                <div className="space-y-1 text-xs">
+                  {Object.entries(selectedIncidentDetail.class_probabilities)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([cls, prob]) => (
+                      <div key={cls} className="space-y-0.5">
+                        <div className="flex justify-between text-[11px]">
+                          <span className={cls === selectedIncident.disaster_type ? 'text-[#FAFAFA] font-medium' : 'text-[#A3A3A3]'}>
+                            {cls}
+                          </span>
+                          <span className="font-mono text-[10px] text-[#A3A3A3]">{(prob * 100).toFixed(1)}%</span>
+                        </div>
+                        <div className="bg-[#111111] h-1 rounded overflow-hidden">
+                          <div
+                            className={`h-full ${cls === selectedIncident.disaster_type ? 'bg-[#D97706]' : 'bg-neutral-700'}`}
+                            style={{ width: `${prob * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+
+            {/* Dispatch Controls */}
+            {(userRole === 'Responder' || userRole === 'Admin') && (
+              <div className="space-y-2 pt-3 border-t border-[#2D2D2D]">
+                <span className="text-[10px] font-mono text-[#D97706]">Responder Status Controls</span>
+                <div className="grid grid-cols-2 gap-2">
+                  {selectedIncident.status === 'Pending' && (
+                    <button
+                      onClick={() => handleStatusUpdate(selectedIncident.id, 'Assigned')}
+                      className="col-span-2 py-1.5 bg-[#D97706] hover:bg-[#b45309] text-white text-xs font-medium rounded transition-colors"
+                    >
+                      Accept Incident
+                    </button>
+                  )}
+                  <button
+                    onClick={() => handleStatusUpdate(selectedIncident.id, 'En Route')}
+                    disabled={selectedIncident.status === 'En Route'}
+                    className="py-1.5 bg-[#202020] hover:bg-[#2A2A2A] border border-[#2D2D2D] text-xs text-[#FAFAFA] rounded transition-colors disabled:opacity-40"
+                  >
+                    En Route
+                  </button>
+                  <button
+                    onClick={() => handleStatusUpdate(selectedIncident.id, 'Rescue In Progress')}
+                    disabled={selectedIncident.status === 'Rescue In Progress'}
+                    className="py-1.5 bg-[#202020] hover:bg-[#2A2A2A] border border-[#2D2D2D] text-xs text-[#FAFAFA] rounded transition-colors disabled:opacity-40"
+                  >
+                    In Progress
+                  </button>
+                  <button
+                    onClick={() => handleStatusUpdate(selectedIncident.id, 'Completed')}
+                    disabled={selectedIncident.status === 'Completed'}
+                    className="col-span-2 py-1.5 bg-emerald-900/60 hover:bg-emerald-800/60 border border-emerald-800/60 text-emerald-300 text-xs font-medium rounded transition-colors disabled:opacity-40"
+                  >
+                    Mark Completed
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
+      )}
+
+      {/* Response Brief Modal */}
+      {showBrief && selectedIncident && (
+        <ResponseBriefModal
+          incidentId={selectedIncident.id}
+          onClose={() => setShowBrief(false)}
+        />
       )}
     </div>
   );
@@ -1084,27 +1291,24 @@ function App() {
         <nav className="flex items-center gap-1 bg-[#111111] p-1 rounded border border-[#2D2D2D]">
           <button
             onClick={() => setTab('citizen')}
-            className={`px-3 py-1 text-xs rounded transition-colors flex items-center gap-1.5 ${
-              tab === 'citizen' ? 'bg-[#202020] text-[#FAFAFA] font-medium' : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
-            }`}
+            className={`px-3 py-1 text-xs rounded transition-colors flex items-center gap-1.5 ${tab === 'citizen' ? 'bg-[#202020] text-[#FAFAFA] font-medium' : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
+              }`}
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Citizen Portal</span>
           </button>
           <button
             onClick={() => setTab('dashboard')}
-            className={`px-3 py-1 text-xs rounded transition-colors flex items-center gap-1.5 ${
-              tab === 'dashboard' ? 'bg-[#202020] text-[#FAFAFA] font-medium' : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
-            }`}
+            className={`px-3 py-1 text-xs rounded transition-colors flex items-center gap-1.5 ${tab === 'dashboard' ? 'bg-[#202020] text-[#FAFAFA] font-medium' : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
+              }`}
           >
             <Radio className="w-3.5 h-3.5" />
             <span>Rescue Command</span>
           </button>
           <button
             onClick={() => setTab('analytics')}
-            className={`px-3 py-1 text-xs rounded transition-colors flex items-center gap-1.5 ${
-              tab === 'analytics' ? 'bg-[#202020] text-[#FAFAFA] font-medium' : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
-            }`}
+            className={`px-3 py-1 text-xs rounded transition-colors flex items-center gap-1.5 ${tab === 'analytics' ? 'bg-[#202020] text-[#FAFAFA] font-medium' : 'text-[#A3A3A3] hover:text-[#FAFAFA]'
+              }`}
           >
             <BarChart2 className="w-3.5 h-3.5" />
             <span>Analytics</span>

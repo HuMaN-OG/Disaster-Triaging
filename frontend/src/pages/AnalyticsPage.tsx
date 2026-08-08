@@ -150,7 +150,7 @@ export const AnalyticsPage: React.FC = () => {
         {/* Language Distribution */}
         <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
           <h3 className="text-sm font-mono font-bold text-slate-200 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-purple-400" /> Language Distribution (EN / HI / Hinglish)
+            <Globe className="w-4 h-4 text-purple-400" /> Language Distribution (English / Hindi)
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">

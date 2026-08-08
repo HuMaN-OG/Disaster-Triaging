@@ -93,9 +93,9 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/75 backdrop-blur-sm transition-opacity">
-      <div className="w-full max-w-2xl bg-slate-900 border-l border-slate-800 h-full flex flex-col shadow-2xl overflow-hidden">
+      <div className="w-full max-w-2xl bg-slate-900 border-l border-slate-800 h-full max-h-full flex flex-col shadow-2xl min-h-0 overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/50 flex-shrink-0">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono text-slate-400">INCIDENT #{incidentId}</span>
@@ -121,7 +121,7 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 min-h-0">
           {loading && (
             <div className="flex items-center justify-center py-20">
               <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>

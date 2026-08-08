@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - disaster_data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:////app/data/disaster_triage.db
+      - UPLOAD_DIR=/app/data/uploads
+      - JWT_SECRET=YOUR_JWT_SECRET_PLACEHOLDER
+      - CORS_ORIGINS=["http://localhost", "http://localhost:80", "http://your-frontend-domain.com"]
+    restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:8000
+    ports:
+      - "80:80"
+    restart: always
+
+volumes:
+  disaster_data:

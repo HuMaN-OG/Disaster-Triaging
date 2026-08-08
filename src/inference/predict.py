@@ -190,6 +190,25 @@ class ImagePredictor:
         return self.class_names[top_idx], confidence, class_probs
 
 
+def check_life_safety_override(text: str) -> bool:
+    text_lower = text.lower()
+    safe_keywords = [
+        "safe", "control", "no one trapped", "no injury", "no injuries", 
+        "no help needed", "no rescue required", "koi ghayal nahi", "nahi chahiye",
+        "safe hain", "safe hai", "theek hai"
+    ]
+    if any(s in text_lower for s in safe_keywords):
+        return False
+    emergency_keywords = [
+        "trapped", "stranded",
+        "faas gya", "faas gaya", "phas gaya", "phas gya", "fas gaya", "fas gya",
+        "faas gye", "phas gye", "fas gye",
+        "phansa", "phanse", "phasa", "fasa", "fase", "fanse", "faase", "phans",
+        "atka", "atke"
+    ]
+    return any(w in text_lower for w in emergency_keywords)
+
+
 class TextPredictor:
     """Inference predictor for multilingual text priority regression."""
 
@@ -222,6 +241,10 @@ class TextPredictor:
         emb = np.asarray(emb, dtype=np.float32)
         raw_score = float(self.model.predict(emb)[0])
         score = clip_score(raw_score)
+        
+        if check_life_safety_override(text_report):
+            score = 95.0
+            
         level = score_to_ui_category(score)
         return score, level, lang
 

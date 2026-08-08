@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import { Incident, IncidentDetail } from '../types';
+import type { Incident, IncidentDetail } from '../types';
 
 export const createIncidentApi = async (formData: FormData): Promise<IncidentDetail> => {
   const response = await apiClient.post<IncidentDetail>('/incidents', formData, {

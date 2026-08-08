@@ -76,6 +76,25 @@ def load_pipeline(
 from src.hinglish_normalizer import normalize_hinglish_text
 
 
+def check_life_safety_override(text: str) -> bool:
+    text_lower = text.lower()
+    safe_keywords = [
+        "safe", "control", "no one trapped", "no injury", "no injuries", 
+        "no help needed", "no rescue required", "koi ghayal nahi", "nahi chahiye",
+        "safe hain", "safe hai", "theek hai"
+    ]
+    if any(s in text_lower for s in safe_keywords):
+        return False
+    emergency_keywords = [
+        "trapped", "stranded",
+        "faas gya", "faas gaya", "phas gaya", "phas gya", "fas gaya", "fas gya",
+        "faas gye", "phas gye", "fas gye",
+        "phansa", "phanse", "phasa", "fasa", "fase", "fanse", "faase", "phans",
+        "atka", "atke"
+    ]
+    return any(w in text_lower for w in emergency_keywords)
+
+
 def predict_priority_score(
     text: str,
     model: Any,
@@ -97,6 +116,9 @@ def predict_priority_score(
     embedding = np.asarray(embedding, dtype=np.float32)
     raw = float(model.predict(embedding)[0])
     score = clip_score(raw)
+
+    if check_life_safety_override(text):
+        score = 95.0
 
     return {
         "priority_score": score,

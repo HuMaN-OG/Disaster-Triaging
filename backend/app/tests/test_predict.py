@@ -75,3 +75,29 @@ def test_predict_multimodal(client):
     assert "confidence" in data
     assert data["language_detected"] == "English"
     assert len(data["class_probabilities"]) == 6
+
+
+def test_life_safety_hinglish_variants_override(client):
+    variants = [
+        "fire haar jagah h aur ma faas gya hu",
+        "baadh me building me fas gaya hoon",
+        "ghar me pani ghusa aur bachche phas gye",
+        "chhat par log atke hai madad bhejo",
+        "flooding occurred and we are stranded upstairs"
+    ]
+    for text in variants:
+        response = client.post("/predict", data={"text_report": text})
+        assert response.status_code == 200
+        data = response.json()
+        assert data["priority_level"] == "Critical"
+        assert data["priority_score"] == 95.0
+
+
+def test_safe_condition_negation_non_override(client):
+    response = client.post(
+        "/predict",
+        data={"text_report": "fire control me hai, koi ghayal nahi hai sab safe hain yahan"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["priority_level"] != "Critical"
