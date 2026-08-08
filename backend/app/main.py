@@ -41,7 +41,20 @@ async def lifespan(app: FastAPI):
     # 1. Create database tables
     Base.metadata.create_all(bind=engine)
     
-    # 2. Seed default admin, responder & rescue team
+    # 2. Run database migrations for new columns
+    db = Session(bind=engine)
+    try:
+        # Check if application_context exists in incidents table
+        columns = [row[1] for row in db.execute(text("PRAGMA table_info(incidents)")).fetchall()]
+        if "application_context" not in columns:
+            db.execute(text("ALTER TABLE incidents ADD COLUMN application_context VARCHAR DEFAULT 'Citizen Portal'"))
+            db.commit()
+    except Exception:
+        db.rollback()
+    finally:
+        db.close()
+
+    # 3. Seed default admin, responder & rescue team
     db = Session(bind=engine)
     try:
         seed_initial_users_and_teams(db)

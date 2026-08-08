@@ -17,6 +17,7 @@ class Incident(Base):
     status = Column(String, nullable=False, default="Pending")  # Pending, Assigned, En Route, Rescue In Progress, Completed
     image_url = Column(String, nullable=True)
     language_detected = Column(String, nullable=False, default="English")
+    application_context = Column(String, nullable=True, default="Citizen Portal")
     
     created_by_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     assigned_responder_id = Column(Integer, ForeignKey("users.id"), nullable=True)

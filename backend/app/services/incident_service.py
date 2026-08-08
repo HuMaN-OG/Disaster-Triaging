@@ -27,6 +27,7 @@ class IncidentService:
         image_path: Optional[str] = None,
         image_url: Optional[str] = None,
         user_id: Optional[int] = None,
+        application_context: Optional[str] = None,
     ) -> Dict[str, Any]:
         # Run prediction through PredictionService
         pred_res = self.prediction_service.run_prediction(
@@ -38,6 +39,9 @@ class IncidentService:
         disaster_type = pred_res["disaster_type"]
         priority_level = pred_res["priority_level"]
         generated_title = title if title and title.strip() else f"{priority_level} Priority {disaster_type} Incident"
+
+        if not application_context:
+            application_context = "Operations Center" if user_id else "Citizen Portal"
 
         # Create Incident record & related entities
         incident = self.incident_repo.create(
@@ -54,6 +58,7 @@ class IncidentService:
             longitude=longitude,
             address_text=address_text,
             class_probabilities=pred_res["class_probabilities"],
+            application_context=application_context,
         )
 
         self.audit_repo.log_action(
@@ -93,6 +98,7 @@ class IncidentService:
             "status": incident.status,
             "image_url": incident.image_url,
             "language_detected": incident.language_detected,
+            "application_context": incident.application_context,
             "created_by_id": incident.created_by_id,
             "assigned_responder_id": incident.assigned_responder_id,
             "assigned_team_id": incident.assigned_team_id,

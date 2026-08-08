@@ -34,6 +34,8 @@ export const RescueDashboard: React.FC<RescueDashboardProps> = ({ currentUserRol
   const [priorityFilter, setPriorityFilter] = useState<string>('ALL');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
   const [disasterFilter, setDisasterFilter] = useState<string>('ALL');
+  const [locationFilter, setLocationFilter] = useState<string>('');
+  const [contextFilter, setContextFilter] = useState<string>('ALL');
 
   // Drawer
   const [selectedIncidentId, setSelectedIncidentId] = useState<number | null>(null);
@@ -41,10 +43,17 @@ export const RescueDashboard: React.FC<RescueDashboardProps> = ({ currentUserRol
   const fetchDashboardData = async () => {
     setLoading(true);
     try {
+      const params: any = { limit: 100 };
+      if (priorityFilter !== 'ALL') params.priority_level = priorityFilter;
+      if (statusFilter !== 'ALL') params.status = statusFilter;
+      if (disasterFilter !== 'ALL') params.disaster_type = disasterFilter;
+      if (locationFilter.trim()) params.location = locationFilter;
+      if (contextFilter !== 'ALL') params.application_context = contextFilter;
+
       const [statsData, mapData, incData] = await Promise.all([
         getDashboardStatsApi(),
         getMapLocationsApi(),
-        getIncidentsApi({ limit: 100 }),
+        getIncidentsApi(params),
       ]);
       setStats(statsData);
       setMapLocations(mapData);
@@ -61,7 +70,7 @@ export const RescueDashboard: React.FC<RescueDashboardProps> = ({ currentUserRol
     // Auto refresh telemetry every 30 seconds
     const interval = setInterval(fetchDashboardData, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [priorityFilter, statusFilter, disasterFilter, locationFilter, contextFilter]);
 
   // Filtered Incidents
   const filteredIncidents = incidents.filter((inc) => {
@@ -70,11 +79,7 @@ export const RescueDashboard: React.FC<RescueDashboardProps> = ({ currentUserRol
       inc.disaster_type.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (inc.description && inc.description.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    const matchesPriority = priorityFilter === 'ALL' || inc.priority_level === priorityFilter;
-    const matchesStatus = statusFilter === 'ALL' || inc.status === statusFilter;
-    const matchesDisaster = disasterFilter === 'ALL' || inc.disaster_type === disasterFilter;
-
-    return matchesSearch && matchesPriority && matchesStatus && matchesDisaster;
+    return matchesSearch;
   });
 
   return (
@@ -168,19 +173,31 @@ export const RescueDashboard: React.FC<RescueDashboardProps> = ({ currentUserRol
         {/* Right: Table */}
         <div className="lg:col-span-7 space-y-4">
           {/* Search & Filter Bar */}
-          <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex flex-col sm:flex-row items-center gap-3 text-xs">
-            <div className="relative flex-1 w-full">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search incidents by title, disaster, or text..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:outline-none focus:border-blue-500"
-              />
+          <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex flex-col gap-3 text-xs">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
+              <div className="relative flex-1 w-full">
+                <Search className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search incidents by title, disaster, or text..."
+                  className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+
+              <div className="relative w-full sm:w-48">
+                <input
+                  type="text"
+                  value={locationFilter}
+                  onChange={(e) => setLocationFilter(e.target.value)}
+                  placeholder="Location filter..."
+                  className="w-full pl-3 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:outline-none focus:border-blue-500 font-mono text-[11px]"
+                />
+              </div>
             </div>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-2 w-full">
               <select
                 value={priorityFilter}
                 onChange={(e) => setPriorityFilter(e.target.value)}
@@ -204,6 +221,31 @@ export const RescueDashboard: React.FC<RescueDashboardProps> = ({ currentUserRol
                 <option value="En Route">En Route</option>
                 <option value="Rescue In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
+              </select>
+
+              <select
+                value={disasterFilter}
+                onChange={(e) => setDisasterFilter(e.target.value)}
+                className="py-2 px-2.5 bg-slate-950 border border-slate-800 text-slate-300 rounded-xl focus:outline-none focus:border-blue-500 font-mono text-[11px]"
+              >
+                <option value="ALL">All Categories</option>
+                <option value="Flood">Flood</option>
+                <option value="Earthquake">Earthquake</option>
+                <option value="Urban Fire">Urban Fire</option>
+                <option value="Wild Fire">Wild Fire</option>
+                <option value="Landslide">Landslide</option>
+                <option value="Drought">Drought</option>
+              </select>
+
+              <select
+                value={contextFilter}
+                onChange={(e) => setContextFilter(e.target.value)}
+                className="py-2 px-2.5 bg-slate-950 border border-slate-800 text-slate-300 rounded-xl focus:outline-none focus:border-blue-500 font-mono text-[11px]"
+              >
+                <option value="ALL">All Contexts</option>
+                <option value="Citizen Portal">Citizen Portal</option>
+                <option value="Operations Center">Operations Center</option>
+                <option value="API Dispatch">API Dispatch</option>
               </select>
             </div>
           </div>

@@ -43,6 +43,7 @@ class IncidentResponse(BaseModel):
     status: str
     image_url: Optional[str]
     language_detected: str
+    application_context: Optional[str] = None
     created_by_id: Optional[int]
     assigned_responder_id: Optional[int]
     assigned_team_id: Optional[int]
@@ -62,3 +63,31 @@ class IncidentUpdate(BaseModel):
     assigned_responder_id: Optional[int] = None
     assigned_team_id: Optional[int] = None
     notes: Optional[str] = None
+
+
+class TimelineEvent(BaseModel):
+    timestamp: datetime
+    status: str
+    notes: Optional[str] = None
+
+
+class ResponseBriefResponse(BaseModel):
+    incident_id: int
+    disaster_type: str
+    priority_score: float
+    priority_level: str
+    confidence: float
+    citizen_report: Optional[str]
+    detected_language: str
+    location: Optional[str]
+    latitude: float
+    longitude: float
+    created_at: datetime
+    current_status: str
+    assigned_responder: Optional[str]
+    assigned_team: Optional[str]
+    timeline: List[TimelineEvent]
+
+    risk_summary: str
+    immediate_actions: List[str]
+    recommended_resources: List[str]

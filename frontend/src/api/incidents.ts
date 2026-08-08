@@ -16,6 +16,8 @@ export const getIncidentsApi = async (params?: {
   disaster_type?: string;
   priority_level?: string;
   status?: string;
+  location?: string;
+  application_context?: string;
   sort_by?: string;
   sort_order?: string;
 }): Promise<Incident[]> => {
@@ -25,6 +27,11 @@ export const getIncidentsApi = async (params?: {
 
 export const getIncidentByIdApi = async (id: number): Promise<IncidentDetail> => {
   const response = await apiClient.get<IncidentDetail>(`/incidents/${id}`);
+  return response.data;
+};
+
+export const getIncidentBriefApi = async (id: number): Promise<any> => {
+  const response = await apiClient.get<any>(`/incidents/${id}/brief`);
   return response.data;
 };
 

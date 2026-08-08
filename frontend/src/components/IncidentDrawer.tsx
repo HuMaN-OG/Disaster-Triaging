@@ -4,7 +4,8 @@ import { getIncidentByIdApi, updateIncidentApi } from '../api/incidents';
 import { acceptIncidentApi, updateResponderStatusApi } from '../api/responder';
 import { ProbabilityBars } from './ProbabilityBars';
 import { RecommendationCard } from './RecommendationCard';
-import { X, Clock, MapPin, UserCheck, Shield, CheckCircle, Flame, AlertCircle } from 'lucide-react';
+import { ResponseBriefModal } from './ResponseBriefModal';
+import { X, Clock, MapPin, UserCheck, Shield, CheckCircle, Flame, AlertCircle, Clipboard } from 'lucide-react';
 
 interface IncidentDrawerProps {
   incidentId: number | null;
@@ -24,6 +25,7 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
   const [actionLoading, setActionLoading] = useState(false);
   const [notes, setNotes] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [showBrief, setShowBrief] = useState(false);
 
   useEffect(() => {
     if (!incidentId) return;
@@ -152,10 +154,17 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
                     <span className="text-slate-400">Detected Language</span>
                     <span className="text-purple-400 font-bold">{incident.language_detected}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between border-b border-slate-800 pb-1.5">
                     <span className="text-slate-400">Status</span>
                     <span className="text-cyan-400 font-bold">{incident.status}</span>
                   </div>
+                  <button
+                    onClick={() => setShowBrief(true)}
+                    className="w-full mt-2 py-2 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold flex items-center justify-center gap-1.5 transition-colors font-sans text-xs"
+                  >
+                    <Clipboard className="w-4 h-4" />
+                    <span>Generate Response Brief</span>
+                  </button>
                 </div>
               </div>
 
@@ -263,6 +272,12 @@ export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
           )}
         </div>
       </div>
+      {showBrief && incident && (
+        <ResponseBriefModal
+          incidentId={incident.id}
+          onClose={() => setShowBrief(false)}
+        />
+      )}
     </div>
   );
 };

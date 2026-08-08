@@ -27,6 +27,7 @@ class IncidentRepository:
         longitude: float,
         address_text: Optional[str],
         class_probabilities: Dict[str, float],
+        application_context: Optional[str] = "Citizen Portal",
     ) -> Incident:
         # Create Incident entity
         incident = Incident(
@@ -40,6 +41,7 @@ class IncidentRepository:
             image_url=image_url,
             language_detected=language_detected,
             created_by_id=created_by_id,
+            application_context=application_context,
         )
         self.db.add(incident)
         self.db.flush()  # Get generated incident.id
@@ -89,6 +91,8 @@ class IncidentRepository:
         disaster_type: Optional[str] = None,
         priority_level: Optional[str] = None,
         status: Optional[str] = None,
+        location: Optional[str] = None,
+        application_context: Optional[str] = None,
         sort_by: str = "created_at",
         sort_order: str = "desc",
     ) -> List[Incident]:
@@ -100,6 +104,10 @@ class IncidentRepository:
             query = query.filter(Incident.priority_level == priority_level)
         if status:
             query = query.filter(Incident.status == status)
+        if location:
+            query = query.join(Incident.location).filter(Location.address_text.ilike(f"%{location}%"))
+        if application_context:
+            query = query.filter(Incident.application_context == application_context)
 
         # Sorting
         sort_attr = getattr(Incident, sort_by, Incident.created_at)
