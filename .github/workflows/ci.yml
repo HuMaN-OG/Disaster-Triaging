@@ -34,7 +34,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install lightweight API test dependencies
-        run: python -m pip install -r backend/requirements-test.txt
+      - name: Install lightweight API and free runtime dependencies
+        run: python -m pip install -r backend/requirements-test.txt -r backend/requirements-free.txt
       - name: Run API, authorization and missing-model regression tests
         run: python -m pytest backend/app/tests -q --maxfail=1
+      - name: Boot real free-tier API and submit test incident
+        run: python backend/tests/smoke_free_service.py
