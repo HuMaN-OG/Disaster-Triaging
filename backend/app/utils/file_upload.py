@@ -4,6 +4,9 @@ from fastapi import UploadFile, HTTPException, status
 from app.core.config import settings
 
 
+HTTP_413 = getattr(status, "HTTP_413_CONTENT_TOO_LARGE", 413)
+
+
 async def save_uploaded_image(file: UploadFile) -> str:
     """
     Validate and save uploaded image file.
@@ -35,7 +38,7 @@ async def save_uploaded_image(file: UploadFile) -> str:
     max_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
     if len(contents) > max_bytes:
         raise HTTPException(
-            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            status_code=HTTP_413,
             detail=f"File size exceeds maximum allowed size of {settings.MAX_UPLOAD_SIZE_MB}MB",
         )
 
@@ -83,7 +86,7 @@ async def save_uploaded_file(file: UploadFile) -> dict:
     max_bytes = settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024
     if len(contents) > max_bytes:
         raise HTTPException(
-            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            status_code=HTTP_413,
             detail=f"File size exceeds maximum allowed size of {settings.MAX_UPLOAD_SIZE_MB}MB",
         )
 

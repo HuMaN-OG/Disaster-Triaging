@@ -1,7 +1,7 @@
 from pathlib import Path
 from secrets import token_urlsafe
 from pydantic import Field
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Root directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
@@ -43,8 +43,11 @@ class Settings(BaseSettings):
         "http://localhost:80",
     ]
     
-    class Config:
-        case_sensitive = True
+    model_config = SettingsConfigDict(
+        case_sensitive=True,
+        env_file=".env",
+        extra="ignore",
+    )
 
 
 settings = Settings()
