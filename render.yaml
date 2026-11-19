@@ -1,0 +1,37 @@
+# Render backend only. The React frontend is already deployed on Vercel.
+# This Blueprint provisions a PAID 2-GB instance and persistent disk.
+# Review Render's pricing and approve charges in Render before creating it.
+services:
+  - type: web
+    name: disastersignal-api
+    runtime: docker
+    repo: https://github.com/HuMaN-OG/Disaster-Triaging
+    branch: main
+    region: singapore
+    plan: standard
+    numInstances: 1
+    dockerfilePath: ./backend.Dockerfile
+    dockerContext: .
+    autoDeployTrigger: checksPass
+    healthCheckPath: /health
+    disk:
+      name: disastersignal-data
+      mountPath: /app/data
+      sizeGB: 5
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: DATABASE_URL
+        value: sqlite:////app/data/disaster_triage.db
+      - key: UPLOAD_DIR
+        value: /app/data/uploads
+      - key: HF_HOME
+        value: /app/data/huggingface
+      - key: DEMO_ACCOUNTS_ENABLED
+        value: "false"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: '["https://disastersignal-bhuvan.vercel.app"]'
+      - key: TOKENIZERS_PARALLELISM
+        value: "false"
