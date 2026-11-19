@@ -64,14 +64,14 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
       <MapContainer
         center={center}
         zoom={zoom}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         style={{ width: '100%', height: '100%', minHeight: '300px' }}
       >
         <ChangeView center={center} zoom={zoom} />
 
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         {interactiveSelect && onSelectLocation && (
