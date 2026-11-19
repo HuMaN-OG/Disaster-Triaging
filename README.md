@@ -2,13 +2,13 @@
 
 **Free Render backend option:** [Deploy with free Python service](docs/RENDER_FREE.md) · [Free Render Blueprint](render.yaml). Limited **text-only supervised research demo**; no vision checkpoints, no durable database or uploads, and cold starts after inactivity. It does not dispatch emergency services.
 
-**Live frontend preview:** [DisasterSignal on Vercel](https://disastersignal-bhuvan.vercel.app/) — deployed in the `human-ogs-projects` Vercel team from the `main` source snapshot. The FastAPI/ML API is **not yet connected** to this deployment; incident submission, database-backed command view and server-side analytics require a separately configured persistent backend. **Do not treat this preview as operational emergency dispatch.**
+**Live full-stack research demo:** [DisasterSignal frontend on Vercel](https://disastersignal-bhuvan.vercel.app/) + [text-only FastAPI on Render Free](https://disastersignal-free-api.onrender.com/health). Production `VITE_API_URL` is configured for this Render origin. A live integration check verified text-priority scoring, a fictional incident submission, dashboard/map/analytics reads, Citizen sign-in and role protections. **Render Free storage is ephemeral, image inference is unavailable, and the prototype does NOT dispatch emergency services.**
 
 A multimodal disaster triaging system that combines computer vision and natural language processing to classify disaster images and estimate rescue priority from citizen reports.
 
-The repository includes machine-learning pipelines, a FastAPI backend prototype (`backend/`) and a React/Vite frontend (`frontend/`). Their source code is present, but full end-to-end deployment and production readiness have not been independently verified.
+The repository includes machine-learning pipelines, a FastAPI backend prototype (`backend/`) and a React/Vite frontend (`frontend/`). A text-only portfolio demonstration is live and its main workflows were verified with fictional data. The original multimodal model and production-grade storage are **not** deployed or validated.
 
-**Vercel setup and live-backend verification:** [Deployment guide](docs/VERCEL_DEPLOYMENT.md). The production domain must use the correct connected Git repository, Vite root directory, and current `main` commit.
+**Vercel setup and live-backend verification:** [Deployment guide](docs/VERCEL_DEPLOYMENT.md) · [Live Render API checks](.github/workflows/render-live-health.yml) · [Synthetic live integration checks](.github/workflows/render-live-e2e.yml). The production build currently points to the Render Free backend; repeat the deployment when changing `VITE_API_URL`.
 
 ## DisasterSignal — redesigned interactive frontend (2026)
 
@@ -53,7 +53,7 @@ This is an AlgOlympia team project. My resume describes work on multilingual cit
 
 **Inspect or reproduce:** Follow the installation instructions below. Run `python -m pytest -q` to execute available tests. The supplied inference examples require compatible model checkpoints and dependencies. Model training can take time and may require datasets or weights that are not immediately available.
 
-**Current status:** The model pipelines and evaluation are documented below; the UI, API, incident database and map are implemented as a prototype; real end-to-end deployment still requires verification. This repository is a research prototype, not a deployed public emergency service.
+**Current status:** The Vercel + Render Free text-only prototype has been tested end-to-end with fictional data. Its SQLite records are temporary; the trained vision models and production-level data security/storage remain outside this free demo. This repository is a research prototype, not a deployed public emergency service.
 
 **Useful real screenshots to capture after running the code:** (1) anonymized incident report with language and 0–100 priority output, (2) image inference with predicted disaster class, and (3) a genuine evaluation plot. Keep real citizen information out of the repository. No verified UI screenshots are currently included here.
 
@@ -354,5 +354,5 @@ Implementation / verification pending:
 - Hinglish performance is lower than English due to inconsistent Romanized spellings.
 - Priority prediction currently relies only on image and text inputs.
 - Disaster-specific technical indicators such as Richter magnitude, flood water level, and Air Quality Index are not yet incorporated.
-- Backend and frontend source code exists, but a running end-to-end deployment was not verified in this review.
+- The live text-only demo was checked end-to-end using fictional reports; full vision-model inference, durable data persistence and real emergency-response workflows were **not** verified.
 - Demo authentication credentials and a hard-coded JWT signing key must be replaced before any public deployment.
