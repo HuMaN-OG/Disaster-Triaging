@@ -64,5 +64,43 @@ jobs:
           assert code==401,"Unauthenticated incident mutation was not blocked"
           code,detail=send("/incidents/"+str(inc_id))
           assert code==200 and detail["status"]=="Pending",detail
-          print("LIVE FULL-STACK BACKEND E2E PASS: actual model priority, incident persistence, map, stats, analytics, auth")
+          # Test public Citizen registration/login without printing credentials or tokens.
+          import uuid, secrets
+          user_email = "synthetic-" + uuid.uuid4().hex[:12] + "@example.com"
+          user_password = "TestOnly-" + secrets.token_urlsafe(22)
+          def auth_request(path, method, body, bearer=None):
+              headers={"Content-Type":"application/json","User-Agent":"DisasterSignal-Synthetic-Auth-Test/1.0"}
+              if bearer: headers["Authorization"]="Bearer "+bearer
+              request=urllib.request.Request(api+path,method=method,headers=headers,
+                  data=json.dumps(body).encode() if body is not None else None)
+              try:
+                  with urllib.request.urlopen(request,timeout=60) as response:
+                      status=response.status
+                      content=response.read(30000)
+              except urllib.error.HTTPError as err:
+                  status=err.code
+                  content=err.read(3000)
+              print(f"{method} {path} (credentials redacted): HTTP {status}")
+              try: return status,json.loads(content)
+              except Exception: return status,{}
+          code,registered=auth_request("/auth/register","POST",{
+              "email":user_email,"password":user_password,"full_name":"Synthetic Test Citizen",
+              "role":"Citizen"
+          })
+          assert code==201 and registered["role"]=="Citizen",(code,registered)
+          code,token=auth_request("/auth/login","POST",{
+              "username":user_email,"password":user_password
+          })
+          assert code==200 and token["role"]=="Citizen",(code,token.get("role"))
+          citizen_token=token["access_token"]
+          code,profile=auth_request("/auth/me","GET",None,citizen_token)
+          assert code==200 and profile["role"]=="Citizen",(code,profile)
+          code,denied=auth_request("/incidents/"+str(inc_id),"PATCH",{"status":"Completed"},citizen_token)
+          assert code==403,(code,denied)
+          code,denied_admin=auth_request("/auth/register","POST",{
+              "email":"synthetic-rejected-"+uuid.uuid4().hex[:9]+"@example.com",
+              "password":user_password,"full_name":"Synthetic Unprivileged Request","role":"Admin"
+          })
+          assert code==403,(code,denied_admin)
+          print("LIVE FULL-STACK BACKEND E2E PASS: model, reports, map, charts, citizen auth, secure roles")
           PY
