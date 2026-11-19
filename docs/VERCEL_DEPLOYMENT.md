@@ -1,6 +1,6 @@
 # Deploy DisasterSignal on Vercel (frontend) + a separate FastAPI host
 
-**Current code:** https://github.com/HuMaN-OG/Disaster-Triaging (branch `main`).
+**Current code:** https://github.com/HuMaN-OG/Disaster-Triaging (branch `main`). **Live frontend:** https://disastersignal-bhuvan.vercel.app · **Live Render API:** https://disastersignal-free-api.onrender.com/health. The frontend is connected using the production Vite environment variable. Original multimodal vision checkpoints and persistent storage are not available on the free backend.
 
 The latest application is **DisasterSignal v3** (navy-and-coral response-studio UI), NOT the old black/orange “DISASTER TRIAGE v2.0” website. GitHub Actions verifies the Vite build, TypeScript checks and browser UI flows with explicit synthetic test fixtures.
 
@@ -17,7 +17,7 @@ Open the Vercel project that **actually owns your production domain**. If you ca
 | Install command | `npm ci` |
 | Build command | `npm run build` |
 | Output directory | `dist` |
-| Production API | `VITE_API_URL=https://YOUR-REAL-FASTAPI-HOST` (set to your **actual** backend; this string is a placeholder) |
+| Production API | `VITE_API_URL=https://disastersignal-free-api.onrender.com` (already set and rebuilt; Render Free text-only research backend) |
 
 The repository also provides `frontend/vercel.json` with Vite build/output defaults. The Vercel project's **Root Directory** must still be `frontend` in Settings.
 
@@ -34,7 +34,7 @@ The repository also provides `frontend/vercel.json` with Vite build/output defau
 
 ## Backend is a separate deployment
 
-The FastAPI backend loads substantial ML dependencies, including PyTorch, CatBoost, and Sentence Transformers; do not assume Vercel static hosting runs it.
+The original FastAPI backend's full ML ensemble is heavy. The currently deployed **Render Free** variant intentionally uses a small supervised text estimator, not PyTorch/Sentence Transformers/CatBoost. The Vercel frontend serves static React assets only.
 
 Deploy the backend to a suitable Python host with the project's dependencies/model assets. Configure **strong private** `JWT_SECRET`, secure storage, database persistence, rate limits, upload limits, and restricted production `CORS_ORIGINS`. `DEMO_ACCOUNTS_ENABLED` should remain **false** on a public installation.
 
