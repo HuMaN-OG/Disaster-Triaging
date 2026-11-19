@@ -1,6 +1,15 @@
 import pytest
 from io import BytesIO
 
+
+def authorized_headers(client):
+    # Test-only account seeded by backend/app/tests/conftest.py.
+    response = client.post('/auth/login', json={
+        'username': 'admin@disaster.org', 'password': 'Admin@123',
+    })
+    assert response.status_code == 200
+    return {'Authorization': 'Bearer ' + response.json()['access_token']}
+
 def test_incident_attachments_lifecycle(client):
     # 1. Create a test incident
     payload = {
@@ -20,6 +29,7 @@ def test_incident_attachments_lifecycle(client):
     
     upload_res = client.post(
         f"/incidents/{incident_id}/attachments",
+        headers=authorized_headers(client),
         files=[
             ("files", ("report.pdf", file1[0], "application/pdf")),
             ("files", ("photo.png", file2[0], "image/png")),
@@ -63,6 +73,7 @@ def test_invalid_attachment_types(client):
     invalid_file = (BytesIO(b"malicious payload"), "script.exe")
     upload_res = client.post(
         f"/incidents/{incident_id}/attachments",
+        headers=authorized_headers(client),
         files=[("files", ("script.exe", invalid_file[0], "application/x-msdownload"))]
     )
     assert upload_res.status_code == 400
@@ -86,7 +97,51 @@ def test_oversized_attachment(client):
     large_file = (BytesIO(oversized_data), "huge_doc.pdf")
     upload_res = client.post(
         f"/incidents/{incident_id}/attachments",
+        headers=authorized_headers(client),
         files=[("files", ("huge_doc.pdf", large_file[0], "application/pdf"))]
     )
     assert upload_res.status_code == 413
     assert "exceeds maximum allowed size" in upload_res.json()["detail"]
+
+
+def test_incident_writes_require_responder_or_admin(client):
+    """Status changes and evidence uploads are server-authorized, not just hidden in the UI."""
+    created = client.post("/incidents", data={
+        "description": "Test incident with reported road flooding",
+        "latitude": 28.61,
+        "longitude": 77.20,
+    })
+    assert created.status_code == 201
+    incident_id = created.json()["id"]
+    url = f"/incidents/{incident_id}"
+
+    # Unauthenticated users cannot write to incident records.
+    assert client.patch(url, json={"status": "Completed"}).status_code == 401
+    anon_upload = client.post(
+        url + "/attachments",
+        files=[("files", ("note.pdf", BytesIO(b"example"), "application/pdf"))],
+    )
+    assert anon_upload.status_code == 401
+
+    registration = client.post("/auth/register", json={
+        "email": f"case-guard-citizen-{incident_id}@example.org",
+        "password": "SampleCitizenPassword2026!",
+        "full_name": "Test Citizen",
+        "role": "Citizen",
+    })
+    assert registration.status_code == 201
+    login = client.post("/auth/login", json={
+        "username": f"case-guard-citizen-{incident_id}@example.org",
+        "password": "SampleCitizenPassword2026!",
+    })
+    assert login.status_code == 200
+    citizen_auth = {"Authorization": "Bearer " + login.json()["access_token"]}
+
+    assert client.patch(url, json={"status": "Completed"}, headers=citizen_auth).status_code == 403
+    citizen_upload = client.post(
+        url + "/attachments",
+        headers=citizen_auth,
+        files=[("files", ("note.pdf", BytesIO(b"example"), "application/pdf"))],
+    )
+    assert citizen_upload.status_code == 403
+    assert client.get(url).json()["status"] == "Pending"
