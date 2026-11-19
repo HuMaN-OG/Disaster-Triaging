@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     # Demo accounts are disabled by default and must be explicitly configured
     # for local demonstrations only. Never enable with public credentials.
     DEMO_ACCOUNTS_ENABLED: bool = False
+    LITE_MODEL_ENABLED: bool = False  # Opt-in to supervised, English-trained lightweight text-only model
     # Demo User Accounts Configuration
     DEMO_RESPONDER_EMAIL: str = "responder@disaster.org"
     DEMO_RESPONDER_PASSWORD: str = ""

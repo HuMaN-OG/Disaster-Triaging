@@ -246,3 +246,12 @@ a{color:inherit}.visually-hidden{position:absolute!important;height:1px;width:1p
 .brief-history{display:grid;gap:12px}.brief-history>div{padding:0 0 12px 15px;border-left:2px solid #d5eade}.brief-history strong{display:block;font-size:12px}.brief-history small{font-size:10px;color:#96a5a4}.brief-history p{margin:6px 0 0;font-size:11px;color:#6f8484}
 .brief-footer{flex:none;display:flex;align-items:center;justify-content:space-between;gap:13px;border-top:1px solid var(--line);background:#fff;padding:14px 28px;color:#869a97;font-size:11px}.brief-footer>div{display:flex;gap:9px;flex-wrap:wrap}
 @media(max-width:720px){.brief-header{padding:19px}.brief-body{padding:14px}.brief-panel{padding:15px}.brief-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.brief-lists{grid-template-columns:1fr}.brief-footer{padding:14px;align-items:flex-start;flex-direction:column}}
+
+/* Leaflet's 400+ internal pane z-index must never escape over the mobile drawer.
+   Both map containers create isolated stacking contexts below the 900/1000 nav. */
+.map-picker, .command-map { isolation:isolate; position:relative; z-index:0; }
+.map-picker .leaflet-container, .command-map .leaflet-container { z-index:0; }
+@media(max-width:980px) {
+  .mobile-backdrop { z-index:900; }
+  .dt-sidebar, .dt-sidebar.is-open { z-index:1000; }
+}

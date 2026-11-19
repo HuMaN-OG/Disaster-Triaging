@@ -1,5 +1,7 @@
 # DisasterSignal — Render backend deployment
 
+> **Historical paid-hosting design, not the active Blueprint.** The root [render.yaml](../render.yaml) now creates a **free** Python service with temporary storage, not the paid Docker/disk service described below. For the supported free setup use [RENDER_FREE.md](RENDER_FREE.md). To adopt the paid architecture below later, you must restore and review a separate paid Blueprint and approve charges; do not use the current free Blueprint expecting persistent storage.
+
 **Architecture:** Vercel serves the React/Vite frontend at [disastersignal-bhuvan.vercel.app](https://disastersignal-bhuvan.vercel.app/). Render runs the separate FastAPI/ML backend. This is an academic research prototype; it **does not dispatch emergency services**.
 
 ## 1. Before creating Render resources

@@ -1,6 +1,6 @@
 # Disaster Triaging System
 
-**Full-stack deployment preparation:** [Render backend setup](docs/RENDER_BACKEND.md) · [Render Blueprint](render.yaml). The frontend is deployed; **the backend is not currently hosted**, and image inference needs trained vision checkpoints absent from the repository. The Blueprint proposes a **paid** instance and persistent disk and must only be provisioned after budget approval.
+**Free Render backend option:** [Deploy with free Python service](docs/RENDER_FREE.md) · [Free Render Blueprint](render.yaml). Limited **text-only supervised research demo**; no vision checkpoints, no durable database or uploads, and cold starts after inactivity. It does not dispatch emergency services.
 
 **Live frontend preview:** [DisasterSignal on Vercel](https://disastersignal-bhuvan.vercel.app/) — deployed in the `human-ogs-projects` Vercel team from the `main` source snapshot. The FastAPI/ML API is **not yet connected** to this deployment; incident submission, database-backed command view and server-side analytics require a separately configured persistent backend. **Do not treat this preview as operational emergency dispatch.**
 

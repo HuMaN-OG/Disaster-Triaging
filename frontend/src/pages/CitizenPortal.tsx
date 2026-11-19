@@ -8,6 +8,8 @@ import type { IncidentDetail } from '../types';
 interface CitizenPortalProps {
   onViewOperations: () => void;
   apiAvailable?: boolean;
+  liteMode?: boolean;
+  apiChecking?: boolean;
 }
 
 const samples = [
@@ -29,7 +31,7 @@ function validCoordinates(lat: string, lng: string) {
   return Number.isFinite(a) && Number.isFinite(b) && a >= -90 && a <= 90 && b >= -180 && b <= 180;
 }
 
-export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, apiAvailable = true }) => {
+export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, apiAvailable = true, liteMode = false, apiChecking = false }) => {
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState('');
@@ -53,9 +55,10 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
   }, [photo]);
 
   const coordsOK = validCoordinates(latitude, longitude);
-  const formOK = (description.trim().length >= 10 || photo !== null) && coordsOK;
+  const formOK = (description.trim().length >= 10 || (!liteMode && photo !== null)) && coordsOK && (!liteMode || photo === null);
   const choosePhoto = (file?: File) => {
     if (!file) return;
+    if (liteMode) { setError('Image analysis requires trained vision checkpoints and is unavailable on the free demo. Use a text-only report.'); return; }
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
       setError('Choose a JPG, PNG or WEBP image.'); return;
     }
@@ -109,7 +112,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
         <div className="report-hero-copy">
           <div className="overline on-dark"><span className="tiny-live-dot" /> MULTILINGUAL RESPONSE RESEARCH</div>
           <h1>Every report matters.<br /><em>Clarity saves time.</em></h1>
-          <p>Share an incident description, optional photograph and a confirmed location. Our research models classify the report and estimate priority for human review.</p>
+          <p>{liteMode ? 'Share a fictional incident and a test location. The free demo uses an experimental text-only similarity model trained on English reports; estimates are not verified emergency guidance.' : 'Share an incident description, optional photograph and a confirmed location. Our research models classify the report and estimate priority for human review.'}</p>
           <a className="hero-link" href="#report-form">Create a report <ArrowRight size={16} /></a>
           <div className="hero-tags"><span><Globe2 size={14} /> English · हिन्दी · Hinglish</span><span><Layers3 size={14} /> Text + image analysis</span></div>
         </div>
@@ -138,7 +141,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
           <div className="sample-row"><span>TRY A SAMPLE</span>{samples.map(s => <button key={s.label} type="button" className="sample-chip" onClick={() => setDescription(s.text)}>{s.label}</button>)}</div>
 
           <div className="form-rule" />
-          <div className="form-section-head"><span className="step-number">02</span><div><h3>Add visual context <span className="optional">Optional</span></h3><p>Photos can help the classifier understand the scene.</p></div></div>
+          <div className="form-section-head"><span className="step-number">02</span><div><h3>Add visual context <span className="optional">{liteMode ? 'Unavailable on free demo' : 'Optional'}</span></h3><p>{liteMode ? 'The published image-classification model weights are not available; text-only reports work in the free demo.' : 'Photos can help the classifier understand the scene.'}</p></div></div>
           <div className={'upload-zone' + (photo ? ' has-image' : '')} onDragOver={e => e.preventDefault()}
             onDrop={e => { e.preventDefault(); choosePhoto(e.dataTransfer.files?.[0]); }}>
             {photo && preview ? (
@@ -148,10 +151,10 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
                 <button type="button" className="icon-button" onClick={() => { setPhoto(null); if(inputRef.current)inputRef.current.value=''; }} aria-label="Remove image"><X size={17} /></button>
               </div>
             ) : (
-              <label htmlFor="incident-photo" className="upload-label"><span className="upload-icon"><ImagePlus size={25} /></span><strong>Drop your image here, or browse files</strong><small>JPG, PNG or WEBP · Maximum 10 MB</small></label>
+              <label htmlFor="incident-photo" className="upload-label"><span className="upload-icon"><ImagePlus size={25} /></span><strong>{liteMode ? "Image analysis unavailable on free demo" : "Drop your image here, or browse files"}</strong><small>{liteMode ? "Submit a text-only research report instead" : "JPG, PNG or WEBP · Maximum 10 MB"}</small></label>
             )}
             <input id="incident-photo" ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp"
-              onChange={e => choosePhoto(e.target.files?.[0])} className="visually-hidden" />
+              onChange={e => choosePhoto(e.target.files?.[0])} disabled={liteMode} className="visually-hidden" />
           </div>
 
           <div className="form-rule" />
@@ -172,7 +175,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
           <div className={'location-confirm' + (coordsOK ? ' confirmed' : '')}><Navigation size={15} /> {coordsOK ? (locationSource || 'Coordinates entered') + ' · ' + Number(latitude).toFixed(4) + ', ' + Number(longitude).toFixed(4) : 'Select a location to enable submission'}</div>
 
           {error && <div className="alert-banner error" role="alert"><AlertCircle size={18} />{error}</div>}
-          {!apiAvailable && <div className="alert-banner warning" role="status">Backend appears offline. Start the FastAPI service before submitting.</div>}
+          {!apiAvailable && <div className="alert-banner warning" role="status">{apiChecking ? "Connecting to the backend. A free Render service may take about a minute to wake up…" : "Backend is not reachable. Check the FastAPI service before submitting."}</div>}
           <button type="submit" className="btn btn-coral btn-submit" disabled={loading || !formOK || !apiAvailable}>
             {loading ? <><span className="button-spinner" /> Analyzing report…</> : <><Send size={18} /> Submit for triage <ArrowUpRight size={17} /></>}
           </button>

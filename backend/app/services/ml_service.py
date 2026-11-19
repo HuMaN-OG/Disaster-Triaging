@@ -6,6 +6,7 @@ import logging
 from fastapi import HTTPException, status
 
 from app.utils.language import detect_language
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +52,17 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
     def load_models(self) -> None:
         """Load the real trained models only. Never substitute a fabricated classification."""
         if self.is_loaded:
+            return
+        if settings.LITE_MODEL_ENABLED:
+            from app.services.lite_text_model import FreeTierTextPredictor
+            try:
+                self._text_predictor = FreeTierTextPredictor()
+                logger.info("Loaded free-tier text-only estimator from labeled research dataset")
+            except Exception:
+                logger.exception("Failed to initialize free-tier text estimator")
+                self._text_predictor = None
+            self._predictor = None
+            self.is_loaded = True
             return
         try:
             from src.inference.predict import MultimodalPredictor
