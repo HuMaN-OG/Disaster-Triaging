@@ -4,6 +4,18 @@ A multimodal disaster triaging system that combines computer vision and natural 
 
 The repository currently contains the complete machine learning pipelines for image classification and multilingual text priority prediction. The backend API, frontend application, and rescue operations dashboard are under active development.
 
+## Demonstration and team contributions
+
+This is an AlgOlympia team project. My resume describes work on multilingual citizen-report priority scoring and combining text predictions with disaster-image classification; it does not imply sole authorship of the entire repository.
+
+**Inspect or reproduce:** Follow the installation instructions below. Run `python -m pytest -q` to execute available tests. The supplied inference examples require compatible model checkpoints and dependencies. Model training can take time and may require datasets or weights that are not immediately available.
+
+**Current status:** The model pipelines and evaluation are documented below; the API, dashboard, incident database and interactive map remain in progress. This repository is a research prototype, not a deployed public emergency service.
+
+**Screenshots to add after running the code:** (1) anonymized incident report with language and 0–100 priority output, (2) image inference with predicted disaster class, and (3) a genuine evaluation plot. Keep real citizen information out of the repository. No verified UI screenshots are currently included here.
+
+**Reproducibility note:** Text-model code includes both XGBoost and CatBoost paths. Confirm which training script, checkpoint and evaluation split generated each reported metric before attributing results to one model.
+
 ## Features
 
 ### Implemented
