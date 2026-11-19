@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import { DashboardStats, RecentIncident, MapLocation, AnalyticsResponse } from '../types';
+import type { DashboardStats, RecentIncident, MapLocation, AnalyticsResponse } from '../types';
 
 export const getDashboardStatsApi = async (): Promise<DashboardStats> => {
   const response = await apiClient.get<DashboardStats>('/dashboard/stats');
