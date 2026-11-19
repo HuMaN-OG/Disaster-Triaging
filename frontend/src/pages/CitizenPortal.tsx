@@ -150,7 +150,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
                 <button type="button" className="icon-button" onClick={() => { setPhoto(null); if(inputRef.current)inputRef.current.value=''; }} aria-label="Remove image"><X size={17} /></button>
               </div>
             ) : (
-              <label htmlFor="incident-photo" className="upload-label"><span className="upload-icon"><ImagePlus size={25} /></span><strong>Drop your image here, or browse files</strong><small>JPG, PNG or WEBP · Maximum 10 MB</small></label>
+              <label htmlFor="incident-photo" className="upload-label"><span className="upload-icon"><ImagePlus size={25} /></span><strong>{liteMode ? "Image analysis unavailable on free demo" : "Drop your image here, or browse files"}</strong><small>{liteMode ? "Submit a text-only research report instead" : "JPG, PNG or WEBP · Maximum 10 MB"}</small></label>
             )}
             <input id="incident-photo" ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp"
               onChange={e => choosePhoto(e.target.files?.[0])} disabled={liteMode} className="visually-hidden" />
