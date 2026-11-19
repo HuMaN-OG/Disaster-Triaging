@@ -45,6 +45,11 @@ TOKENS = re.compile(r"[\w]+", re.UNICODE)
 
 def _terms(text: str) -> frozenset[str]:
     clean = NUM_PATTERN.sub(" ", text.lower())
+    # Python's \w tokenization can split Devanagari vowel marks, so normalize
+    # known Hindi phrases BEFORE tokenization instead of relying on exact tokens.
+    for word, english in LEXICON.items():
+        if any(ord(char) > 127 for char in word):
+            clean = clean.replace(word, " " + english + " ")
     tokens = [LEXICON.get(w, w) for w in TOKENS.findall(clean)]
     words = [w for w in tokens if len(w) >= 3 and not w.isdigit() and w not in COMMON]
     bigrams = [words[i] + "_" + words[i + 1] for i in range(len(words) - 1)]
