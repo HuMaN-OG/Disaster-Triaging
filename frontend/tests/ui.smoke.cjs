@@ -35,6 +35,8 @@ async function main() {
   const errors=[];
   page.on('pageerror',e=>{ errors.push(e.message); console.error('PAGE ERROR:',e.message); });
   page.on('console',m=>{ if(m.type()==='error') console.error('BROWSER CONSOLE:',m.text()); });
+  page.on('response',r=>{if(r.status()>=400) console.error('HTTP FAILURE:',r.status(),r.url());});
+  page.on('requestfailed',r=>console.error('REQUEST FAILURE:',r.url(),r.failure()?.errorText));
   let incident={...baseIncident};
   await page.route('**/api/**',async route=>{
     const request=route.request(),u=new URL(request.url()),p=u.pathname,m=request.method();
