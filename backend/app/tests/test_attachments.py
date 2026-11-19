@@ -1,6 +1,12 @@
 import pytest
 from io import BytesIO
 
+
+def admin_headers(client):
+    response = client.post('/auth/login', json={'username': 'admin@disaster.org', 'password': 'Admin@123'})
+    assert response.status_code == 200
+    return {'Authorization': 'Bearer ' + response.json()['access_token']}
+
 def test_incident_attachments_lifecycle(client):
     # 1. Create a test incident
     payload = {
@@ -20,6 +26,7 @@ def test_incident_attachments_lifecycle(client):
     
     upload_res = client.post(
         f"/incidents/{incident_id}/attachments",
+        headers=admin_headers(client),
         files=[
             ("files", ("report.pdf", file1[0], "application/pdf")),
             ("files", ("photo.png", file2[0], "image/png")),
@@ -90,3 +97,42 @@ def test_oversized_attachment(client):
     )
     assert upload_res.status_code == 413
     assert "exceeds maximum allowed size" in upload_res.json()["detail"]
+
+
+def test_citizen_cannot_modify_incident_or_attach_evidence(client):
+    """The backend must enforce the same privileges as the frontend."""
+    created = client.post("/incidents", data={
+        "description": "Water levels rising near main road",
+        "latitude": 28.61, "longitude": 77.20
+    })
+    assert created.status_code == 201
+    incident_id = created.json()["id"]
+
+    # Unauthenticated write attempts must not be allowed.
+    anonymous_status = client.patch(f"/incidents/{incident_id}", json={"status": "Completed"})
+    assert anonymous_status.status_code == 401
+    anonymous_attachment = client.post(
+        f"/incidents/{incident_id}/attachments",
+        files=[("files", ("note.pdf", BytesIO(b"test"), "application/pdf"))]
+    )
+    assert anonymous_attachment.status_code == 401
+
+    registered = client.post("/auth/register", json={
+        "email": f"non-responder-{incident_id}@example.net",
+        "password": "CitizenSecurePassword2026!",
+        "full_name": "Prototype Citizen",
+        "role": "Citizen",
+    })
+    assert registered.status_code == 201
+    login = client.post("/auth/login", json={
+        "username": f"non-responder-{incident_id}@example.net",
+        "password": "CitizenSecurePassword2026!",
+    })
+    assert login.status_code == 200
+    headers = {"Authorization": "Bearer " + login.json()["access_token"]}
+    assert client.patch(f"/incidents/{incident_id}", json={"status": "Completed"}, headers=headers).status_code == 403
+    assert client.post(
+        f"/incidents/{incident_id}/attachments",
+        headers=headers, files=[("files", ("note.pdf", BytesIO(b"test"), "application/pdf"))]
+    ).status_code == 403
+    assert client.get(f"/incidents/{incident_id}").json()["status"] == "Pending"
