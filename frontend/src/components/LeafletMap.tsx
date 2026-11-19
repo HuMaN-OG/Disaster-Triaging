@@ -60,7 +60,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
   interactiveSelect = false,
 }) => {
   return (
-    <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden">
+    <div className="relative isolate z-0 w-full h-full min-h-[300px] rounded-xl overflow-hidden">
       <MapContainer
         center={center}
         zoom={zoom}
