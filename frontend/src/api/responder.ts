@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import { Incident, IncidentDetail } from '../types';
+import type { Incident, IncidentDetail } from '../types';
 
 export const getPendingResponderIncidentsApi = async (): Promise<Incident[]> => {
   const response = await apiClient.get<Incident[]>('/responder/incidents');
