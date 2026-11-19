@@ -25,17 +25,21 @@ function App() {
   const [currentUser, setCurrentUser] = useState<SignedInUser | null>(null);
   const [health, setHealth] = useState<ApiHealth>('checking');
   const [healthInfo, setHealthInfo] = useState('Checking prediction service');
+  const [freeTierMode, setFreeTierMode] = useState(false);
 
   useEffect(() => {
     let live = true;
     const checkHealth = async () => {
       try {
-        const response = await apiClient.get<{ status: string; database?: string; models_loaded?: boolean }>('/health', { timeout: 6000 });
+        const response = await apiClient.get<{ status: string; database?: string; models_loaded?: boolean; model_variant?: string }>('/health', { timeout: 75000 });
         if (!live) return;
+        setFreeTierMode(response.data.model_variant === 'free-tier-supervised-retrieval');
         setHealth(response.data.status === 'ok' ? 'online' : 'degraded');
         setHealthInfo(response.data.status === 'ok'
           ? 'Prediction service available'
-          : 'Service partially available — check models/database');
+          : response.data.model_variant === 'free-tier-supervised-retrieval'
+            ? 'Free research demo: text-only model, temporary storage'
+            : 'Service partially available — check models/database');
       } catch {
         if (live) { setHealth('offline'); setHealthInfo('API not reachable — check backend setup'); }
       }
@@ -139,7 +143,8 @@ function App() {
             <span><strong>Research / portfolio prototype.</strong> This app does not dispatch real emergency services. In an emergency, contact local emergency services immediately.</span>
             <CircleHelp size={15} className="notice-end" />
           </div>
-          {activeView === 'report' && <CitizenPortal onViewOperations={() => setPage('operations')} apiAvailable={health !== 'offline'} />}
+          {freeTierMode && <div className="prototype-notice" role="note"><AlertTriangle size={16} /><span><strong>Free research demo:</strong> Text priority estimates use a small experimental model trained on English reports. Photos cannot be analysed. Stored reports and accounts may disappear when the free backend sleeps or restarts. Use fictional test data only.</span></div>}
+          {activeView === 'report' && <CitizenPortal onViewOperations={() => setPage('operations')} apiAvailable={health !== 'offline'} liteMode={freeTierMode} />}
           {activeView === 'operations' && <RescueDashboard currentUserRole={currentUser?.role ?? 'Citizen'} onRequestLogin={() => setLoginOpen(true)} />}
           {activeView === 'analytics' && <AnalyticsPage />}
         </main>
