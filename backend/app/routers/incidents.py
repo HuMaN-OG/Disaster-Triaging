@@ -125,7 +125,7 @@ def update_incident(
     id: int,
     update_in: IncidentUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_roles(["Responder", "Admin"])),
 ):
     """
     Update incident status, assigned team, or notes.
@@ -268,7 +268,8 @@ def get_incident_brief(id: int, db: Session = Depends(get_db)):
 async def upload_attachments(
     id: int,
     files: List[UploadFile] = File(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_roles(["Responder", "Admin"])),
 ):
     """
     Upload multiple attachments for a specific incident.
