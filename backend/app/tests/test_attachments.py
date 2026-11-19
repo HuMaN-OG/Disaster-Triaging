@@ -73,6 +73,7 @@ def test_invalid_attachment_types(client):
     invalid_file = (BytesIO(b"malicious payload"), "script.exe")
     upload_res = client.post(
         f"/incidents/{incident_id}/attachments",
+        headers=authorized_headers(client),
         files=[("files", ("script.exe", invalid_file[0], "application/x-msdownload"))]
     )
     assert upload_res.status_code == 400
@@ -96,6 +97,7 @@ def test_oversized_attachment(client):
     large_file = (BytesIO(oversized_data), "huge_doc.pdf")
     upload_res = client.post(
         f"/incidents/{incident_id}/attachments",
+        headers=authorized_headers(client),
         files=[("files", ("huge_doc.pdf", large_file[0], "application/pdf"))]
     )
     assert upload_res.status_code == 413
