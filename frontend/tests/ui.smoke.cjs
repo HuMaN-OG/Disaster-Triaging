@@ -82,15 +82,16 @@ async function main() {
     await page.getByRole('dialog',{name:'Response brief'}).waitFor();
     assert.ok((await page.getByRole('dialog',{name:'Response brief'}).innerText()).includes('Derived'));
     await page.getByRole('button',{name:'Close response brief'}).click();
+    await page.getByRole('button',{name:'Close incident details'}).click();
 
     // Auth through real UI, then a mocked authorized accept transition.
     await page.getByRole('button',{name:'Sign in'}).click();
     await page.locator('#auth-email').fill('operator@example.com');
     await page.locator('#auth-password').fill('example-password');
     await page.getByRole('button',{name:'Sign in to workspace'}).click();
+    await page.getByRole('button',{name:'View report 42'}).click();
     await page.getByRole('button',{name:/Accept incident/}).waitFor();
     await page.getByRole('button',{name:/Accept incident/}).click();
-    await page.getByText('Workflow marked completed.').count(); // no fake completion after acceptance
     assert.ok((await page.getByRole('dialog',{name:/Flood near bridge/}).innerText()).includes('Assigned'));
     await page.getByRole('button',{name:'Close incident details'}).click();
 
