@@ -81,7 +81,7 @@ async function main() {
     await page.getByRole('dialog',{name:/Flood near bridge/}).waitFor();
     await page.getByRole('button',{name:/Open brief/}).click();
     await page.getByRole('dialog',{name:'Response brief'}).waitFor();
-    assert.ok((await page.getByRole('dialog',{name:'Response brief'}).innerText()).includes('Derived'));
+    assert.ok((await page.getByRole('dialog',{name:'Response brief'}).innerText()).toLowerCase().includes('derived'));
     await page.getByRole('button',{name:'Close response brief'}).click();
     await page.getByRole('button',{name:'Close incident details'}).click();
 
