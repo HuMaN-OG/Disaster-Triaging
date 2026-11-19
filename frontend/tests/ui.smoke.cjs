@@ -97,7 +97,7 @@ async function main() {
     await page.getByRole('button',{name:'View report 42'}).click();
     await page.getByRole('button',{name:/Accept incident/}).waitFor();
     await page.getByRole('button',{name:/Accept incident/}).click();
-    assert.ok((await page.getByRole('dialog',{name:/Flood near bridge/}).innerText()).includes('Assigned'));
+    await page.locator('.drawer-pills .status-pill').getByText('Assigned', { exact: true }).waitFor({ timeout: 10000 });
     await page.getByRole('button',{name:'Close incident details'}).click();
 
     await page.getByRole('button',{name:/Intelligence hub/}).click();
