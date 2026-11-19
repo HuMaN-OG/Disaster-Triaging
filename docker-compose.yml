@@ -12,7 +12,8 @@ services:
     environment:
       - DATABASE_URL=sqlite:////app/data/disaster_triage.db
       - UPLOAD_DIR=/app/data/uploads
-      - JWT_SECRET=YOUR_JWT_SECRET_PLACEHOLDER
+      - JWT_SECRET=${JWT_SECRET:?Set JWT_SECRET to a unique 32+ character secret in your local .env file}
+      - DEMO_ACCOUNTS_ENABLED=false
       - CORS_ORIGINS=["http://localhost", "http://localhost:80", "http://your-frontend-domain.com"]
     restart: always
 
