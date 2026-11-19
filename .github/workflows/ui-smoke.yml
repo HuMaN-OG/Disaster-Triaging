@@ -1,0 +1,44 @@
+name: Disaster Triaging UI Browser Smoke
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: disaster-ui-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install application dependencies
+        run: npm ci
+      - name: Install browser runner
+        run: npm install --no-save playwright@1.55.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start Vite app
+        run: |
+          npx vite --host 127.0.0.1 --port 4173 >/tmp/triage-vite.log 2>&1 &
+          echo $! >/tmp/triage-vite.pid
+          sleep 3
+      - name: Exercise synthetic API flows in Chromium
+        run: node tests/ui.smoke.cjs
+      - name: Save UI screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: disaster-triaging-ui-evidence
+          path: frontend/artifacts/
+          if-no-files-found: ignore
