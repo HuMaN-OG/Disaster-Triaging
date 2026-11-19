@@ -1,0 +1,68 @@
+name: Render Live End-to-End Research Smoke
+on:
+  push:
+    branches: [integration/render-live-health-check]
+  workflow_dispatch:
+
+jobs:
+  test-real-free-backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Submit a fictional test report and verify real backend flow
+        env:
+          API: https://disastersignal-free-api.onrender.com
+        run: |
+          python - <<'PY'
+          import json, os, urllib.parse, urllib.request, urllib.error, time
+          api=os.environ["API"].rstrip("/")
+          def send(path, method="GET", payload=None, extra_headers=None):
+              headers={"User-Agent":"DisasterSignal-Synthetic-E2E/1.0"}
+              if extra_headers: headers.update(extra_headers)
+              data=urllib.parse.urlencode(payload).encode() if payload is not None else None
+              req=urllib.request.Request(api+path, data=data,method=method,headers=headers)
+              try:
+                  with urllib.request.urlopen(req,timeout=115) as r:
+                      body=r.read(30000).decode("utf-8","replace")
+                      print(f"{method} {path}: {r.status} | {body[:450]}")
+                      return r.status,json.loads(body) if body.strip().startswith(("{","[")) else body
+              except urllib.error.HTTPError as e:
+                  body=e.read(2000).decode("utf-8","replace")
+                  print(f"{method} {path}: {e.code} | {body[:250]}")
+                  return e.code,body
+          code,health=send("/health")
+          assert code==200 and health["database"]=="connected",health
+          assert health.get("text_model_loaded") is True and health.get("vision_model_loaded") is False,health
+          code,before=send("/dashboard/stats")
+          assert code==200,before
+          old=before["total_incidents"]
+          unique=str(int(time.time()))
+          # Fictional research data only; never interpreted as a real rescue request.
+          description="Research DEMO ONLY: Flood waters have entered several homes and neighbours are stranded. Test case "+unique
+          code,incident=send("/incidents","POST",{
+             "title":"Synthetic portfolio test "+unique,
+             "description":description,
+             "latitude":"28.6139",
+             "longitude":"77.2090",
+             "address_text":"Fictional testing coordinate, no emergency",
+             "application_context":"Synthetic automated smoke test"
+          })
+          assert code==201,(code,incident)
+          inc_id=incident["id"]
+          assert 0<=incident["priority_score"]<=100,incident
+          assert incident["class_probabilities"]=={},incident
+          assert incident["disaster_type"]=="Unknown",incident
+          code,detail=send("/incidents/"+str(inc_id))
+          assert code==200 and detail["description"]==description,(code,detail)
+          code,after=send("/dashboard/stats")
+          assert code==200 and after["total_incidents"]>=old+1,(old,after)
+          code,analytics=send("/dashboard/analytics")
+          assert code==200 and analytics["priority_distribution"],analytics
+          code,mapped=send("/dashboard/map")
+          assert code==200 and any(x["id"]==inc_id for x in mapped),mapped
+          code,_=send("/incidents/"+str(inc_id),"PATCH",None,{"Content-Type":"application/json"})
+          assert code==401,"Unauthenticated incident mutation was not blocked"
+          code,detail=send("/incidents/"+str(inc_id))
+          assert code==200 and detail["status"]=="Pending",detail
+          print("LIVE FULL-STACK BACKEND E2E PASS: actual model priority, incident persistence, map, stats, analytics, auth")
+          PY
