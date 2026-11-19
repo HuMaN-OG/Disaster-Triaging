@@ -1,37 +1,31 @@
-# Render backend only. The React frontend is already deployed on Vercel.
-# This Blueprint provisions a PAID 2-GB instance and persistent disk.
-# Review Render's pricing and approve charges in Render before creating it.
+# Render FREE web service. Never attach a persistent disk (unsupported on Free).
+# IMPORTANT: local SQLite data and uploads WILL BE LOST on sleep/redeploy/restart.
+# Free tier: 512 MB RAM; no PyTorch image ensemble, paid persistent storage, or SLA.
 services:
   - type: web
-    name: disastersignal-api
-    runtime: docker
+    name: disastersignal-free-api
+    runtime: python
     repo: https://github.com/HuMaN-OG/Disaster-Triaging
     branch: main
     region: singapore
-    plan: standard
+    plan: free
     numInstances: 1
-    dockerfilePath: ./backend.Dockerfile
-    dockerContext: .
+    buildCommand: pip install -r backend/requirements-free.txt
+    startCommand: PYTHONPATH=backend uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000} --workers 1
     autoDeployTrigger: checksPass
     healthCheckPath: /health
-    disk:
-      name: disastersignal-data
-      mountPath: /app/data
-      sizeGB: 5
     envVars:
-      - key: PORT
-        value: "10000"
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: LITE_MODEL_ENABLED
+        value: "true"
       - key: DATABASE_URL
-        value: sqlite:////app/data/disaster_triage.db
+        value: sqlite:////tmp/disastersignal-free.db
       - key: UPLOAD_DIR
-        value: /app/data/uploads
-      - key: HF_HOME
-        value: /app/data/huggingface
+        value: /tmp/disastersignal-uploads
       - key: DEMO_ACCOUNTS_ENABLED
         value: "false"
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGINS
         value: '["https://disastersignal-bhuvan.vercel.app"]'
-      - key: TOKENIZERS_PARALLELISM
-        value: "false"
