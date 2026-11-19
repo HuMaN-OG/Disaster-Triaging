@@ -107,8 +107,8 @@ Performance:
 Clone the repository.
 
 ```bash
-git clone https://github.com/<your-username>/disaster-triaging.git
-cd disaster-triaging
+git clone https://github.com/HuMaN-OG/Disaster-Triaging.git
+cd Disaster-Triaging
 ```
 
 Create a virtual environment.
