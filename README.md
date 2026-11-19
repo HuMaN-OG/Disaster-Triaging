@@ -4,6 +4,8 @@ A multimodal disaster triaging system that combines computer vision and natural 
 
 The repository includes machine-learning pipelines, a FastAPI backend prototype (`backend/`) and a React/Vite frontend (`frontend/`). Their source code is present, but full end-to-end deployment and production readiness have not been independently verified.
 
+**Vercel setup and live-backend verification:** [Deployment guide](docs/VERCEL_DEPLOYMENT.md). The production domain must use the correct connected Git repository, Vite root directory, and current `main` commit.
+
 ## DisasterSignal — redesigned interactive frontend (2026)
 
 **DisasterSignal** is a responsive research prototype that brings the citizen report workflow, responder review and incident analytics together in one interface. Its navy/coral visual system replaces the older bare-bones UI.
