@@ -1,6 +1,8 @@
 # DisasterSignal on Render Free (portfolio demonstration)
 
-The checked-in **[render.yaml](../render.yaml)** creates one **Render Free Python web service**, with no persistent disk and no paid compute plan. The React frontend continues to run on **[Vercel](https://disastersignal-bhuvan.vercel.app)**.
+**Live deployment:** [DisasterSignal frontend on Vercel](https://disastersignal-bhuvan.vercel.app) + [Render Free API](https://disastersignal-free-api.onrender.com/health). The Vercel production variable `VITE_API_URL` is set to `https://disastersignal-free-api.onrender.com`. Live smoke tests on 19 November 2026 verified API health/CORS and submitted fictional incidents that appeared in the response queue, map and analytics. Public Citizen registration/login and write restrictions also passed. **This remains a text-only experimental demo with temporary data.**
+
+The checked-in **[render.yaml](../render.yaml)** configures one Render Free Python web service with no paid disk or instance.
 
 ## Limitations you must accept
 
@@ -29,9 +31,9 @@ Official details: https://render.com/docs/free
 3. Select `HuMaN-OG/Disaster-Triaging` (branch `main`). Render reads root `render.yaml`.
 4. Confirm **plan: Free**, **runtime: Python**, service `disastersignal-free-api`, and **no disk/no paid database** before creating the service.
 5. Render generates a random `JWT_SECRET` automatically. Do not share or commit it.
-6. Wait for the build and visit `https://<your-actual-render-url>.onrender.com/health` (placeholder; get the real URL from Render). Check `database: connected`, `text_model_loaded: true`, and `available_inference_modes: ["text"]`. `status: degraded` is **expected** because the original image ensemble is missing.
-7. In Vercel project **disastersignal-bhuvan → Settings → Environment Variables**, add `VITE_API_URL` for Production with exactly the real Render origin `https://...onrender.com`, no trailing `/api`.
-8. Redeploy the Vercel frontend from its latest GitHub commit. The Vite variable is embedded at build time; changing it alone does not update the browser bundle.
+6. For this project the live API is **https://disastersignal-free-api.onrender.com/health**. If deploying a new instance, substitute its real address. Check `database: connected`, `text_model_loaded: true`, and `available_inference_modes: ["text"]`. `status: degraded` is **expected** because the original image ensemble is missing.
+7. **Already configured:** Vercel project `disastersignal-bhuvan` has production `VITE_API_URL=https://disastersignal-free-api.onrender.com`. Update this only if you change Render hosts.
+8. **Already redeployed and verified:** the browser JavaScript contains the Render URL. On future backend URL changes, redeploy Vercel; Vite embeds `VITE_*` at build time.
 9. Test with **invented incident details only** (not personal information): submit an English text report and test coordinates; verify result, response queue, analytics and route navigation. The incident will disappear after a Render Free restart. Sign-up/account data also resets.
 
 The frontend may take over a minute to show API status when the free service wakes. Do not continuously ping the API to defeat free-tier idling.
