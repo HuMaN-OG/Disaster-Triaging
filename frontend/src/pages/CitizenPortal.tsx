@@ -9,6 +9,7 @@ interface CitizenPortalProps {
   onViewOperations: () => void;
   apiAvailable?: boolean;
   liteMode?: boolean;
+  apiChecking?: boolean;
 }
 
 const samples = [
@@ -30,7 +31,7 @@ function validCoordinates(lat: string, lng: string) {
   return Number.isFinite(a) && Number.isFinite(b) && a >= -90 && a <= 90 && b >= -180 && b <= 180;
 }
 
-export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, apiAvailable = true, liteMode = false }) => {
+export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, apiAvailable = true, liteMode = false, apiChecking = false }) => {
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState('');
@@ -174,7 +175,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, 
           <div className={'location-confirm' + (coordsOK ? ' confirmed' : '')}><Navigation size={15} /> {coordsOK ? (locationSource || 'Coordinates entered') + ' · ' + Number(latitude).toFixed(4) + ', ' + Number(longitude).toFixed(4) : 'Select a location to enable submission'}</div>
 
           {error && <div className="alert-banner error" role="alert"><AlertCircle size={18} />{error}</div>}
-          {!apiAvailable && <div className="alert-banner warning" role="status">Backend appears offline. Start the FastAPI service before submitting.</div>}
+          {!apiAvailable && <div className="alert-banner warning" role="status">{apiChecking ? "Connecting to the backend. A free Render service may take about a minute to wake up…" : "Backend is not reachable. Check the FastAPI service before submitting."}</div>}
           <button type="submit" className="btn btn-coral btn-submit" disabled={loading || !formOK || !apiAvailable}>
             {loading ? <><span className="button-spinner" /> Analyzing report…</> : <><Send size={18} /> Submit for triage <ArrowUpRight size={17} /></>}
           </button>
