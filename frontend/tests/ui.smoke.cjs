@@ -107,9 +107,18 @@ async function main() {
     await page.waitForTimeout(220);
     await page.screenshot({path:'artifacts/disastersignal-analytics.png',fullPage:true});
 
+    // Regression: the active Leaflet map must remain BELOW the mobile drawer.
+    await page.locator('.side-link').filter({hasText:'Report an incident'}).click();
+    await page.getByRole('button',{name:/Choose on map/}).click();
     await page.setViewportSize({width:390,height:844});
     await page.getByRole('button',{name:'Open navigation'}).click();
     assert.equal(await page.locator('.dt-sidebar').evaluate(x=>x.classList.contains('is-open')),true);
+    await page.waitForTimeout(300);
+    const topAtMap = await page.evaluate(() => {
+      const top = document.elementFromPoint(100, Math.min(640, window.innerHeight - 100));
+      return !!top?.closest('.dt-sidebar');
+    });
+    assert.ok(topAtMap, 'Leaflet map panes must not overlay the mobile navigation drawer');
     await page.screenshot({path:'artifacts/disastersignal-mobile.png',fullPage:true});
     assert.deepEqual(errors,[],'Browser runtime errors');
     console.log('DisasterSignal synthetic browser smoke PASSED: reporting, queue, GIS, brief, responder sign-in/actions, analytics and mobile navigation.');
