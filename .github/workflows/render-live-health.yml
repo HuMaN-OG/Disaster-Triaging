@@ -1,0 +1,49 @@
+name: Render Live Backend Readiness
+on:
+  push:
+    branches: [integration/render-live-health-check]
+  workflow_dispatch:
+jobs:
+  check-live-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check deployed Render FastAPI health, routes, and CORS
+        env:
+          RENDER_URL: https://disastersignal-free-api.onrender.com
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error, time, sys
+          root = os.environ["RENDER_URL"].rstrip("/")
+          frontend = "https://disastersignal-bhuvan.vercel.app"
+          def call(path, method="GET", headers=None, timeout=115):
+              request = urllib.request.Request(root + path, method=method, headers=headers or {"User-Agent":"DisasterSignal-Deployment-Check/1.0"})
+              started = time.monotonic()
+              try:
+                  with urllib.request.urlopen(request, timeout=timeout) as r:
+                      content=r.read(12000).decode("utf-8",errors="replace")
+                      print(f"{method} {path}: HTTP {r.status}; duration {time.monotonic()-started:.1f}s")
+                      print("Content:",content[:1600])
+                      return r.status, dict(r.headers), content
+              except urllib.error.HTTPError as e:
+                  content=e.read(3000).decode("utf-8",errors="replace")
+                  print(f"{method} {path}: HTTP {e.code}; content: {content[:1200]}")
+                  raise
+          code, headers, body=call("/health")
+          data=json.loads(body)
+          print("HEALTH JSON:", json.dumps(data,sort_keys=True))
+          assert data.get("database") == "connected", "Database not connected"
+          assert data.get("text_model_loaded") is True, "Light text model unavailable"
+          assert data.get("model_variant") == "free-tier-supervised-retrieval", "Unexpected API variant"
+          assert data.get("storage_persistence") == "ephemeral", "Unexpected persistence mode"
+          code, headers, body=call("/dashboard/stats",timeout=40)
+          assert "total_incidents" in json.loads(body), "Dashboard response invalid"
+          code, headers, body=call("/health",method="OPTIONS",headers={
+            "Origin":frontend,
+            "Access-Control-Request-Method":"GET",
+            "User-Agent":"DisasterSignal-Deployment-Check/1.0",
+          },timeout=40)
+          assert headers.get("Access-Control-Allow-Origin", headers.get("access-control-allow-origin")) == frontend, "Vercel origin is not allowed"
+          print("LIVE RENDER CONNECTIVITY + CORS VERIFIED")
+          PY
