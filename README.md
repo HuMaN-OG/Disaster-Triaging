@@ -2,7 +2,7 @@
 
 A multimodal disaster triaging system that combines computer vision and natural language processing to classify disaster images and estimate rescue priority from citizen reports.
 
-The repository currently contains the complete machine learning pipelines for image classification and multilingual text priority prediction. The backend API, frontend application, and rescue operations dashboard are under active development.
+The repository includes machine-learning pipelines, a FastAPI backend prototype (`backend/`) and a React/Vite frontend (`frontend/`). Their source code is present, but full end-to-end deployment and production readiness have not been independently verified.
 
 ## Demonstration and team contributions
 
@@ -27,15 +27,14 @@ This is an AlgOlympia team project. My resume describes work on multilingual cit
 - Model benchmarking and evaluation pipeline
 - Training and inference scripts for both image and text models
 
-### In Progress
+### Application prototype present (requires end-to-end verification)
 
-- FastAPI backend
-- Next.js frontend
-- Rescue operations dashboard
-- Incident database
-- Interactive map interface
-- Live request management
-- REST API for production inference
+- FastAPI backend routes for authentication, prediction, incidents and dashboard
+- React/Vite frontend with citizen portal, rescue dashboard and map components
+- Database models for incidents, users, teams and status history
+- Route tests under `backend/app/tests/`
+
+These are code-presence claims, not proof of production readiness. The current frontend is React/Vite, not Next.js. Do not deploy publicly with the demo credentials or JWT secret in `backend/app/core/config.py`.
 
 ## Repository Structure
 
@@ -281,14 +280,12 @@ Completed:
 - Model evaluation
 - Automated testing
 
-In Progress:
+Implementation / verification pending:
 
-- FastAPI backend
-- Next.js frontend
-- Rescue operations dashboard
-- Incident database
-- Live API endpoints
-- Interactive map interface
+- Run end-to-end tests for the present FastAPI and React code
+- Confirm production deployment, data persistence and authentication configuration
+- Verify live inference and incident-management workflows with sanitized demo data
+- Replace demo credentials and hard-coded signing keys before public deployment
 
 ## Known Limitations
 
@@ -297,5 +294,5 @@ In Progress:
 - Hinglish performance is lower than English due to inconsistent Romanized spellings.
 - Priority prediction currently relies only on image and text inputs.
 - Disaster-specific technical indicators such as Richter magnitude, flood water level, and Air Quality Index are not yet incorporated.
-- Backend services and web interface are still under development.
-- Rescue request management and live dashboard functionality are not yet available.
+- Backend and frontend source code exists, but a running end-to-end deployment was not verified in this review.
+- Demo authentication credentials and a hard-coded JWT signing key must be replaced before any public deployment.
