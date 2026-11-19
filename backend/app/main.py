@@ -70,7 +70,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Production-Ready AI Disaster Triaging FastAPI Backend with Model-Agnostic Prediction Architecture.",
+    description="Research-prototype disaster triage API. Predictions require loaded, trained ML models.",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
@@ -134,13 +134,21 @@ def health_check(db: Session = Depends(get_db)):
         db_status = f"error: {str(e)}"
 
     prediction_service = get_prediction_service()
-    models_loaded = prediction_service.predictor._predictor is not None if hasattr(prediction_service.predictor, "_predictor") else False
+    adapter = prediction_service.predictor
+    vision_loaded = getattr(adapter, "_predictor", None) is not None
+    text_loaded = vision_loaded or getattr(adapter, "_text_predictor", None) is not None
+    modes_available = (["text", "image", "multimodal"] if vision_loaded
+                       else ["text"] if text_loaded else [])
 
     uptime = round(time.time() - SERVER_START_TIME, 2)
-
     return {
-        "status": "ok" if db_status == "connected" and models_loaded else "degraded",
+        "status": "ok" if db_status == "connected" and vision_loaded
+                  else "degraded",
         "database": db_status,
-        "models_loaded": models_loaded,
+        # Legacy flag retains its meaning: full multimodal ensemble is loaded.
+        "models_loaded": vision_loaded,
+        "text_model_loaded": text_loaded,
+        "vision_model_loaded": vision_loaded,
+        "available_inference_modes": modes_available,
         "uptime_seconds": uptime,
     }

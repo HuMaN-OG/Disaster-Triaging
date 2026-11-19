@@ -13,5 +13,9 @@ def test_health_check(client):
     data = response.json()
     assert data["status"] in ["ok", "degraded"]
     assert data["database"] == "connected"
-    assert data["models_loaded"] is True
+    # The API test suite deliberately stubs inference rather than downloading ML weights.
+    assert data["models_loaded"] is False
+    assert data["vision_model_loaded"] is False
+    assert data["text_model_loaded"] is False
+    assert data["available_inference_modes"] == []
     assert "uptime_seconds" in data

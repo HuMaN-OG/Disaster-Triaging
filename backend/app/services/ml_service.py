@@ -2,9 +2,12 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Optional, Dict, Any, Union
 from PIL import Image
-import torch
+import logging
+from fastapi import HTTPException, status
 
 from app.utils.language import detect_language
+
+logger = logging.getLogger(__name__)
 
 
 class BasePredictor(ABC):
@@ -46,23 +49,25 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
         self.is_loaded = False
 
     def load_models(self) -> None:
-        """Load ML model checkpoints ONCE during app startup."""
-        if not self.is_loaded:
+        """Load the real trained models only. Never substitute a fabricated classification."""
+        if self.is_loaded:
+            return
+        try:
+            from src.inference.predict import MultimodalPredictor
+            self._predictor = MultimodalPredictor(image_model_type="ensemble")
+        except Exception:
+            # This repository does not contain the trained vision .pth checkpoints.
+            # A valid text checkpoint can still support honest text-only predictions.
+            logger.warning("Full multimodal model unavailable; trying text-only model", exc_info=True)
+            self._predictor = None
             try:
-                from src.inference.predict import MultimodalPredictor
-                self._predictor = MultimodalPredictor(image_model_type="ensemble")
-                self.is_loaded = True
-            except FileNotFoundError:
-                try:
-                    from src.inference.predict import TextPredictor
-                    self._text_predictor = TextPredictor()
-                except Exception:
-                    self._text_predictor = None
-                self._predictor = None
-                self.is_loaded = True
+                from src.inference.predict import TextPredictor
+                self._text_predictor = TextPredictor()
             except Exception:
-                self._predictor = None
-                self.is_loaded = True
+                logger.exception("Text-only prediction model unavailable")
+                self._text_predictor = None
+        finally:
+            self.is_loaded = True
 
     def predict(
         self,
@@ -112,65 +117,45 @@ class ProductionMultimodalPredictorAdapter(BasePredictor):
                     self._predictor.text_predictor.model,
                     self._predictor.text_predictor.encoder,
                 )
-                default_classes = ["Flood", "Earthquake", "Urban Fire", "Wild Fire", "Landslide", "Drought"]
-                uniform_prob = round(1.0 / len(default_classes), 4)
-                class_probs = {c: uniform_prob for c in default_classes}
+                # Text-only regression does not calculate a vision class distribution.
+                class_probs = {}
                 return {
                     "disaster_type": "Unknown",
                     "priority_score": round(float(text_res["priority_score"]), 1),
                     "priority_level": text_res["ui_category"],
-                    "confidence": 0.5,
+                    "confidence": 0.0,  # No image-classification confidence is available.
                     "language_detected": lang,
                     "class_probabilities": class_probs,
                 }
 
-        # Fallback when vision model checkpoint is absent
+        # A missing vision model must never be disguised as a confident Flood classification.
+        # The browser can still submit text-only reports if the trained text model exists.
         has_image = image_input is not None
-        has_text = text_report is not None and bool(text_report.strip())
+        has_text = bool(text_report and text_report.strip())
 
-        if not has_image and not has_text:
-            raise ValueError("Prediction requires at least an image_input or text_report.")
+        if has_image:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Image classification is unavailable: trained vision checkpoints are not installed. Please submit a text-only report.",
+            )
+        if not has_text:
+            raise ValueError("Prediction requires a text report or an available image model.")
+        if self._text_predictor is None:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Text prediction model is not loaded. Check the backend model assets and inference dependencies.",
+            )
 
-        lang = detect_language(text_report) if has_text else "English"
-        default_classes = ["Flood", "Earthquake", "Urban Fire", "Wild Fire", "Landslide", "Drought"]
-
-        score = 50.0
-        level = "Medium"
-        if has_text:
-            if self._text_predictor is not None:
-                score, level, lang = self._text_predictor.predict(text_report)
-            else:
-                from src.predict_text import predict_priority_score
-                from src.text_dataset import CATBOOST_PATH
-                if CATBOOST_PATH.exists():
-                    from catboost import CatBoostRegressor
-                    from sentence_transformers import SentenceTransformer
-                    cb = CatBoostRegressor()
-                    cb.load_model(str(CATBOOST_PATH))
-                    st = SentenceTransformer("sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
-                    t_res = predict_priority_score(text_report, cb, st)
-                    score = t_res["priority_score"]
-                    level = t_res["ui_category"]
-
-        disaster_type = "Flood" if has_image else "Unknown"
-        confidence = 0.85 if has_image else 0.5
-        class_probs = {
-            "Flood": 0.85,
-            "Earthquake": 0.03,
-            "Urban Fire": 0.03,
-            "Wild Fire": 0.03,
-            "Landslide": 0.03,
-            "Drought": 0.03,
-        } if has_image else {c: round(1.0 / len(default_classes), 4) for c in default_classes}
-
+        score, level, lang = self._text_predictor.predict(text_report)
         return {
-            "disaster_type": disaster_type,
+            "disaster_type": "Unknown",  # Text regression does not classify image categories.
             "priority_score": round(float(score), 1),
             "priority_level": level,
-            "confidence": confidence,
+            "confidence": 0.0,
             "language_detected": lang,
-            "class_probabilities": class_probs,
+            "class_probabilities": {},
         }
+
 
 
 class PredictionService:
