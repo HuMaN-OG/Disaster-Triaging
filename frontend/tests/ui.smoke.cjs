@@ -33,7 +33,8 @@ async function main() {
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:1440,height:980}});
   const errors=[];
-  page.on('pageerror',e=>errors.push(e.message));
+  page.on('pageerror',e=>{ errors.push(e.message); console.error('PAGE ERROR:',e.message); });
+  page.on('console',m=>{ if(m.type()==='error') console.error('BROWSER CONSOLE:',m.text()); });
   let incident={...baseIncident};
   await page.route('**/api/**',async route=>{
     const request=route.request(),u=new URL(request.url()),p=u.pathname,m=request.method();
@@ -58,7 +59,7 @@ async function main() {
   });
   try{
     await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
-    await page.getByText('Every report matters.').waitFor();
+    await page.getByRole('heading',{name:/Every report matters/}).waitFor({timeout:15000});
     await page.getByText('API connected').waitFor();
     await page.screenshot({path:'artifacts/disastersignal-report.png',fullPage:true});
 
@@ -106,6 +107,12 @@ async function main() {
     await page.screenshot({path:'artifacts/disastersignal-mobile.png',fullPage:true});
     assert.deepEqual(errors,[],'Browser runtime errors');
     console.log('DisasterSignal synthetic browser smoke PASSED: reporting, queue, GIS, brief, responder sign-in/actions, analytics and mobile navigation.');
+  } catch(err) {
+    console.error('BROWSER DEBUG TITLE:',await page.title());
+    console.error('BROWSER DEBUG BODY:',(await page.locator('body').innerText().catch(()=>'' )).slice(0,2400));
+    try { await page.screenshot({path:'artifacts/ui-failure.png',fullPage:true}); } catch {}
+    console.error('PAGE ERRORS:',errors);
+    throw err;
   } finally{await browser.close();}
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});
