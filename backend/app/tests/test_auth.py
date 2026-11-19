@@ -58,3 +58,30 @@ def test_unauthenticated_me_request_rejected(client):
     res = client.get("/auth/me")
     assert res.status_code == 401
 
+
+def test_public_registration_rejects_elevated_roles(client):
+    for role in ("Admin", "Responder"):
+        response = client.post(
+            "/auth/register",
+            json={
+                "email": f"unauthorized-{role.lower()}@disaster.org",
+                "password": "Password@123",
+                "full_name": "Unauthorized Registration",
+                "role": role,
+            },
+        )
+        assert response.status_code == 403
+        assert "Citizen" in response.json()["detail"]
+
+
+def test_default_public_registration_is_citizen(client):
+    response = client.post(
+        "/auth/register",
+        json={
+            "email": "test-default-role@disaster.org",
+            "password": "Password@123",
+            "full_name": "Default Citizen",
+        },
+    )
+    assert response.status_code == 201
+    assert response.json()["role"] == "Citizen"
