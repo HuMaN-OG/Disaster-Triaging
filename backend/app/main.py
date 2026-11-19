@@ -150,5 +150,7 @@ def health_check(db: Session = Depends(get_db)):
         "text_model_loaded": text_loaded,
         "vision_model_loaded": vision_loaded,
         "available_inference_modes": modes_available,
+        "model_variant": "free-tier-supervised-retrieval" if settings.LITE_MODEL_ENABLED else "full-research-model",
+        "storage_persistence": "ephemeral" if settings.LITE_MODEL_ENABLED else "configured",
         "uptime_seconds": uptime,
     }
