@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { IncidentDetail, UserRole } from '../types';
-import { getIncidentByIdApi, updateIncidentApi, uploadAttachmentsApi } from '../api/incidents';
+import React, { useEffect, useState } from 'react';
+import { AlertCircle, ArrowRight, CalendarClock, Check, CheckCircle2, ClipboardList, Clock3, Download, FileText, Image as ImageIcon, MapPin, Paperclip, Send, ShieldAlert, ShieldCheck, UploadCloud, X } from 'lucide-react';
+import { getIncidentByIdApi, uploadAttachmentsApi } from '../api/incidents';
 import { acceptIncidentApi, updateResponderStatusApi } from '../api/responder';
-import { ProbabilityBars } from './ProbabilityBars';
-import { RecommendationCard } from './RecommendationCard';
+import { getApiAssetUrl, readableApiError } from '../api/client';
 import { ResponseBriefModal } from './ResponseBriefModal';
-import { X, Clock, MapPin, UserCheck, Shield, CheckCircle, Flame, AlertCircle, Clipboard, Paperclip, Upload } from 'lucide-react';
+import type { IncidentDetail, UserRole } from '../types';
 
 interface IncidentDrawerProps {
   incidentId: number | null;
@@ -14,341 +13,138 @@ interface IncidentDrawerProps {
   onIncidentUpdated?: () => void;
 }
 
+const nextStage: Record<string, {label: string; status: string}> = {
+  'Assigned': {label:'Mark team en route',status:'En Route'},
+  'En Route': {label:'Start rescue work',status:'Rescue In Progress'},
+  'Rescue In Progress': {label:'Mark completed',status:'Completed'},
+};
+
+function dateTime(value?: string) {
+  if (!value) return '—';
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleString(undefined, {dateStyle:'medium',timeStyle:'short'});
+}
+function priorityClass(level: string) {
+  return level === 'Critical' ? 'critical' : level === 'High' ? 'high' : level === 'Medium' ? 'medium' : 'low';
+}
+
 export const IncidentDrawer: React.FC<IncidentDrawerProps> = ({
-  incidentId,
-  userRole = 'Citizen',
-  onClose,
-  onIncidentUpdated,
+  incidentId, userRole = 'Citizen', onClose, onIncidentUpdated,
 }) => {
   const [incident, setIncident] = useState<IncidentDetail | null>(null);
   const [loading, setLoading] = useState(false);
-  const [actionLoading, setActionLoading] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
   const [notes, setNotes] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [showBrief, setShowBrief] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
-  const [uploading, setUploading] = useState(false);
-
-  useEffect(() => {
-    if (!incidentId) return;
-    setLoading(true);
-    setError(null);
-    getIncidentByIdApi(incidentId)
-      .then((data) => setIncident(data))
-      .catch((err) => setError(err.response?.data?.detail || 'Failed to load incident details.'))
-      .finally(() => setLoading(false));
-  }, [incidentId]);
-
-  if (!incidentId) return null;
-
-  const handleAccept = async () => {
-    if (!incident) return;
-    setActionLoading(true);
-    try {
-      const updated = await acceptIncidentApi(incident.id, notes || 'Accepted by responder');
-      setIncident(updated);
-      setNotes('');
-      if (onIncidentUpdated) onIncidentUpdated();
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to accept incident.');
-    } finally {
-      setActionLoading(false);
-    }
-  };
-
-  const handleStatusUpdate = async (newStatus: string) => {
-    if (!incident) return;
-    setActionLoading(true);
-    try {
-      const updated = await updateResponderStatusApi(incident.id, newStatus, notes || `Status updated to ${newStatus}`);
-      setIncident(updated);
-      setNotes('');
-      if (onIncidentUpdated) onIncidentUpdated();
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to update status.');
-    } finally {
-      setActionLoading(false);
-    }
-  };
-
-  const handleUpload = async () => {
-    if (!selectedFiles || !incident) return;
-    setUploading(true);
-    setError(null);
-    try {
-      const filesArray = Array.from(selectedFiles);
-      await uploadAttachmentsApi(incident.id, filesArray);
-      setSelectedFiles(null);
-      const updatedData = await getIncidentByIdApi(incident.id);
-      setIncident(updatedData);
-      if (onIncidentUpdated) onIncidentUpdated();
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to upload attachments.');
-    } finally {
-      setUploading(false);
-    }
-  };
-
+  const [files, setFiles] = useState<File[]>([]);
+  const [briefOpen, setBriefOpen] = useState(false);
   const canManage = userRole === 'Responder' || userRole === 'Admin';
 
+  useEffect(() => {
+    if (incidentId == null) { setIncident(null); setError(''); return; }
+    let mounted = true;
+    setLoading(true); setError(''); setIncident(null); setNotes(''); setFiles([]);
+    getIncidentByIdApi(incidentId).then(value => {if(mounted)setIncident(value);})
+      .catch(e => {if(mounted)setError(readableApiError(e,'Failed to load incident.'));})
+      .finally(() => {if(mounted)setLoading(false);});
+    return () => {mounted=false;};
+  }, [incidentId]);
+
+  useEffect(() => {
+    if (incidentId == null) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const key = (e: KeyboardEvent) => {if(e.key === 'Escape' && !briefOpen)onClose();};
+    document.addEventListener('keydown', key);
+    return () => {document.body.style.overflow = previous;document.removeEventListener('keydown',key);};
+  }, [incidentId, onClose, briefOpen]);
+
+  if (incidentId == null) return null;
+
+  const updateWorkflow = async (status?: string) => {
+    if (!incident || busy) return;
+    setBusy(true); setError('');
+    try {
+      const result = status ? await updateResponderStatusApi(incident.id,status,notes.trim() || undefined)
+        : await acceptIncidentApi(incident.id,notes.trim() || undefined);
+      setIncident(result); setNotes(''); onIncidentUpdated?.();
+    } catch(e) { setError(readableApiError(e,'Could not change incident status.')); }
+    finally {setBusy(false);}
+  };
+  const upload = async () => {
+    if (!incident || !files.length || busy) return;
+    if (files.some(x=>x.size>10*1024*1024)){setError('Each attachment must be 10 MB or smaller.');return;}
+    setBusy(true);setError('');
+    try {
+      await uploadAttachmentsApi(incident.id,files);
+      setIncident(await getIncidentByIdApi(incident.id));
+      setFiles([]);onIncidentUpdated?.();
+    } catch(e) {setError(readableApiError(e,'Could not upload attachments.'));}
+    finally {setBusy(false);}
+  };
+  const next = incident ? nextStage[incident.status] : undefined;
+  const image = incident ? getApiAssetUrl(incident.image_url) : '';
+
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/75 backdrop-blur-sm transition-opacity">
-      <div className="w-full max-w-2xl bg-slate-900 border-l border-slate-800 h-full max-h-full flex flex-col shadow-2xl min-h-0 overflow-hidden">
-        {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/50 flex-shrink-0">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono text-slate-400">INCIDENT #{incidentId}</span>
-              {incident && (
-                <span className={`px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded ${
-                  incident.priority_level === 'Critical' ? 'bg-red-950 text-red-400 border border-red-800' :
-                  incident.priority_level === 'High' ? 'bg-amber-950 text-amber-400 border border-amber-800' : 'bg-slate-800 text-slate-300'
-                }`}>
-                  {incident.priority_level} Priority
-                </span>
-              )}
+    <>
+      <div className="drawer-overlay" onMouseDown={event=>{if(event.target===event.currentTarget)onClose();}}>
+        <aside className="incident-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+          <header className="drawer-header">
+            <div><div className="overline">INCIDENT INTELLIGENCE / #{incidentId}</div>
+              <h2 id="drawer-title">{incident?.title || (loading?'Loading incident…':'Incident details')}</h2>
             </div>
-            <h2 className="text-lg font-bold text-slate-100 truncate mt-0.5">
-              {incident?.title || 'Loading Incident Telemetry...'}
-            </h2>
+            <button className="icon-button" type="button" aria-label="Close incident details" onClick={onClose}><X size={21}/></button>
+          </header>
+
+          <div className="drawer-body">
+            {loading && <div className="loading-panel"><span className="button-spinner dark-spinner"/><strong>Loading case details…</strong></div>}
+            {error && <div className="alert-banner error" role="alert"><AlertCircle size={18}/>{error}</div>}
+            {incident && !loading && (
+              <>
+                <div className="drawer-pills"><span className={'priority-pill '+priorityClass(incident.priority_level)}>{incident.priority_level} priority</span><span className="status-pill">{incident.status}</span><span className="drawer-time"><Clock3 size={14}/>{dateTime(incident.created_at)}</span></div>
+                <div className="drawer-summary-grid">
+                  <div><small>Predicted disaster</small><strong>{incident.disaster_type}</strong></div>
+                  <div><small>Priority score</small><strong>{incident.priority_score.toFixed(1)} <em>/ 100</em></strong></div>
+                  <div><small>Model confidence</small><strong>{(incident.confidence*100).toFixed(1)}%</strong></div>
+                  <div><small>Detected language</small><strong>{incident.language_detected||'—'}</strong></div>
+                </div>
+                {image && <div className="drawer-media"><img src={image} alt="Photograph submitted with this report"/><span><ImageIcon size={14}/> Report image</span></div>}
+                <section className="drawer-section"><h3><FileText size={18}/> Citizen report</h3><p className="report-quote">{incident.description || 'Image-only submission; no text description supplied.'}</p></section>
+                {incident.location && <section className="drawer-section"><h3><MapPin size={18}/> Location</h3><div className="location-summary"><strong>{incident.location.address_text || 'Coordinates provided'}</strong><small>{incident.location.latitude.toFixed(5)}, {incident.location.longitude.toFixed(5)}</small></div></section>}
+                <section className="drawer-section"><div className="drawer-section-title"><h3><ClipboardList size={18}/> Response brief</h3><button className="btn btn-outline btn-small" type="button" onClick={()=>setBriefOpen(true)}>Open brief <ArrowRight size={15}/></button></div>
+                  <p className="drawer-helper">Confirmed incident details, derived risk assessment, suggested resources and timeline—generated from the backend.</p></section>
+
+                {incident.recommendations?.length>0 && <section className="drawer-section"><h3><ShieldCheck size={18}/> Suggested review actions</h3><ul className="recommendation-list">{incident.recommendations.map((r,i)=><li key={i}><Check size={15}/>{r}</li>)}</ul><p className="drawer-helper">AI- and rule-derived suggestions; require human verification.</p></section>}
+                {Object.keys(incident.class_probabilities||{}).length>0 && <section className="drawer-section"><h3>Model probabilities</h3><div className="drawer-probs">{Object.entries(incident.class_probabilities).sort((a,b)=>b[1]-a[1]).map(([label,value])=><div key={label}><span>{label}</span><div><i style={{width:Math.max(0,Math.min(100,value*100))+'%'}}/></div><b>{(value*100).toFixed(1)}%</b></div>)}</div></section>}
+
+                <section className="drawer-section"><h3><Paperclip size={18}/> Attachments</h3>
+                  {incident.attachments?.length ? <div className="attachment-list">{incident.attachments.map(a=><div className="attachment-row" key={a.id}><Paperclip size={16}/><span><strong>{a.file_name}</strong><small>{(a.file_size/1024).toFixed(1)} KB</small></span>
+                    {getApiAssetUrl(a.file_path) && <a href={getApiAssetUrl(a.file_path)} target="_blank" rel="noopener noreferrer">View <ArrowRight size={14}/></a>}</div>)}</div>
+                  :<p className="drawer-helper">No additional attachments yet.</p>}
+                  {canManage && <div className="attachment-uploader"><label className="file-input-label" htmlFor="attachment-input"><UploadCloud size={18}/> Add evidence files</label><input id="attachment-input" type="file" multiple onChange={e=>setFiles(Array.from(e.target.files||[]))}/>{files.length>0 && <button className="btn btn-outline btn-small" type="button" disabled={busy} onClick={()=>void upload()}>Upload {files.length} file{files.length>1?'s':''}</button>}</div>}
+                </section>
+
+                <section className="drawer-section"><h3><CalendarClock size={18}/> Status history</h3>
+                  {incident.status_history?.length ? <ol className="timeline">{incident.status_history.map(h=><li key={h.id}><span className="timeline-dot"/><div><strong>{h.new_status}</strong><small>{dateTime(h.created_at)}</small>{h.notes && <p>{h.notes}</p>}</div></li>)}</ol>
+                  :<p className="drawer-helper">No status changes recorded yet.</p>}
+                </section>
+
+                <section className="drawer-actions-section"><div className="overline">HUMAN-AUTHORIZED ACTIONS</div>
+                  <h3>Manage this case</h3>
+                  {canManage ? <><label className="field-label" htmlFor="responder-notes">Responder notes <span className="optional">Optional</span></label><textarea id="responder-notes" className="dt-textarea" value={notes} onChange={e=>setNotes(e.target.value)} rows={3} placeholder="Add relevant action notes before updating…"/>
+                    {incident.status==='Pending' && <button type="button" className="btn btn-coral btn-submit" disabled={busy} onClick={()=>void updateWorkflow()}><ShieldCheck size={17}/> {busy?'Working…':'Accept incident'}</button>}
+                    {next && <button type="button" className="btn btn-coral btn-submit" disabled={busy} onClick={()=>void updateWorkflow(next.status)}><Send size={17}/> {busy?'Updating…':next.label}</button>}
+                    {incident.status==='Completed' && <div className="completion-note"><CheckCircle2 size={20}/> Workflow marked completed.</div>}
+                    <p className="drawer-helper">The status change is saved in the backend and reflected in the incident timeline.</p>
+                  </>:<div className="access-restricted"><ShieldAlert size={19}/><span>Read-only view. Authorized Responder or Admin sign-in is required to change status.</span></div>}
+                </section>
+              </>
+            )}
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 min-h-0">
-          {loading && (
-            <div className="flex items-center justify-center py-20">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )}
-
-          {error && (
-            <div className="p-4 bg-red-950/60 border border-red-800 rounded-xl text-red-300 text-sm flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 shrink-0" />
-              <span>{error}</span>
-            </div>
-          )}
-
-          {incident && !loading && (
-            <>
-              {/* Media & Key Telemetry Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {incident.image_url ? (
-                  <div className="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 relative h-48">
-                    <img
-                      src={incident.image_url}
-                      alt="Disaster report photo"
-                      className="w-full h-full object-cover"
-                    />
-                    <span className="absolute bottom-2 left-2 px-2 py-0.5 bg-slate-950/80 text-[10px] font-mono text-slate-300 rounded backdrop-blur">
-                      Citizen Image Upload
-                    </span>
-                  </div>
-                ) : (
-                  <div className="rounded-xl border border-slate-800/80 bg-slate-950/50 h-48 flex flex-col items-center justify-center text-slate-500">
-                    <Flame className="w-8 h-8 mb-2 opacity-50" />
-                    <span className="text-xs">No Photo Uploaded</span>
-                  </div>
-                )}
-
-                <div className="space-y-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 text-xs font-mono">
-                  <div className="flex justify-between border-b border-slate-800 pb-1">
-                    <span className="text-slate-400">Disaster Type</span>
-                    <span className="text-amber-400 font-bold">{incident.disaster_type}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-800 pb-1">
-                    <span className="text-slate-400">Priority Score</span>
-                    <span className="text-emerald-400 font-bold">{incident.priority_score.toFixed(1)} / 100</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-800 pb-1">
-                    <span className="text-slate-400">Confidence</span>
-                    <span className="text-blue-400 font-bold">{(incident.confidence * 100).toFixed(1)}%</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-800 pb-1">
-                    <span className="text-slate-400">Detected Language</span>
-                    <span className="text-purple-400 font-bold">{incident.language_detected}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-800 pb-1.5">
-                    <span className="text-slate-400">Status</span>
-                    <span className="text-cyan-400 font-bold">{incident.status}</span>
-                  </div>
-                  <button
-                    onClick={() => setShowBrief(true)}
-                    className="w-full mt-2 py-2 px-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold flex items-center justify-center gap-1.5 transition-colors font-sans text-xs"
-                  >
-                    <Clipboard className="w-4 h-4" />
-                    <span>Generate Response Brief</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Citizen Text Report */}
-              {incident.description && (
-                <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">Citizen Text Report</label>
-                  <div className="p-3.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 leading-relaxed font-sans">
-                    "{incident.description}"
-                  </div>
-                </div>
-              )}
-
-              {/* Attachments Section */}
-              <div className="space-y-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 text-xs">
-                <h4 className="font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Paperclip className="w-4 h-4 text-blue-500" /> Attachments & Documents
-                </h4>
-
-                {incident.attachments && incident.attachments.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {incident.attachments.map((att: any) => (
-                      <div key={att.id} className="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between gap-2">
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate text-slate-200 font-mono text-[11px] font-bold" title={att.file_name}>
-                            {att.file_name}
-                          </p>
-                          <span className="text-[10px] text-slate-500 font-mono">
-                            {(att.file_size / 1024).toFixed(1)} KB
-                          </span>
-                        </div>
-                        <a
-                          href={att.file_path.startsWith('/') ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${att.file_path}` : att.file_path}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-2 py-1 bg-slate-800 hover:bg-blue-600 hover:text-white text-[10px] rounded-lg transition-colors font-mono"
-                        >
-                          View
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-slate-500 font-mono text-[11px]">No additional files attached.</p>
-                )}
-
-                <div className="pt-2 border-t border-slate-800/50 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                  <input
-                    type="file"
-                    multiple
-                    onChange={(e) => setSelectedFiles(e.target.files)}
-                    className="flex-1 text-slate-400 bg-slate-950 border border-slate-800 rounded-lg p-1 text-[11px] file:bg-slate-800 file:text-slate-200 file:border-0 file:rounded file:px-2 file:py-0.5 file:mr-2 file:hover:bg-slate-700 cursor-pointer"
-                  />
-                  <button
-                    onClick={handleUpload}
-                    disabled={uploading || !selectedFiles}
-                    className="py-1 px-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white rounded-lg font-bold flex items-center justify-center gap-1.5 transition-colors font-mono disabled:opacity-50 text-[11px]"
-                  >
-                    <Upload className="w-3.5 h-3.5" />
-                    <span>{uploading ? 'Uploading...' : 'Upload'}</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Response Directives */}
-              <RecommendationCard
-                recommendations={incident.recommendations}
-                priorityLevel={incident.priority_level}
-                disasterType={incident.disaster_type}
-              />
-
-              {/* Probability Breakdown */}
-              <div className="space-y-2.5">
-                <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                  Model Probability Breakdown (All 6 Classes)
-                </h4>
-                <div className="p-4 bg-slate-950 border border-slate-800 rounded-xl">
-                  <ProbabilityBars
-                    probabilities={incident.class_probabilities}
-                    predictedClass={incident.disaster_type}
-                  />
-                </div>
-              </div>
-
-              {/* Status History Timeline */}
-              {incident.status_history && incident.status_history.length > 0 && (
-                <div className="space-y-2.5">
-                  <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">Incident Status Audit Log</h4>
-                  <div className="space-y-2 border-l-2 border-slate-800 pl-4">
-                    {incident.status_history.map((hist) => (
-                      <div key={hist.id} className="relative text-xs space-y-0.5">
-                        <div className="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-blue-500 border-2 border-slate-900" />
-                        <div className="flex justify-between font-mono text-[11px] text-slate-400">
-                          <span>{hist.new_status}</span>
-                          <span>{new Date(hist.created_at).toLocaleTimeString()}</span>
-                        </div>
-                        {hist.notes && <p className="text-slate-300 text-[11px]">{hist.notes}</p>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Responder Action Controls */}
-              {canManage && (
-                <div className="pt-4 border-t border-slate-800 space-y-3 bg-slate-950/60 -mx-6 -mb-6 p-6">
-                  <h4 className="text-xs font-mono text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <UserCheck className="w-4 h-4" /> Responder Dispatch Controls
-                  </h4>
-
-                  <textarea
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Enter dispatch notes / status update details..."
-                    className="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-100 focus:outline-none focus:border-blue-500 h-16 resize-none"
-                  />
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {incident.status === 'Pending' && (
-                      <button
-                        onClick={handleAccept}
-                        disabled={actionLoading}
-                        className="py-2 px-3 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold transition-colors disabled:opacity-50 col-span-2 md:col-span-4"
-                      >
-                        {actionLoading ? 'Processing...' : 'Accept Incident'}
-                      </button>
-                    )}
-
-                    <button
-                      onClick={() => handleStatusUpdate('En Route')}
-                      disabled={actionLoading || incident.status === 'En Route'}
-                      className="py-2 px-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white rounded-lg text-xs font-semibold transition-colors"
-                    >
-                      En Route
-                    </button>
-
-                    <button
-                      onClick={() => handleStatusUpdate('Rescue In Progress')}
-                      disabled={actionLoading || incident.status === 'Rescue In Progress'}
-                      className="py-2 px-2 bg-purple-600 hover:bg-purple-500 disabled:bg-slate-800 text-white rounded-lg text-xs font-semibold transition-colors"
-                    >
-                      In Progress
-                    </button>
-
-                    <button
-                      onClick={() => handleStatusUpdate('Completed')}
-                      disabled={actionLoading || incident.status === 'Completed'}
-                      className="py-2 px-2 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 text-white rounded-lg text-xs font-semibold transition-colors col-span-2"
-                    >
-                      Mark Completed
-                    </button>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+          <footer className="drawer-footer"><span>Research prototype · no real dispatch</span><button type="button" className="btn btn-outline btn-small" onClick={onClose}>Close</button></footer>
+        </aside>
       </div>
-      {showBrief && incident && (
-        <ResponseBriefModal
-          incidentId={incident.id}
-          onClose={() => setShowBrief(false)}
-        />
-      )}
-    </div>
+      {briefOpen && incidentId!=null && <ResponseBriefModal incidentId={incidentId} onClose={()=>setBriefOpen(false)}/>}
+    </>
   );
 };
