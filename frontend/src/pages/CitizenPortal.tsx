@@ -1,422 +1,214 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AlertCircle, ArrowRight, ArrowUpRight, Camera, Check, CheckCircle2, ChevronDown, Crosshair, FileImage, Globe2, ImagePlus, Info, Layers3, MapPin, Navigation, RadioTower, RotateCcw, Send, ShieldCheck, Sparkles, UploadCloud, X } from 'lucide-react';
 import { createIncidentApi } from '../api/incidents';
-import { IncidentDetail } from '../types';
-import { ProbabilityBars } from '../components/ProbabilityBars';
-import { RecommendationCard } from '../components/RecommendationCard';
+import { readableApiError } from '../api/client';
 import { LeafletMap } from '../components/LeafletMap';
-import {
-  UploadCloud,
-  MapPin,
-  Send,
-  CheckCircle2,
-  AlertTriangle,
-  Clock,
-  Sparkles,
-  RefreshCw,
-  Globe2,
-  Cpu,
-  Layers,
-  Check,
-  Navigation,
-} from 'lucide-react';
+import type { IncidentDetail } from '../types';
 
-export const CitizenPortal: React.FC = () => {
+interface CitizenPortalProps {
+  onViewOperations: () => void;
+  apiAvailable?: boolean;
+}
+
+const samples = [
+  { label: 'English · Flood', text: 'Flood water is rising rapidly around the neighbourhood. Several residents are trapped on rooftops and need assessment.' },
+  { label: 'हिन्दी · भूकंप', text: 'भूकंप के बाद एक इमारत क्षतिग्रस्त है, अंदर कुछ लोग फंसे हो सकते हैं। सहायता की जरूरत है।' },
+  { label: 'Hinglish · Fire', text: 'Building mein aag lag gayi hai, smoke bohot hai. Log bahar wait kar rahe hain, help chahiye.' },
+];
+const maxBytes = 10 * 1024 * 1024;
+
+function tone(level: string) {
+  if (level === 'Critical') return 'critical';
+  if (level === 'High') return 'high';
+  if (level === 'Medium') return 'medium';
+  return 'low';
+}
+function validCoordinates(lat: string, lng: string) {
+  if (!lat.trim() || !lng.trim()) return false;
+  const a = Number(lat), b = Number(lng);
+  return Number.isFinite(a) && Number.isFinite(b) && a >= -90 && a <= 90 && b >= -180 && b <= 180;
+}
+
+export const CitizenPortal: React.FC<CitizenPortalProps> = ({ onViewOperations, apiAvailable = true }) => {
   const [description, setDescription] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [latitude, setLatitude] = useState<number>(28.6139); // Default New Delhi
-  const [longitude, setLongitude] = useState<number>(77.2090);
-  const [addressText, setAddressText] = useState('');
-  const [gpsStatus, setGpsStatus] = useState<string>('Detecting location...');
-  const [showManualMap, setShowManualMap] = useState(false);
-
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [preview, setPreview] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [address, setAddress] = useState('');
+  const [showMap, setShowMap] = useState(false);
+  const [locating, setLocating] = useState(false);
+  const [locationSource, setLocationSource] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<IncidentDetail | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
-  // Auto request browser GPS on mount
   useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setLatitude(pos.coords.latitude);
-          setLongitude(pos.coords.longitude);
-          setGpsStatus(`GPS Acquired: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`);
-        },
-        (err) => {
-          setGpsStatus('GPS permission denied. Please select location manually on map.');
-          setShowManualMap(true);
-        },
-        { timeout: 8000 }
-      );
-    } else {
-      setGpsStatus('Geolocation not supported. Please select location manually.');
-      setShowManualMap(true);
-    }
-  }, []);
+    if (!photo) { setPreview(''); return; }
+    const url = URL.createObjectURL(photo);
+    setPreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [photo]);
 
-  const handleImageChange = (file: File) => {
-    setImageFile(file);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result as string);
-    };
-    reader.readAsDataURL(file);
+  const coordsOK = validCoordinates(latitude, longitude);
+  const formOK = (description.trim().length >= 10 || photo !== null) && coordsOK;
+  const choosePhoto = (file?: File) => {
+    if (!file) return;
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      setError('Choose a JPG, PNG or WEBP image.'); return;
+    }
+    if (file.size > maxBytes) { setError('Images must be 10 MB or smaller.'); return; }
+    setPhoto(file); setError('');
   };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleImageChange(e.dataTransfer.files[0]);
-    }
+  const locate = () => {
+    if (!navigator.geolocation) { setError('Geolocation is not supported. Enter coordinates manually or select on the map.'); return; }
+    setLocating(true); setError('');
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        setLatitude(String(position.coords.latitude));
+        setLongitude(String(position.coords.longitude));
+        setLocationSource('GPS location selected'); setLocating(false);
+      },
+      () => { setError('Could not get your location. Choose a point on the map or enter coordinates manually.'); setLocating(false); },
+      { timeout: 10000, maximumAge: 120000, enableHighAccuracy: false }
+    );
   };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!description.trim() && !imageFile) {
-      setError('Please provide at least a text description or upload a disaster photo.');
-      return;
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!formOK) {
+      setError('Add a report (at least 10 characters) or photo, then confirm a valid location.'); return;
     }
-
-    setLoading(true);
-    setError(null);
-
-    const formData = new FormData();
-    if (description) formData.append('description', description);
-    if (imageFile) formData.append('image', imageFile);
-    formData.append('latitude', latitude.toString());
-    formData.append('longitude', longitude.toString());
-    if (addressText) formData.append('address_text', addressText);
-
+    setLoading(true); setError(''); setResult(null);
+    const form = new FormData();
+    if (description.trim()) form.append('description', description.trim());
+    if (photo) form.append('image', photo);
+    form.append('latitude', String(Number(latitude)));
+    form.append('longitude', String(Number(longitude)));
+    if (address.trim()) form.append('address_text', address.trim());
+    form.append('application_context', 'Citizen Portal');
     try {
-      const res = await createIncidentApi(formData);
-      setResult(res);
-      // Smooth scroll to results
-      setTimeout(() => {
-        document.getElementById('triage-results')?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Incident submission failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+      const response = await createIncidentApi(form);
+      setResult(response);
+      requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    } catch (err) {
+      setError(readableApiError(err, 'The report could not be submitted. Please retry.'));
+    } finally { setLoading(false); }
   };
-
-  const setSampleText = (text: string) => {
-    setDescription(text);
+  const reset = () => {
+    setDescription(''); setPhoto(null); setResult(null); setError('');
+    setLatitude(''); setLongitude(''); setAddress(''); setLocationSource(''); setShowMap(false);
+    if (inputRef.current) inputRef.current.value = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8 space-y-12">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12 shadow-2xl">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/80 border border-blue-800 text-blue-400 text-xs font-mono rounded-full font-semibold">
-            <Sparkles className="w-3.5 h-3.5" /> Multimodal Emergency AI Triage System
-          </div>
-
-          <h1 className="text-3xl lg:text-5xl font-black text-slate-100 tracking-tight leading-tight">
-            Rapid Disaster Reporting & <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-400 to-blue-500">
-              Automated Emergency Prioritization
-            </span>
-          </h1>
-
-          <p className="text-sm lg:text-base text-slate-300 leading-relaxed font-sans">
-            Submit citizen report photos and multilingual text descriptions. Our deep learning ensemble evaluates disaster severity in real time and automatically dispatches emergency rescue protocols.
-          </p>
-
-          {/* Quick Metrics Bar */}
-          <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
-            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-              <span className="text-slate-400 block text-[10px]">VISION ENSEMBLE</span>
-              <span className="text-amber-400 font-bold text-sm">6 Disaster Classes</span>
-            </div>
-            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-              <span className="text-slate-400 block text-[10px]">TEXT REGRESSOR</span>
-              <span className="text-emerald-400 font-bold text-sm">Priority 0–100</span>
-            </div>
-            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-              <span className="text-slate-400 block text-[10px]">LANGUAGES</span>
-              <span className="text-blue-400 font-bold text-sm">EN / HI / Hinglish</span>
-            </div>
-            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-              <span className="text-slate-400 block text-[10px]">LATENCY</span>
-              <span className="text-purple-400 font-bold text-sm">&lt; 800ms Pipeline</span>
-            </div>
-          </div>
+    <div className="page-stack">
+      <section className="report-hero">
+        <div className="report-hero-copy">
+          <div className="overline on-dark"><span className="tiny-live-dot" /> MULTILINGUAL RESPONSE RESEARCH</div>
+          <h1>Every report matters.<br /><em>Clarity saves time.</em></h1>
+          <p>Share an incident description, optional photograph and a confirmed location. Our research models classify the report and estimate priority for human review.</p>
+          <a className="hero-link" href="#report-form">Create a report <ArrowRight size={16} /></a>
+          <div className="hero-tags"><span><Globe2 size={14} /> English · हिन्दी · Hinglish</span><span><Layers3 size={14} /> Text + image analysis</span></div>
+        </div>
+        <div className="signal-art" aria-hidden="true">
+          <div className="signal-ring r1" /><div className="signal-ring r2" /><div className="signal-ring r3" />
+          <div className="signal-center"><RadioTower size={42} /></div>
+          <div className="floating-signal signal-one"><span>01</span><strong>Report</strong><small>Received</small></div>
+          <div className="floating-signal signal-two"><span>02</span><strong>Analyze</strong><small>Model output</small></div>
+          <div className="floating-signal signal-three"><span>03</span><strong>Review</strong><small>Human action</small></div>
         </div>
       </section>
 
-      {/* Incident Report Form */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-8 space-y-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-            <div>
-              <h2 className="text-lg font-bold text-slate-100">Report Emergency Incident</h2>
-              <p className="text-xs text-slate-400">Upload disaster photo and describe the situation</p>
-            </div>
-            <span className="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-800">
-              Live Triage Form
-            </span>
+      <div className="section-intro">
+        <div><div className="overline">CITIZEN REPORTING WORKFLOW</div><h2>Tell us what happened.</h2><p>Three simple steps to prepare a report for review.</p></div>
+        <span className="section-count">01 / REPORT</span>
+      </div>
+
+      <div className="report-grid" id="report-form">
+        <form className="dt-card form-card" onSubmit={onSubmit}>
+          <div className="form-section-head"><span className="step-number">01</span><div><h3>Describe the situation</h3><p>Your report can be written in English, Hindi or Hinglish.</p></div></div>
+          <label className="field-label" htmlFor="incident-description">What is happening?</label>
+          <textarea id="incident-description" rows={5} maxLength={5000} className="dt-textarea report-textarea"
+            placeholder="Describe what you can see, who may be affected, and why the situation needs attention…"
+            value={description} onChange={e => setDescription(e.target.value)} />
+          <div className="input-meta"><span>Keep personal identifying details out of prototype reports.</span><span>{description.length} / 5000</span></div>
+          <div className="sample-row"><span>TRY A SAMPLE</span>{samples.map(s => <button key={s.label} type="button" className="sample-chip" onClick={() => setDescription(s.text)}>{s.label}</button>)}</div>
+
+          <div className="form-rule" />
+          <div className="form-section-head"><span className="step-number">02</span><div><h3>Add visual context <span className="optional">Optional</span></h3><p>Photos can help the classifier understand the scene.</p></div></div>
+          <div className={'upload-zone' + (photo ? ' has-image' : '')} onDragOver={e => e.preventDefault()}
+            onDrop={e => { e.preventDefault(); choosePhoto(e.dataTransfer.files?.[0]); }}>
+            {photo && preview ? (
+              <div className="preview-photo">
+                <img src={preview} alt="Selected disaster report upload" />
+                <div><strong>{photo.name}</strong><small>{(photo.size / 1024 / 1024).toFixed(2)} MB</small></div>
+                <button type="button" className="icon-button" onClick={() => { setPhoto(null); if(inputRef.current)inputRef.current.value=''; }} aria-label="Remove image"><X size={17} /></button>
+              </div>
+            ) : (
+              <label htmlFor="incident-photo" className="upload-label"><span className="upload-icon"><ImagePlus size={25} /></span><strong>Drop your image here, or browse files</strong><small>JPG, PNG or WEBP · Maximum 10 MB</small></label>
+            )}
+            <input id="incident-photo" ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp"
+              onChange={e => choosePhoto(e.target.files?.[0])} className="visually-hidden" />
           </div>
 
-          {error && (
-            <div className="p-4 bg-red-950/80 border border-red-800 rounded-xl text-red-300 text-xs flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 shrink-0 text-red-400" />
-              <span>{error}</span>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Drag and Drop Image Upload */}
-            <div className="space-y-2">
-              <label className="text-xs font-mono text-slate-300 uppercase tracking-wider font-semibold">
-                1. Upload Disaster Photo (Optional)
-              </label>
-              
-              <div
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={handleDrop}
-                className="border-2 border-dashed border-slate-700 hover:border-blue-500 bg-slate-950/60 rounded-2xl p-6 text-center transition-colors cursor-pointer relative"
-              >
-                {imagePreview ? (
-                  <div className="relative group max-h-48 mx-auto w-fit">
-                    <img
-                      src={imagePreview}
-                      alt="Preview"
-                      className="max-h-48 rounded-xl object-contain border border-slate-700"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setImageFile(null);
-                        setImagePreview(null);
-                      }}
-                      className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full text-xs shadow-lg hover:bg-red-500"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ) : (
-                  <label className="cursor-pointer space-y-3 block">
-                    <UploadCloud className="w-10 h-10 text-blue-500 mx-auto animate-bounce" />
-                    <div>
-                      <p className="text-xs font-semibold text-slate-200">
-                        Click or Drag & Drop photo here
-                      </p>
-                      <p className="text-[10px] text-slate-500 mt-1 font-mono">
-                        Supports JPG, PNG, WEBP (Max 10MB)
-                      </p>
-                    </div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={(e) => e.target.files?.[0] && handleImageChange(e.target.files[0])}
-                    />
-                  </label>
-                )}
-              </div>
-            </div>
-
-            {/* Multilingual Text Box */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-mono text-slate-300 uppercase tracking-wider font-semibold">
-                  2. Citizen Text Report
-                </label>
-                <span className="text-[10px] font-mono text-purple-400">Supports English / Hindi / Hinglish</span>
-              </div>
-
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={4}
-                placeholder="Describe the emergency... e.g. 'Massive flood waters rising fast. 4 people trapped on roof requiring immediate boat rescue!'"
-                className="w-full p-4 bg-slate-950 border border-slate-800 rounded-2xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 leading-relaxed resize-none"
-              />
-
-              {/* Sample Prompt Chips */}
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono text-slate-500">Quick Test Prompts:</span>
-                <div className="flex flex-wrap gap-1.5 text-[11px]">
-                  <button
-                    type="button"
-                    onClick={() => setSampleText("Massive flood waters rising rapidly. Four people trapped on roof needing immediate boat rescue!")}
-                    className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-blue-300 rounded-lg transition-colors border border-slate-700"
-                  >
-                    🇬🇧 English Flood
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSampleText("बाढ़ का पानी घर में घुस गया है, 3 लोग फंसे हैं, तुरंत नाव भेजो!")}
-                    className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded-lg transition-colors border border-slate-700"
-                  >
-                    🇮🇳 Hindi Flood
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSampleText("Aag bohot fail gayi hai building me, rescue team and ambulance jaldi bhejo!")}
-                    className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-lg transition-colors border border-slate-700"
-                  >
-                    🗣️ Hinglish Fire
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* GPS Location & Map Toggle */}
-            <div className="space-y-3 p-4 bg-slate-950 border border-slate-800 rounded-2xl">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs text-slate-300">
-                  <Navigation className="w-4 h-4 text-blue-400" />
-                  <span className="font-mono text-[11px]">{gpsStatus}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setShowManualMap(!showManualMap)}
-                  className="text-xs text-blue-400 hover:underline font-mono"
-                >
-                  {showManualMap ? 'Hide Map' : 'Select on Map'}
-                </button>
-              </div>
-
-              {showManualMap && (
-                <div className="space-y-2">
-                  <span className="text-[10px] text-slate-400 font-mono">
-                    Click anywhere on the map to set exact incident coordinates:
-                  </span>
-                  <div className="h-56">
-                    <LeafletMap
-                      center={[latitude, longitude]}
-                      zoom={12}
-                      selectedLocation={{ latitude, longitude }}
-                      onSelectLocation={(lat, lng) => {
-                        setLatitude(lat);
-                        setLongitude(lng);
-                        setGpsStatus(`Manual GPS Selected: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
-                      }}
-                      interactiveSelect={true}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-red-600 via-amber-600 to-blue-600 hover:opacity-95 text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-xl shadow-red-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-            >
-              {loading ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Running AI Inference & Triage...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="w-4 h-4" />
-                  <span>Submit Incident Report</span>
-                </>
-              )}
-            </button>
-          </form>
-        </div>
-
-        {/* Informational Panel / Feature Cards */}
-        <div className="lg:col-span-5 space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-            <h3 className="text-sm font-mono font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-blue-400" /> AI System Architecture
-            </h3>
-
-            <div className="space-y-3 text-xs text-slate-300">
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-                <span className="font-bold text-amber-400 block">Weighted Vision Ensemble (85.26% Accuracy)</span>
-                <p className="text-slate-400 text-[11px]">
-                  Fuses prediction probabilities from Swin Transformer Tiny, ConvNeXt Tiny, Vision Transformer (ViT-B/16), and EfficientNetV2-S.
-                </p>
-              </div>
-
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-                <span className="font-bold text-emerald-400 block">Multilingual Text Priority Regressor</span>
-                <p className="text-slate-400 text-[11px]">
-                  SentenceTransformer (all-MiniLM-L6-v2) embedding + CatBoost regressor delivering continuous 0–100 priority scores across English, Hindi, and Hinglish.
-                </p>
-              </div>
-
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-                <span className="font-bold text-purple-400 block">Automated Dispatch Protocol</span>
-                <p className="text-slate-400 text-[11px]">
-                  Maps disaster classifications directly to action directives (rescue boats, fire brigades, heavy excavators) for instantaneous emergency responder dispatch.
-                </p>
-              </div>
-            </div>
+          <div className="form-rule" />
+          <div className="form-section-head"><span className="step-number">03</span><div><h3>Confirm incident location</h3><p>We never assume that your device location is where the incident happened.</p></div></div>
+          <div className="location-actions">
+            <button type="button" className="btn btn-outline" disabled={locating} onClick={locate}><Crosshair size={16} />{locating ? 'Locating…' : 'Use my current location'}</button>
+            <button type="button" className="btn btn-quiet" onClick={() => setShowMap(!showMap)}><MapPin size={16} /> {showMap ? 'Hide map' : 'Choose on map'} <ChevronDown size={14} /></button>
           </div>
-        </div>
-      </section>
+          {showMap && <div className="map-picker"><LeafletMap center={coordsOK ? [Number(latitude), Number(longitude)] : [20.5937, 78.9629]}
+            zoom={coordsOK ? 12 : 5} interactiveSelect selectedLocation={coordsOK ? { latitude: Number(latitude), longitude: Number(longitude) } : undefined}
+            onSelectLocation={(lat, lng) => { setLatitude(String(lat)); setLongitude(String(lng)); setLocationSource('Map location selected'); }} /></div>}
+          <div className="two-fields">
+            <div><label className="field-label" htmlFor="latitude">Latitude</label><input className="dt-input" id="latitude" type="number" step="any" min="-90" max="90" value={latitude} placeholder="e.g. 28.6139" onChange={e => {setLatitude(e.target.value);setLocationSource('Manual coordinates');}} /></div>
+            <div><label className="field-label" htmlFor="longitude">Longitude</label><input className="dt-input" id="longitude" type="number" step="any" min="-180" max="180" value={longitude} placeholder="e.g. 77.2090" onChange={e => {setLongitude(e.target.value);setLocationSource('Manual coordinates');}} /></div>
+          </div>
+          <label className="field-label" htmlFor="address">Area or landmark <span className="optional">Optional</span></label>
+          <input id="address" className="dt-input" maxLength={250} value={address} onChange={e => setAddress(e.target.value)} placeholder="e.g. Near the main bridge, Zone 3" />
+          <div className={'location-confirm' + (coordsOK ? ' confirmed' : '')}><Navigation size={15} /> {coordsOK ? (locationSource || 'Coordinates entered') + ' · ' + Number(latitude).toFixed(4) + ', ' + Number(longitude).toFixed(4) : 'Select a location to enable submission'}</div>
 
-      {/* Post-Submission Triage Results Section */}
+          {error && <div className="alert-banner error" role="alert"><AlertCircle size={18} />{error}</div>}
+          {!apiAvailable && <div className="alert-banner warning" role="status">Backend appears offline. Start the FastAPI service before submitting.</div>}
+          <button type="submit" className="btn btn-coral btn-submit" disabled={loading || !formOK || !apiAvailable}>
+            {loading ? <><span className="button-spinner" /> Analyzing report…</> : <><Send size={18} /> Submit for triage <ArrowUpRight size={17} /></>}
+          </button>
+          <div className="under-submit"><ShieldCheck size={15} /> Creates a research database incident, not an emergency dispatch.</div>
+        </form>
+
+        <aside className="report-aside">
+          <div className="dt-card process-card">
+            <div className="card-overline">HOW IT WORKS</div><h3>A thoughtful signal,<br />not an automatic decision.</h3>
+            <div className="process-line"><div className="process-icon peach"><FileImage size={19} /></div><div><strong>01 / Collect</strong><p>Combine a written report, optional photo and coordinates.</p></div></div>
+            <div className="process-line"><div className="process-icon blue"><Sparkles size={19} /></div><div><strong>02 / Analyze</strong><p>Configured models estimate category, confidence and priority.</p></div></div>
+            <div className="process-line"><div className="process-icon mint"><CheckCircle2 size={19} /></div><div><strong>03 / Human review</strong><p>Authorized users can inspect and update cases in the command view.</p></div></div>
+          </div>
+          <div className="dt-card architecture-card"><div className="card-overline">UNDER THE HOOD</div><h3>Multimodal by design</h3>
+            <div className="architecture-item"><Globe2 size={18} /><div><strong>Multilingual NLP</strong><span>English, Hindi and Hinglish scoring</span></div></div>
+            <div className="architecture-item"><Camera size={18} /><div><strong>Vision models</strong><span>Image classification when a photograph is attached</span></div></div>
+            <div className="architecture-item"><ShieldCheck size={18} /><div><strong>Role-aware workflow</strong><span>Citizen reporting, responders and admin review</span></div></div>
+          </div>
+          <div className="aside-info"><Info size={18} /><p>Model outputs are research estimates and can be wrong. They are not medical or emergency instructions.</p></div>
+        </aside>
+      </div>
+
       {result && (
-        <section id="triage-results" className="bg-slate-900 border-2 border-emerald-500/50 rounded-3xl p-6 lg:p-8 space-y-6 shadow-2xl shadow-emerald-500/10 animate-fade-in">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-800 pb-4 gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-950 border border-emerald-700 flex items-center justify-center text-emerald-400">
-                <CheckCircle2 className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-slate-100">Incident Triage Complete</h3>
-                <p className="text-xs font-mono text-slate-400">REQUEST ID #{result.id} • STATUS: {result.status}</p>
-              </div>
-            </div>
-            <span className="text-xs font-mono text-emerald-400 bg-emerald-950 px-3 py-1 rounded-full border border-emerald-800">
-              Estimated Processing Time: &lt; 0.8s
-            </span>
+        <div ref={resultRef} id="triage-results" className="result-wrap">
+          <div className="result-header"><div className="result-check"><Check size={24} /></div><div><div className="overline">REPORT RECORDED</div><h2>Triage analysis ready</h2><p>Reference #{result.id} · Status: {result.status}. No responders have been automatically dispatched.</p></div></div>
+          <div className="result-metrics">
+            <div><span>Predicted category</span><strong>{result.disaster_type || 'Unclassified'}</strong></div>
+            <div><span>Priority score</span><strong>{Number(result.priority_score).toFixed(1)}<small> / 100</small></strong></div>
+            <div><span>Priority level</span><strong className={'priority-text ' + tone(result.priority_level)}>{result.priority_level}</strong></div>
+            <div><span>Language</span><strong>{result.language_detected || 'Not determined'}</strong></div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 font-mono">
-              <span className="text-xs text-slate-400 block">Disaster Type</span>
-              <span className="text-xl font-bold text-amber-400">{result.disaster_type}</span>
-            </div>
-
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 font-mono">
-              <span className="text-xs text-slate-400 block">Priority Score</span>
-              <span className="text-xl font-bold text-emerald-400">{result.priority_score.toFixed(1)} / 100</span>
-            </div>
-
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 font-mono">
-              <span className="text-xs text-slate-400 block">Priority Level</span>
-              <span className="text-xl font-bold text-red-400 uppercase">{result.priority_level}</span>
-            </div>
-
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 font-mono">
-              <span className="text-xs text-slate-400 block">Detected Language</span>
-              <span className="text-xl font-bold text-purple-400">{result.language_detected}</span>
-            </div>
-          </div>
-
-          <RecommendationCard
-            recommendations={result.recommendations}
-            priorityLevel={result.priority_level}
-            disasterType={result.disaster_type}
-          />
-
-          <div className="space-y-3">
-            <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-              Disaster Probability Breakdown (All 6 Classes)
-            </h4>
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800">
-              <ProbabilityBars
-                probabilities={result.class_probabilities}
-                predictedClass={result.disaster_type}
-              />
-            </div>
-          </div>
-        </section>
+          {result.recommendations?.length > 0 && <div className="result-panel"><h3>Suggested review actions <span>AI / rule-derived</span></h3><ul>{result.recommendations.map((item, index) => <li key={index}><Check size={15} /> {item}</li>)}</ul></div>}
+          {Object.keys(result.class_probabilities || {}).length > 0 && <div className="result-panel"><h3>Model class probabilities</h3><div className="prob-grid">{Object.entries(result.class_probabilities).sort((a,b)=>b[1]-a[1]).map(([key,val]) =>
+            <div className="prob-row" key={key}><span>{key}</span><div className="prob-track"><i style={{ width: Math.max(0,Math.min(100,Number(val)*100)) + '%' }} /></div><strong>{(Number(val)*100).toFixed(1)}%</strong></div>)}</div></div>}
+          <div className="result-actions"><button className="btn btn-dark" type="button" onClick={onViewOperations}>Open command view <ArrowRight size={16} /></button><button className="btn btn-outline" type="button" onClick={reset}><RotateCcw size={16} /> Start a new report</button></div>
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRole } from '../types';
+import type { UserRole } from '../types';
 import { ShieldAlert, LayoutDashboard, Send, BarChart3, LogIn, LogOut, User } from 'lucide-react';
 
 interface NavbarProps {

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import L, { DivIcon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { MapLocation } from '../types';
+import type { MapLocation } from '../types';
 import { Navigation } from 'lucide-react';
 
 // Custom colored leaflet markers — created lazily (inside render, not module scope)

@@ -4,15 +4,52 @@ A multimodal disaster triaging system that combines computer vision and natural 
 
 The repository includes machine-learning pipelines, a FastAPI backend prototype (`backend/`) and a React/Vite frontend (`frontend/`). Their source code is present, but full end-to-end deployment and production readiness have not been independently verified.
 
+## DisasterSignal — redesigned interactive frontend (2026)
+
+**DisasterSignal** is a responsive research prototype that brings the citizen report workflow, responder review and incident analytics together in one interface. Its navy/coral visual system replaces the older bare-bones UI.
+
+### Screens and working integration paths
+
+- **Citizen reporting:** multilingual free-text samples (English, Hindi, Hinglish), optional JPG/PNG/WEBP uploads (10 MB limit), **explicit incident coordinates** using GPS, map or manual input, API submission and stored model-derived triage result including confidence and priority
+- **Response command:** live-from-database statistics, searchable/filterable incident queue, map pins, CSV summary export, 30-second refresh and per-incident inspection
+- **Case details:** model scores, evidence attachments, location, status audit, structured response brief with downloadable text and **role-authorized** responder transitions
+- **Intelligence hub:** backend-provided daily volume, predicted classifications, priority, status, language distributions and average recorded confidence
+- **Authentication:** normal sign-in and public **Citizen-only** registration. Admin and Responder accounts must be provisioned securely and may not be created through public registration
+
+> **Important:** This is an academic prototype; it **does not automatically dispatch emergency services**. Model predictions and suggested actions are unverified estimates and must not be used as emergency instructions. Call actual emergency services when help is needed.
+
+### Local Docker demo (frontend + FastAPI)
+
+1. Clone the repo, make a **private** local `.env` from `.env.example` (do not commit it).
+2. Generate a new signing secret using `python -c "import secrets; print(secrets.token_urlsafe(48))"` and set `JWT_SECRET` in `.env`. On a real deployment use secure secrets management.
+3. Run `docker compose up --build` from the repository root. Initial installation downloads model dependencies and may require substantial memory/storage/time.
+4. Open **http://localhost** for the frontend. FastAPI documentation is at **http://localhost:8000/docs**. The browser calls the same-origin `/api` gateway through Nginx.
+5. For a **private local demonstration only**, optionally set `DEMO_ACCOUNTS_ENABLED=true` and supply unique `DEMO_ADMIN_PASSWORD` and `DEMO_RESPONDER_PASSWORD`. Never enable public demo accounts or publish these secrets. If the database contains old accounts, review and rotate them manually.
+
+For frontend development, run FastAPI on port 8000 and `cd frontend && npm ci && npm run dev`. Vite development proxies `/api` to `http://127.0.0.1:8000`. If hosting the frontend separately, set `VITE_API_URL` to your real, appropriately CORS-enabled backend origin.
+
+### Verification
+
+- `.github/workflows/ci.yml` validates TypeScript types, builds the React/Vite frontend and checks backend Python syntax.
+- `.github/workflows/ui-smoke.yml` uses Chromium and **synthetic, mocked API data** to test navigation, form validation/report submission, dashboard queue, map, response briefs, sign-in, responder actions, charts and mobile layout. Screenshots are saved as GitHub Actions artifacts. This does **not** prove live ML inference or production integration.
+- Run backend integration tests in a properly configured environment: `python -m pytest backend/app/tests -v`.
+- Before deploying, validate the actual ML model files, external map tiles, database persistence, API connectivity, attachments, and authorized responder account settings.
+
+### Portfolio contribution
+
+The project is collaborative. My contributions include multilingual ML scoring, system integration, front-end response workflow refinements, secure UI flows, responsive design and testing. See git history and commit attribution for individual ownership.
+
+---
+
 ## Demonstration and team contributions
 
 This is an AlgOlympia team project. My resume describes work on multilingual citizen-report priority scoring and combining text predictions with disaster-image classification; it does not imply sole authorship of the entire repository.
 
 **Inspect or reproduce:** Follow the installation instructions below. Run `python -m pytest -q` to execute available tests. The supplied inference examples require compatible model checkpoints and dependencies. Model training can take time and may require datasets or weights that are not immediately available.
 
-**Current status:** The model pipelines and evaluation are documented below; the API, dashboard, incident database and interactive map remain in progress. This repository is a research prototype, not a deployed public emergency service.
+**Current status:** The model pipelines and evaluation are documented below; the UI, API, incident database and map are implemented as a prototype; real end-to-end deployment still requires verification. This repository is a research prototype, not a deployed public emergency service.
 
-**Screenshots to add after running the code:** (1) anonymized incident report with language and 0–100 priority output, (2) image inference with predicted disaster class, and (3) a genuine evaluation plot. Keep real citizen information out of the repository. No verified UI screenshots are currently included here.
+**Useful real screenshots to capture after running the code:** (1) anonymized incident report with language and 0–100 priority output, (2) image inference with predicted disaster class, and (3) a genuine evaluation plot. Keep real citizen information out of the repository. No verified UI screenshots are currently included here.
 
 **Reproducibility note:** Text-model code includes both XGBoost and CatBoost paths. Confirm which training script, checkpoint and evaluation split generated each reported metric before attributing results to one model.
 
