@@ -78,6 +78,8 @@ async function main() {
     await page.getByRole('button',{name:/Response command/}).click();
     await page.getByRole('heading',{name:/Response command/}).waitFor();
     await page.getByRole('button',{name:'View report 42'}).waitFor();
+    await page.evaluate(() => {document.documentElement.style.scrollBehavior='auto'; window.scrollTo(0,0);});
+    await page.waitForTimeout(220);
     await page.screenshot({path:'artifacts/disastersignal-command.png',fullPage:true});
     await page.getByRole('button',{name:'View report 42'}).click();
     await page.getByRole('dialog',{name:/Flood near bridge/}).waitFor();
@@ -95,12 +97,14 @@ async function main() {
     await page.getByRole('button',{name:'View report 42'}).click();
     await page.getByRole('button',{name:/Accept incident/}).waitFor();
     await page.getByRole('button',{name:/Accept incident/}).click();
-    assert.ok((await page.getByRole('dialog',{name:/Flood near bridge/}).innerText()).includes('Assigned'));
+    await page.locator('.drawer-pills .status-pill').getByText('Assigned', { exact: true }).waitFor({ timeout: 10000 });
     await page.getByRole('button',{name:'Close incident details'}).click();
 
     await page.getByRole('button',{name:/Intelligence hub/}).click();
     await page.getByRole('heading',{name:/Intelligence hub/}).waitFor();
     await page.getByText('Incidents over time').waitFor();
+    await page.evaluate(() => {document.documentElement.style.scrollBehavior='auto'; window.scrollTo(0,0);});
+    await page.waitForTimeout(220);
     await page.screenshot({path:'artifacts/disastersignal-analytics.png',fullPage:true});
 
     await page.setViewportSize({width:390,height:844});
