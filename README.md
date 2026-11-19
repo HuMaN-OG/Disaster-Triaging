@@ -1,5 +1,7 @@
 # Disaster Triaging System
 
+**Live frontend preview:** [DisasterSignal on Vercel](https://disastersignal-bhuvan.vercel.app/) — deployed in the `human-ogs-projects` Vercel team from the `main` source snapshot. The FastAPI/ML API is **not yet connected** to this deployment; incident submission, database-backed command view and server-side analytics require a separately configured persistent backend. **Do not treat this preview as operational emergency dispatch.**
+
 A multimodal disaster triaging system that combines computer vision and natural language processing to classify disaster images and estimate rescue priority from citizen reports.
 
 The repository includes machine-learning pipelines, a FastAPI backend prototype (`backend/`) and a React/Vite frontend (`frontend/`). Their source code is present, but full end-to-end deployment and production readiness have not been independently verified.
