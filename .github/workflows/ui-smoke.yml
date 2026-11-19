@@ -28,11 +28,17 @@ jobs:
         run: npm install --no-save playwright@1.55.1
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Start Vite app
+      - name: Build production frontend
+        run: npm run build
+      - name: Start production preview
         run: |
-          npx vite --host 127.0.0.1 --port 4173 >/tmp/triage-vite.log 2>&1 &
+          npm run preview -- --host 127.0.0.1 --port 4173 --strictPort >/tmp/triage-vite.log 2>&1 &
           echo $! >/tmp/triage-vite.pid
-          sleep 3
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -I --fail http://127.0.0.1:4173/
       - name: Exercise synthetic API flows in Chromium
         run: node tests/ui.smoke.cjs
       - name: Save UI screenshots
@@ -42,3 +48,6 @@ jobs:
           name: disaster-triaging-ui-evidence
           path: frontend/artifacts/
           if-no-files-found: ignore
+      - name: Print preview logs on failure
+        if: failure()
+        run: cat /tmp/triage-vite.log || true
