@@ -58,3 +58,108 @@ def test_unauthenticated_me_request_rejected(client):
     res = client.get("/auth/me")
     assert res.status_code == 401
 
+
+def test_public_registration_rejects_elevated_roles(client):
+    for role in ("Admin", "Responder"):
+        response = client.post(
+            "/auth/register",
+            json={
+                "email": f"unauthorized-{role.lower()}@disaster.org",
+                "password": "Password@123",
+                "full_name": "Unauthorized Registration",
+                "role": role,
+            },
+        )
+        assert response.status_code == 403
+        assert "Citizen" in response.json()["detail"]
+
+
+def test_default_public_registration_is_citizen(client):
+    response = client.post(
+        "/auth/register",
+        json={
+            "email": "test-default-role@disaster.org",
+            "password": "Password@123",
+            "full_name": "Default Citizen",
+        },
+    )
+    assert response.status_code == 201
+    assert response.json()["role"] == "Citizen"
+
+
+def test_admin_can_create_elevated_users(client):
+    # 1. Login as seeded admin
+    admin_login = client.post(
+        "/auth/login",
+        json={"username": "admin@disaster.org", "password": "Admin@123"},
+    )
+    assert admin_login.status_code == 200
+    token = admin_login.json()["access_token"]
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # 2. Admin creates a new Responder
+    responder_create = client.post(
+        "/admin/users",
+        json={
+            "email": "new-responder@disaster.org",
+            "password": "Password@123",
+            "full_name": "New Responder",
+            "role": "Responder",
+        },
+        headers=headers,
+    )
+    assert responder_create.status_code == 201
+    assert responder_create.json()["role"] == "Responder"
+
+    # 3. New Responder can log in and has Responder role
+    resp_login = client.post(
+        "/auth/login",
+        json={"username": "new-responder@disaster.org", "password": "Password@123"},
+    )
+    assert resp_login.status_code == 200
+    assert resp_login.json()["role"] == "Responder"
+
+    # 4. Admin creates a new Admin
+    subadmin_create = client.post(
+        "/admin/users",
+        json={
+            "email": "subadmin@disaster.org",
+            "password": "Password@123",
+            "full_name": "Secondary Admin",
+            "role": "Admin",
+        },
+        headers=headers,
+    )
+    assert subadmin_create.status_code == 201
+    assert subadmin_create.json()["role"] == "Admin"
+
+    # 5. Non-admin unauthenticated cannot call /admin/users
+    unauth = client.post(
+        "/admin/users",
+        json={
+            "email": "hacker@disaster.org",
+            "password": "Password@123",
+            "full_name": "Hacker",
+            "role": "Admin",
+        },
+    )
+    assert unauth.status_code == 401
+
+    # 6. Citizen cannot call /admin/users (forbidden)
+    citizen_login = client.post(
+        "/auth/login",
+        json={"username": "testcitizen@disaster.org", "password": "Password@123"},
+    )
+    citizen_headers = {"Authorization": f"Bearer {citizen_login.json()['access_token']}"}
+    forbidden = client.post(
+        "/admin/users",
+        json={
+            "email": "hacker2@disaster.org",
+            "password": "Password@123",
+            "full_name": "Hacker 2",
+            "role": "Admin",
+        },
+        headers=citizen_headers,
+    )
+    assert forbidden.status_code == 403
+

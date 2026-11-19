@@ -32,6 +32,8 @@ class AuthService:
         }
 
     def register_user(self, email: str, password: str, full_name: str, role: str = "Citizen") -> User:
+        if role != "Citizen":
+            raise ValueError("Public registration is restricted to Citizen accounts")
         existing = self.user_repo.get_by_email(email)
         if existing:
             raise ValueError(f"User with email '{email}' already exists")
@@ -47,42 +49,43 @@ class AuthService:
 
 
 def seed_initial_users_and_teams(db: Session) -> None:
-    """Ensure deterministic Admin, Responder, and Team exist on startup."""
+    """Seed explicit local demo accounts; never ship default privileged passwords."""
     from app.core.config import settings
+
+    if not settings.DEMO_ACCOUNTS_ENABLED:
+        return
+
+    if not settings.DEMO_ADMIN_PASSWORD or not settings.DEMO_RESPONDER_PASSWORD:
+        raise RuntimeError(
+            "Demo account seeding requires DEMO_ADMIN_PASSWORD and "
+            "DEMO_RESPONDER_PASSWORD environment variables"
+        )
+
     user_repo = UserRepository(db)
-    
-    # Default Admin
-    admin_user = user_repo.get_by_email(settings.DEMO_ADMIN_EMAIL)
-    if not admin_user:
+
+    if not user_repo.get_by_email(settings.DEMO_ADMIN_EMAIL):
         user_repo.create(
             email=settings.DEMO_ADMIN_EMAIL,
             password=settings.DEMO_ADMIN_PASSWORD,
             full_name="System Administrator",
             role="Admin",
         )
-    elif not verify_password(settings.DEMO_ADMIN_PASSWORD, admin_user.hashed_password):
-        user_repo.update(admin_user.id, password=settings.DEMO_ADMIN_PASSWORD)
 
-    # Default Responder
-    responder_user = user_repo.get_by_email(settings.DEMO_RESPONDER_EMAIL)
-    if not responder_user:
+    if not user_repo.get_by_email(settings.DEMO_RESPONDER_EMAIL):
         user_repo.create(
             email=settings.DEMO_RESPONDER_EMAIL,
             password=settings.DEMO_RESPONDER_PASSWORD,
             full_name="Lead Disaster Responder",
             role="Responder",
         )
-    elif not verify_password(settings.DEMO_RESPONDER_PASSWORD, responder_user.hashed_password):
-        user_repo.update(responder_user.id, password=settings.DEMO_RESPONDER_PASSWORD)
 
-    # Default Rescue Team
+    # Never reset an existing user's password during application startup.
     from app.models.team import Team
     if not db.query(Team).filter(Team.name == "Alpha Search & Rescue").first():
-        team = Team(
+        db.add(Team(
             name="Alpha Search & Rescue",
             specialization="Rapid Search and Extraction",
             contact_number="+1-800-RESCUE-1",
             is_active=True,
-        )
-        db.add(team)
+        ))
         db.commit()

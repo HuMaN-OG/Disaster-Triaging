@@ -12,13 +12,20 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register(user_in: UserCreate, db: Session = Depends(get_db)):
+    # Public registration must never grant elevated roles.
+    # Admin and Responder accounts can only be created by a logged-in Admin.
+    if user_in.role not in (None, "Citizen"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Public registration is restricted to Citizen accounts",
+        )
     auth_service = AuthService(db)
     try:
         user = auth_service.register_user(
             email=user_in.email,
             password=user_in.password,
             full_name=user_in.full_name,
-            role=user_in.role or "Citizen",
+            role="Citizen",
         )
         return user
     except ValueError as err:

@@ -16,6 +16,23 @@ This is an AlgOlympia team project. My resume describes work on multilingual cit
 
 **Reproducibility note:** Text-model code includes both XGBoost and CatBoost paths. Confirm which training script, checkpoint and evaluation split generated each reported metric before attributing results to one model.
 
+## Security and deployment checklist
+
+The repository is a research prototype. Do not publish a deployment with test accounts or sensitive incident data.
+
+- **Public registration is Citizen-only.** Creating Admin and Responder users is restricted to authenticated admin operations.
+- **JWT signing key:** Set `JWT_SECRET` to a fresh, unpredictable value (at least 32 characters) in the deployment environment. Without it, non-Docker development uses a random in-memory key, so tokens are invalidated on process restart. Docker Compose requires `JWT_SECRET` explicitly.
+- **Demo accounts:** Seeding is disabled by default. For private local tests only, set `DEMO_ACCOUNTS_ENABLED=true` and supply unique `DEMO_ADMIN_PASSWORD` and `DEMO_RESPONDER_PASSWORD` values. Never enable test accounts on a public server.
+- **Existing databases:** Previously seeded admin/responder accounts are **not automatically removed** by this change. Inspect your current database, remove unused demo accounts, rotate any known passwords, and invalidate old sessions before making a deployment public.
+- **CORS:** Replace allowed origins with your actual frontend URL in `CORS_ORIGINS`. Do not use wildcard origins for authenticated production applications.
+- **Testing:** Run the tests under `backend/app/tests` with a private test database and model dependencies. A passing frontend build or Python syntax check is not a complete security review.
+
+### Hand-off to deployment owner
+
+Create a local `.env` from `.env.example`, generate a fresh key with `python -c "import secrets; print(secrets.token_urlsafe(48))"`, set `JWT_SECRET`, then run `docker compose config` and verify values are present **without sharing secrets or the rendered config**. Follow with private development smoke tests for register/login, role permissions, and incident lifecycle.
+
+---
+
 ## Features
 
 ### Implemented

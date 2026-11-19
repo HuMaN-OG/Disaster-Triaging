@@ -14,6 +14,7 @@ from app.main import app
 from app.core.database import Base, get_db
 from app.services.auth_service import seed_initial_users_and_teams
 from app.services.ml_service import initialize_ml_models
+from app.core.config import settings
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test_disaster.db"
 
@@ -35,7 +36,11 @@ def override_get_db():
 def setup_database_and_models():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
-    
+
+    # Explicitly enable demo fixtures only for tests; production defaults are off.
+    settings.DEMO_ACCOUNTS_ENABLED = True
+    settings.DEMO_ADMIN_PASSWORD = "Admin@123"
+    settings.DEMO_RESPONDER_PASSWORD = "Responder@123"
     db = TestingSessionLocal()
     seed_initial_users_and_teams(db)
     db.close()
