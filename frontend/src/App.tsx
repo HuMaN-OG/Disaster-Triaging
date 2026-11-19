@@ -122,7 +122,7 @@ function App() {
           <div className="top-right">
             <div className={'api-chip ' + health} title={healthInfo}>
               {health === 'offline' ? <WifiOff size={14} /> : <Wifi size={14} />}
-              <span>{health === 'online' ? 'API connected' : health === 'degraded' ? 'Service degraded' : health === 'offline' ? 'Backend offline' : 'Connecting…'}</span>
+              <span>{health === 'online' ? 'API connected' : health === 'degraded' ? (freeTierMode ? 'Free demo · text only' : 'Service degraded') : health === 'offline' ? 'Backend offline' : 'Connecting…'}</span>
             </div>
             {currentUser ? (
               <div className="account-actions">
@@ -144,7 +144,7 @@ function App() {
             <CircleHelp size={15} className="notice-end" />
           </div>
           {freeTierMode && <div className="prototype-notice" role="note"><AlertTriangle size={16} /><span><strong>Free research demo:</strong> Text priority estimates use a small experimental model trained on English reports. Photos cannot be analysed. Stored reports and accounts may disappear when the free backend sleeps or restarts. Use fictional test data only.</span></div>}
-          {activeView === 'report' && <CitizenPortal onViewOperations={() => setPage('operations')} apiAvailable={health !== 'offline'} liteMode={freeTierMode} />}
+          {activeView === 'report' && <CitizenPortal onViewOperations={() => setPage('operations')} apiAvailable={health === 'online' || health === 'degraded'} apiChecking={health === 'checking'} liteMode={freeTierMode} />}
           {activeView === 'operations' && <RescueDashboard currentUserRole={currentUser?.role ?? 'Citizen'} onRequestLogin={() => setLoginOpen(true)} />}
           {activeView === 'analytics' && <AnalyticsPage />}
         </main>
